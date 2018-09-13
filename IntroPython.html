@@ -839,10 +839,10 @@ True
                     <span class="s1"></span>
                 </p>
                 <pre><code>&gt;&gt;&gt; l = [1,3,9,4,884328881]
-&gt;&gt;&gt; n = ['sex', 'drugs', 'rock', 'roll']
+&gt;&gt;&gt; n = ['first', 'second', 'third', 'fourth']
 &gt;&gt;&gt; m = l + n
 &gt;&gt;&gt; m
-[1, 3, 9, 4, 884328881, 'sex', 'drugs', 'rock', 'roll']</code></pre>
+[1, 3, 9, 4, 884328881, 'first', 'second', 'third', 'fourth']</code></pre>
             </div>
             <br/>A list is a ordered sequence of items (between [...]) each with their own index:
 
@@ -852,7 +852,7 @@ True
                     <pre><code>&gt;&gt;&gt; m[0]
 1
 &gt;&gt;&gt; m[8]
-'roll' </code></pre>
+'fourth' </code></pre>
                 </blockquote>
             </div>
             <br/>
@@ -886,50 +886,26 @@ True
             </h2>
             <div>
                 <pre><code>
-                        <p class="p1">
-                            <font style="font-size: 18px;">
-                                <span class="s1">&gt;&gt;&gt; l = list(range(10))
-</span>&gt;&gt;&gt; l
+&gt;&gt;&gt; l = list(range(10))
+&gt;&gt;&gt; l
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                            </font>
-                            <font style="font-size: 18px;">&gt;&gt;&gt; l[1:5]
+&gt;&gt;&gt; l[1:5]
 [1, 2, 3, 4]
 &gt;&gt;&gt; l[:5]
 [0, 1, 2, 3, 4]
-                                <stdin>
-                                    <module>
+                                
 &gt;&gt;&gt; del l[5:]
 &gt;&gt;&gt; l
-[0, 1, 2, 3, 4] </module>
-                                </stdin>
-                            </font>
-                            <code>
-                                <stdin>
-                                    <module>
-                                        <span style="font-family: monospace; font-style: normal; font-variant: normal;">
-                                            <font style="font-size: 18px;">&gt;&gt;&gt; l.append(5)
+[0, 1, 2, 3, 4] 
+&gt;&gt;&gt; l.append(5)
 &gt;&gt;&gt; l
-[0, 1, 2, 3, 4, 5] </font>
-                                        </span>
-                                    </module>
-                                </stdin>
-                            </code>
-                            <code>
-                                <stdin>
-                                    <module>
-                                        <span style="font-family: monospace; font-style: normal; font-variant: normal;">
-                                            <font style="font-size: 18px;">&gt;&gt;&gt; l.reverse()
+[0, 1, 2, 3, 4, 5] 
+&gt;&gt;&gt; l.reverse()
 &gt;&gt;&gt; l
 [5, 4, 3, 2, 1, 0]
-                                                <br/>&gt;&gt;&gt; 5 in l
-                                                <br/>True
-                                                <br/>
-                                            </font>
-                                        </span>
-                                    </module>
-                                </stdin>
-                            </code>
-                        </p>
+&gt;&gt;&gt; 5 in l
+True
+                                                
                     </code></pre>
             </div>
             <font style="font-size: 24px;">
