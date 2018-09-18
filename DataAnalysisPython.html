@@ -64,7 +64,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
 
 
-<section data-menu-title="strings" data-state="strings"><style>.fiji2a header:after { content: "String manipulation"; }</style>
+<section data-menu-title="strings" data-state="strings"><style>.intro0 header:after { content: "String manipulation"; }</style>
 <p>We've talked a little bit about strings before.</p>
 <p>What if we want a string containing a quote?</p>
  <pre><code class="python">string = 'That is Erick's presentation</code> </pre> won't work.
@@ -73,13 +73,20 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <p>What if we need double quotes in the string?</p>
 </section>
 
-<section data-menu-title="escape characters" data-state="escape"><style>.fiji2a header:after { content: "Escape characters"; }</style>
-<p>We've talked a little bit about strings before.</p>
-<p class="fragment">What if we want a string containing a quote? </p>
-<p class="fragment"><code class="python">string = 'That is Erick's presentation'</code> won't work.</p>
-<p class="fragment">Fix: use double quotes! </p>
-<p class="fragment"><code class="python">string = "That is Erick's presentation"</code> works!</p>
-<p class="fragment">What if we need double quotes in the string?</p>
+<section data-menu-title="escape characters" data-state="escape"><style>.intro0 header:after { content: "Escape characters"; }</style>
+
+Allows you to use a character that would otherwise be impossible to be put into a string! Just use the reverse slash (\) before the character.
+<ul>
+<li><b><code> \'</b> Single quote</li>	
+<li><b><code> \"</b> Double quote</li>	
+<li><b><code> \t</b> Tab</li>	
+<li><b><code> \n</b> New line (or line break)</li>	
+<li><b><code> \\</b> backslash</li>	
+</ul>
+<pre><code class="python">>>> print("Hello there!\nHow are you?\nI\'m doing fine.")
+Hello there!
+How are you?
+I'm doing fine.</code></pre>
 </section>
 
 <section data-state="intro1"><style>.intro1 header:after { content: "How an image is formed"; }</style>
