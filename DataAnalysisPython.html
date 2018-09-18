@@ -64,7 +64,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
 
 
-<section data-menu-title="strings" data-state="strings"><style>.intro2 header:after { content: "String manipulation"; }</style>
+<section data-menu-title="strings" data-state="strings"><style>.string1 header:after { content: "String manipulation"; }</style>
 <p>We've talked a little bit about strings before.</p>
 <p>What if we want a string containing a quote?</p>
  <pre><code class="python">string = 'That is Erick's presentation</code> </pre> won't work.
@@ -73,7 +73,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <p>What if we need double quotes in the string?</p>
 </section>
 
-<section data-menu-title="escape characters" data-state="escape"><style>.intro3 header:after { content: "Escape characters"; }</style>
+<section data-menu-title="escape characters" data-state="escape"><style>.string2 header:after { content: "Escape characters"; }</style>
 
 Allows you to use a character that would otherwise be impossible to be put into a string! Just use the reverse slash (\) before the character.
 <ul>
@@ -89,7 +89,7 @@ How are you?
 I'm doing fine.</pre>
 </section>
 
-<section data-state="indexing"><style>.intro4 header:after { content: "Indexing strings"; }</style>
+<section data-state="indexing"><style>.string3 header:after { content: "Indexing strings"; }</style>
 <div><img  src="img-py/helloworld.png"/></div>
 <p>Strings use indexing the same way lists do. It's just a list of characters! The space and exclamation points count, so 'Hello world!' has 12 characters (from 0 to 11).</p>
 <pre><code class="python">>>> test = 'Hello world!'
@@ -107,37 +107,19 @@ I'm doing fine.</pre>
 'world!'</code></pre>
 </section>
 
-<section data-state="intro1"><style>.intro1 header:after { content: "How an image is formed"; }</style>
-<div><img  class="half" src="img-ia/acq_widefield.png"/>
-<img class="half fragment" src="img-ia/acq_lsm.png"/></div>
-<p>Widefield and laser-scanning microscopes acquire images in different ways.</p>
-</section>
+<section data-state="indexing"><style>.string4 header:after { content: "in and not in"; }</style>
 
-<section data-state="intro1"><style>.intro1 header:after { content: "How an image is formed"; }</style>
-<img  class="imbox" src="img-ia/detector.png"/>
-<p>Detectors collect photons and convert them to a voltage</p>
-</section>
-
-<section data-state="intro1"><style>.intro1 header:after { content: "How an image is formed"; }</style>
-<img  class="imbox" src="img-ia/ad_1.png"/>
-<p>The A/D converter determines the dynamic range of the data</p>
-</section>
-
-<section data-state="intro1"><style>.intro1 header:after { content: "How an image is formed"; }</style>
-<img  class="imbox" src="img-ia/bd1.png"/>
-<p></p>
-</section>
-<section data-state="intro1"><style>.intro1 header:after { content: "How an image is formed"; }</style>
-<img  class="imbox" src="img-ia/bd2.png"/>
-<p></p>
-</section>
-<section data-state="intro1"><style>.intro1 header:after { content: "How an image is formed"; }</style>
-<img  class="imbox" src="img-ia/bd3.png"/>
-<p>Unless you have good reason not to, always collect data at the highest possible bit depth</p>
-</section>
-<section data-state="intro1"><style>.intro1 header:after { content: "How an image is formed"; }</style>
-	<img class="left half" src="img-ia/bd3.png"/>
-	<p class="right half fragment">32 bit is a special data type called <a href="https://en.wikipedia.org/wiki/Floating-point_arithmetic#Floating-point_numbers" target="_blank">floating point</a>. <br/><br/><b>TL;DR:</b> pixels can have non-integer values which can be useful in applications like ratiometric imaging.</p>
+<p>The <code>in</code> and <code>not in</code> operators work for strings as well as lists (have I mentioned that strings are just lists of characters?). It will return <code>True</code> or <code>False</code>.</p>
+<pre><code class="python">>>> 'Hello' in 'Hello world!'
+True
+>>> 'Hello' in 'Hello'
+True
+>>> 'HELLO' in 'Hello world!'
+False
+>>> '' in 'test'
+True
+>>> 'cats' not in 'cats and dogs'
+False</code></pre>
 </section>
 
 <section data-menu-title="Introduction to ImageJ" data-state="fijiz"><style>.fiji1z header:after { content: ""; }</style>
