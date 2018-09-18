@@ -107,7 +107,7 @@ I'm doing fine.</pre>
 'world!'</code></pre>
 </section>
 
-<section data-state="indexing"><style>.string4 header:after { content: "in and not in"; }</style>
+<section data-state="innotin"><style>.string4 header:after { content: "in and not in"; }</style>
 
 <p>The <code>in</code> and <code>not in</code> operators work for strings as well as lists (have I mentioned that strings are just lists of characters?). It will return <code>True</code> or <code>False</code>.</p>
 <pre><code class="python">>>> 'Hello' in 'Hello world!'
@@ -121,6 +121,26 @@ True
 >>> 'cats' not in 'cats and dogs'
 False</code></pre>
 </section>
+
+
+<section data-state="startswithendswith"><style>.string4 header:after { content: "startswith and endswith"; }</style>
+
+<p>The <code>startswith()</code> and <code>endswith()</code> return <code>True</code> if the string they are called on begins or (respectively) ends with the string passed to the method.</p>
+<pre><code class="python">>>> 'Hello world!'.startswith('Hello')
+True
+>>> 'Hello world!'.endswith('world!')
+True
+>>> 'abc123'.startswith('abcdef')
+False
+>>> 'abc123'.endswith('12')
+False
+>>> 'Hello world!'.startswith('Hello world!')
+True
+>>> 'Hello world!'.endswith('Hello world!')
+True
+</code></pre>
+</section>
+
 
 <section data-menu-title="Introduction to ImageJ" data-state="fijiz"><style>.fiji1z header:after { content: ""; }</style>
 <h1>Introduction to ImageJ &amp; Fiji</h1>
