@@ -160,6 +160,25 @@ True
 </section>
 
 
+<section data-state="strings"><style>.strings header:after { content: "String manipulation"; }</style>
+
+<p>We can use <code>strip()</code> and its friends to remove whitespace characters (space, tab, newline) from the ends of a string. It returns a new string without the whitespaces.</p>
+<pre><code class="python">>>> spam = '    Hello World     '
+>>> spam.strip()
+'Hello World'
+>>> spam.lstrip()
+'Hello World     '
+>>> spam.rstrip()
+'    Hello World'
+</code></pre>
+<p>Alternatively, you can tell <code>strip()</code> which characters you want to remove.</p>
+<pre><code class="python">>>> spam = 'SpamSpamBaconSpamEggsSpamSpam'
+>>> spam.strip('ampS')
+'BaconSpamEggs'
+</code></pre>
+</section>
+
+
 <section data-menu-title="Introduction to ImageJ" data-state="fijiz"><style>.fiji1z header:after { content: ""; }</style>
 <h1>Introduction to ImageJ &amp; Fiji</h1>
 <h4>A cross platform, open source, Java-based image processing program</h4>
