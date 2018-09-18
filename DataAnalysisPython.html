@@ -73,7 +73,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <p>What if we need double quotes in the string?</p>
 </section>
 
-<section data-menu-title="escape characters" data-state="escape"><style>.intro1 header:after { content: "Escape characters"; }</style>
+<section data-menu-title="escape characters" data-state="escape"><style>.intro3 header:after { content: "Escape characters"; }</style>
 
 Allows you to use a character that would otherwise be impossible to be put into a string! Just use the reverse slash (\) before the character.
 <ul>
@@ -138,6 +138,24 @@ False
 True
 >>> 'Hello world!'.endswith('Hello world!')
 True
+</code></pre>
+</section>
+
+<section data-state="joinsplit"><style>.intro1 header:after { content: "join and split"; }</style>
+
+<p>The <code>join()</code> and <code>split()</code> do what you expect them to do. <code>split()</code> can take a string argument and will split the string upon the occurrence of this argument. It is especially useful when dealing with CSV files, as we will see later.</p>
+<pre><code class="python">>>> ', '.join(['cats', 'rats', 'bats'])
+'cats, rats, bats'
+>>> ' '.join(['My', 'name', 'is', 'Simon'])
+'My name is Simon'
+>>> 'ABC'.join(['My', 'name', 'is', 'Simon'])
+'MyABCnameABCisABCSimon'
+>>> 'My name is Simon'.split()
+['My', 'name', 'is', 'Simon']
+>>> 'MyABCnameABCisABCSimon'.split('ABC')
+['My', 'name', 'is', 'Simon']
+>>> 'My name is Simon'.split('m')
+['My na', 'e is Si', 'on']
 </code></pre>
 </section>
 
