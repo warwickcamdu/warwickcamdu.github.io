@@ -247,7 +247,21 @@ print(add_string('string'))</code></pre>
 
 <section data-state="fileio"><style>.fileio header:after { content: "File input/output"; }</style>
 
-<p>os.path functionsa</p>
+<p>Some additional <code>os</code> functions that can be useful:</p>
+<pre><code>>>> os.path.abspath('.\\Scripts')
+'C:\\Python34\\Scripts'
+>>> os.path.relpath('C:\\Windows', 'C:\\spam\\eggs')
+'..\\..\\Windows'
+>>> os.getcwd() 
+'C:\\Python34'
+>>> path = 'C:\\Windows\\System32\\calc.exe'
+>>> os.path.basename(path)
+'calc.exe'
+>>> os.path.dirname(path)
+'C:\\Windows\\System32'
+>>> os.path.split(path)
+('C:\\Windows\\System32', 'calc.exe')
+</code></pre>
 </section>
 
 <section data-state="fileio"><style>.fileio header:after { content: "File input/output"; }</style>
