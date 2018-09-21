@@ -218,8 +218,19 @@ print(add_string('string'))</code></pre>
 
 
 <section data-menu-title="File input/output" data-state="fileio"><style>.fileio header:after { content: "File input/output"; }</style>
-
-<p>paths, filenames, slashes on win vs linux, os.path.join</p>
+<ul>
+<li>Every file contains three key pieces of information: <i>path, filename</i> and <i>extension</i>.</li>	
+<ul>
+	<li><i>path:</i> indicates in which folder the file exists. Can be something like <code>C:\Users\User1\Desktop\</code> on Windows and <code>/home/User1/Desktop</code> on Mac/Linux.</li>
+	<li><i>filename:</i> the actual name of the file. Can be essentially anything you want except for some special characters.</li>
+	<li><i>extension: </i> indicates the file type. Common extensions are <code>.doc, .xls, .txt</code> and so on. They are often hidden in Windows.</li>
+</ul>
+</ul>
+<p>As you can see from the examples, Windows has a different way of indicating folders compared to Mac/Linux, including some weird backslashes.</p>
+<p>If you want your code to run in any system, it needs to be aware of which system it is! <code>os.paht.join() is your best friend. </code></p>
+<pre><code>>>> import os
+>>> os.path.join('usr', 'bin', 'spam')
+'usr\\bin\\spam'</code></pre>
 </section>
 
 <section data-state="fileio"><style>.fileio header:after { content: "File input/output"; }</style>
