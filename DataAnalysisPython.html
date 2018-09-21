@@ -278,7 +278,25 @@ True
 
 <section data-state="fileio"><style>.fileio header:after { content: "File input/output"; }</style>
 
-<p>maybe more os.path functions, find folder contents</p>
+<p>For finding everything that is inside a folder, use <code>os.listdir(path)</code>:</p>
+<pre><code class="python">>>> os.listdir('C:\\Windows\\System32')
+['0409', '12520437.cpx', '12520850.cpx', '5U877.ax', 'aaclient.dll',
+--snip--
+'xwtpdui.dll', 'xwtpw32.dll', 'zh-CN', 'zh-HK', 'zh-TW', 'zipfldr.dll']</code></pre>
+<p>If you want to recursively go into every subfolder, you will need something like this:</p>
+<pre><code class="python">>>>import os
+>>> path = '/home/erick/Desktop'
+>>> for root,dirs,files in os.walk('.'):
+...     print("current directory is "+root)
+...     print("immediate subdirectories are "+' '.join(dirs))
+...     print("files in this subfolder are "+' '.join(files))
+... 
+current directory is .
+immediate subdirectories are js img-ia css .git plugin test img img-py lib material
+files in this subfolder are test.md bower.json handout.png DataAnalysisPython.html package.json LICENSE ImageAnalysisWithFiji.html CONTRIBUTING.md index.html README.md Gruntfile.js README_REVEAL.md IntroPython.html ImageAnalysis.html
+current directory is ./js
+(...)
+</code></pre>
 </section>
 
 
