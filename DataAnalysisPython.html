@@ -234,8 +234,15 @@ print(add_string('string'))</code></pre>
 </section>
 
 <section data-state="fileio"><style>.fileio header:after { content: "File input/output"; }</style>
-
-<p>current working directory, change directories, absolute vs relative path</p>
+<p>Every program has a <i>current working directory</i> - every path that doesn't start with the root folder (C:\ on Windows, / on Mac/Linux) is presumed to be inside the current working directory.</p>
+<pre><code>>>> import os
+>>> os.getcwd()
+'C:\\Python34'
+>>> os.chdir('C:\\Windows\\System32')
+>>> os.getcwd()
+'C:\\Windows\\System32'</code></pre>
+<p>File paths can be <i>absolute</i> (starts with root directory) or <i>relative</i> (from the current working directory).</p>
+<div><img  src="img-py/paths.jpg"/></div>
 </section>
 
 <section data-state="fileio"><style>.fileio header:after { content: "File input/output"; }</style>
