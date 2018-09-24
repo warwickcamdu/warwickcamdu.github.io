@@ -342,13 +342,43 @@ This is a nice extra message!
 
 </section>
 
-<section data-menu-title="String Exercises" data-state="stringsex"><style>.stringsex header:after { content: "String exercises!"; }</style>
+<section data-menu-title="File Exercises" data-state="fileex"><style>.fileex header:after { content: "File exercises!"; }</style>
 
 <ul>
 <li>Write a Python program to print the first 5 lines of the <a href="material/cereal.csv">cereal.csv</a> file.</li>	
 <li>Write a Python program to print the first 5 columns of the <a href="material/cereal.csv">cereal.csv</a> file.</li>
 <li>Write a Python program to print all lines of the <a href="material/cereal.csv">cereal.csv</a> file where <b>calories >= 120</b>.</li>
 </ul>
+</section>
+
+
+<section data-menu-title="File Exercises" data-state="fileex"><style>.fileex header:after { content: "File exercises!"; }</style>
+
+<p>Sample solution 1</p>
+<pre><code class="python">import os
+os.chdir('Whatever directory your cereal.csv file is in')
+
+f = open('material/cereal.csv')
+lines = f.readlines()
+for i in range(5):
+    print(lines[i])
+         
+f.close()</code></pre>
+</section>
+
+<section data-menu-title="File Exercises" data-state="fileex"><style>.fileex header:after { content: "File exercises!"; }</style>
+
+<p>Sample solution 2</p>
+<pre><code class="python">import os
+os.chdir('Whatever directory your cereal.csv file is in')
+
+f = open('material/cereal.csv')
+lines = f.readlines()
+for line in lines:
+    line_split = line.split(',')
+    print(','.join(line_split[:5])+'\n')
+         
+f.close()</code></pre>
 </section>
 
 
