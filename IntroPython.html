@@ -969,7 +969,7 @@ True
                     <span class="s1"></span>
                 </p>
                 
-                <pre><code>&gt;&gt;&gt; personX = {'first':'Erick', 'last':'Ratamero', 'twitter':'@erickratamero'}
+                <pre><code class="python">&gt;&gt;&gt; personX = {'first':'Erick', 'last':'Ratamero', 'twitter':'@erickratamero'}
 &gt;&gt;&gt; personX['first']
 'Erick'
 &gt;&gt;&gt; personX['age'] = 32
@@ -986,12 +986,10 @@ True
             <h2>some things you can do with Dictionaries
                 <br/>
             </h2>
-            <pre><code>&gt;&gt;&gt; list(personX.keys())
+            <pre><code class="python">&gt;&gt;&gt; list(personX.keys())
 ['twitter', 'last', 'first']
 &gt;&gt;&gt; list(personX.values())
-['@erickratamero', 'Ratamero', 'Erick']
-
-                </code></pre>
+['@erickratamero', 'Ratamero', 'Erick']</code></pre>
             
         </section>
 
@@ -1140,7 +1138,7 @@ True
                         <br/>
                     </span>
                 </p>
-                <pre><code> for item in sequence:
+                <pre><code class="python">for item in sequence:
                         
     do someting with item</code></pre>
             </div>
@@ -1166,15 +1164,14 @@ True
         <p>for example
             <br/>
         </p>
-        <pre><code>&gt;&gt;&gt; ages = [18, 21, 16, 12]
+        <pre><code class="python">&gt;&gt;&gt; ages = [18, 21, 16, 12]
 &gt;&gt;&gt; for age in ages:
 ....    print(age)
 ....
 18
 21
 16
-12
-            </code></pre>
+12 </code></pre>
         <br/>
         <font style="font-size: 24px;">
             <a href="http://pythontutor.com/visualize.html#code=ages+%3D+%5B18,+21,+16,+12%5D%0Afor+age+in+ages%3A%0A++++print(age%29&amp;mode=display&amp;origin=opt-frontend.js&amp;cumulative=false&amp;heapPrimitives=false&amp;textReferences=false&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;curInstr=0">Visualise this code in action</a>
@@ -1210,9 +1207,8 @@ True
                     <span class="s1"></span>
                 </p>
                 <p class="p2"></p>
-                <pre><code>while condition true:
-    do something
-                    </code></pre>
+                <pre><code class="python">while condition true:
+    do something</code></pre>
                 
             </div>
         </section>
@@ -1243,7 +1239,7 @@ True
             <span class="s1"></span>
         </p>
         <p class="p2"></p>
-        <pre><code>&gt;&gt;&gt; gas = 42
+        <pre><code class="python">&gt;&gt;&gt; gas = 42
 &gt;&gt;&gt; while gas &gt; 0:
 ...     print("Vroom!")
 ...     gas = gas - 10
@@ -1306,7 +1302,7 @@ elif other condition: #optional
     other action
 else:
     final action</code></pre>
-                <pre><code>&gt;&gt;&gt; age = 17
+                <pre><code class="python">&gt;&gt;&gt; age = 17
 &gt;&gt;&gt; if age &lt; 18:
 ...     print("no drinks for you")
 ... 
@@ -1348,7 +1344,7 @@ no drinks for you
         <div>
             <br/>
             <p class="p2"></p>
-            <pre><code>&gt;&gt;&gt; ages = [18, 21, 16, 12]
+            <pre><code class="python">&gt;&gt;&gt; ages = [18, 21, 16, 12]
 &gt;&gt;&gt; for age in ages:
 ...     if age &gt;= 18:
 ...         print("come on in")
@@ -1360,8 +1356,7 @@ no drinks for you
 come on in
 come on in
 not quite yet
-get outta here
-                </code></pre>
+get outta here</code></pre>
         </div>
         <a href="http://pythontutor.com/visualize.html#code=ages+%3D+%5B18,+21,+16,+12%5D%0Afor+age+in+ages%3A%0A++++if+age+%3E%3D+18%3A%0A++++++++++++print(%22come+on+in%22%29%0A++++elif+age+%3E%3D+16%3A%0A++++++++++++print(%22not+quite+yet%22%29%0A++++else%3A%0A++++++++++++print(%22get+outta+here%22%29&amp;mode=display&amp;origin=opt-frontend.js&amp;cumulative=false&amp;heapPrimitives=false&amp;textReferences=false&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;curInstr=0">
             <font style="font-size: 24px;">
@@ -1421,13 +1416,12 @@ Visualise this code in action</font>
                 <p class="p2">
                     <br/>
                 </p>
-                <pre><code>&gt;&gt;&gt; name = "Erick Ratamerp"
+                <pre><code class="python">&gt;&gt;&gt; name = "Erick Ratamerp"
 &gt;&gt;&gt; length = len(name)
 &gt;&gt;&gt; length
 18
 &gt;&gt;&gt; type(length)
-&lt;type 'int'&gt;
-                    </code></pre>
+&lt;type 'int'&gt; </code></pre>
             </div>
             <br/>
         </section>
@@ -1475,10 +1469,10 @@ Visualise this code in action</font>
                 </span>
             </p>
           
-            <pre><code>def function_name(argument(s)):4
+            <pre><code class="python">def function_name(argument(s)):4
     action with argument(s)</code></pre>
             <p class="p1"></p>
-            <pre><code>&gt;&gt;&gt; def multiply(a, b):
+            <pre><code class="python">&gt;&gt;&gt; def multiply(a, b):
 ...     return a * b
 ...
 &gt;&gt;&gt; multiply(3,4)
@@ -1603,14 +1597,13 @@ Mind the
                 <font style="font-size: 32px;">Importing a modules into your script is simple</font>
             </div>
             <div>
-                <pre><code>&gt;&gt;&gt; import random
+                <pre><code class="python">&gt;&gt;&gt; import random
 &gt;&gt;&gt; random.randint(0,10)
 0
 &gt;&gt;&gt; random.randint(0,10)
 9
 &gt;&gt;&gt; random.randint(0,10)
-3
-                    </code></pre>
+3</code></pre>
             </div>
         </div>
     </section>
@@ -1645,11 +1638,7 @@ Mind the
             </p>
             
             <pre><code>print("Hello World")  </code></pre>
-            <p class="p1">
-                <span class="s1">
-                    <br/>
-                </span>
-            </p>
+            
             <p class="p1">
                 <span class="s1">
                     <font style="font-size: 32px;">Save your script as “[a_descriptive_name].py”</font>
@@ -1695,14 +1684,10 @@ span multiple lines
 # print() is a very useful function
 # mind the quotes
 print("Hello World")
-
-
-# don't forget to greet the Sun
-print("Hello Sun")
 </code></pre>
         </div>
      
-
+<div><img src="runscript.png"></div>
 <!-- ADD IMAGE OF RUNNING A SCRIPT HERE -->
 
 
