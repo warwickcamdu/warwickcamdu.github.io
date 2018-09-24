@@ -382,6 +382,24 @@ f.close()</code></pre>
 </section>
 
 
+<section data-menu-title="File Exercises" data-state="fileex"><style>.fileex header:after { content: "File exercises!"; }</style>
+
+<p>Sample solution 3</p>
+<pre><code class="python">import os
+os.chdir('Whatever directory your cereal.csv file is in')
+
+f = open('material/cereal.csv')
+lines = f.readlines()[1:]
+for line in lines:
+    line_split = line.split(',')
+    cal = int(line_split[3])
+    if (cal >= 120):
+        print(line)
+         
+f.close()</code></pre>
+</section>
+
+
 
 </div> <!-- ---------------------- END OF SLIDES -------------------------- -->
 
