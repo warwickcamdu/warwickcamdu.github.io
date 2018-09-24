@@ -312,6 +312,19 @@ current directory is ./js
 </section>
 
 
+<section data-state="fileio"><style>.fileio header:after { content: "File input/output"; }</style>
+<p>Two ways of reading the contents of a file (try it yourself with the <a href="material/sonnet29.txt">sonnet29.txt</a> file):</p>
+<pre><code class="python">>>> f = open('/Users/your_home_folder/sonnet29.txt')
+>>> f.read()
+"When, in disgrace with fortune and men's eyes,\nI all alone beweep my outcast state,\nAnd trouble deaf heaven with my bootless cries,\nAnd look upon myself and curse my fate,"
+>>> f2 = open('material/sonnet29.txt')
+>>> f2.readlines()
+["When, in disgrace with fortune and men's eyes,\n", 'I all alone beweep my outcast state,\n', 'And trouble deaf heaven with my bootless cries,\n', 'And look upon myself and curse my fate,']
+</code></pre>
+
+</section>
+
+
 </div> <!-- ---------------------- END OF SLIDES -------------------------- -->
 
 
