@@ -557,6 +557,58 @@ plt.show()</code></pre>
 <div><img src="img-py/sol2.png" width="50%"></div>
 </section>
 
+
+<section data-menu-title="Numpy and Pandas" data-state="nppd"><style>.nppd header:after { content: "Numpy and Pandas"; }</style>
+
+<p><i>Pandas</i> is a data analysis/manipulation library. It operates on top of the numerical library <i>numpy</i>, so we will start by having a look at it.</p>
+<pre><code class="python">>>> np.zeros(10)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'np' is not defined
+>>> import numpy as np
+>>> np.zeros(10)
+array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
+>>> np.full((3,5),1.23)
+array([[1.23, 1.23, 1.23, 1.23, 1.23],
+       [1.23, 1.23, 1.23, 1.23, 1.23],
+       [1.23, 1.23, 1.23, 1.23, 1.23]])
+>>> np.arange(0, 20, 2)
+array([ 0,  2,  4,  6,  8, 10, 12, 14, 16, 18])
+>>> np.linspace(0, 1, 5)
+array([0.  , 0.25, 0.5 , 0.75, 1.  ])
+>>> np.random.randint(10, size=6)
+array([0, 4, 1, 3, 9, 1])
+>>> np.random.randint(10, size=(3,4))
+array([[0, 3, 5, 7],
+       [3, 4, 7, 2],
+       [5, 2, 1, 0]])
+>>> np.random.randint(10, size=(3,4,5))
+array([[[5, 3, 2, 5, 6],
+        [2, 6, 0, 2, 3],
+        [3, 7, 7, 7, 5],
+        [5, 1, 1, 5, 9]],
+
+       [[5, 4, 0, 0, 1],
+        [6, 4, 2, 6, 5],
+        [6, 1, 7, 4, 8],
+        [2, 1, 7, 9, 4]],
+
+       [[7, 1, 9, 2, 7],
+        [5, 8, 3, 3, 0],
+        [6, 5, 9, 1, 4],
+        [0, 4, 7, 8, 4]]])
+</code></pre>
+
+
+</section>
+
+
+
+
+
+
+
+
 </div> <!-- ---------------------- END OF SLIDES -------------------------- -->
 
 
