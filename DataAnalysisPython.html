@@ -526,6 +526,35 @@ plt.show()
 </section>
 
 
+<section data-state="plotex"><style>.plotex header:after { content: "Plotting exercises!"; }</style>
+
+<p>Sample solution 1</p>
+<pre><code class="python">import matplotlib.pyplot as plt
+times = range(7)
+co2 = [250, 265, 272, 260, 300, 320, 389]
+#plt.plot(times, co2)
+plt.plot(times, co2, 'b--')
+plt.title("Concentration of CO2 versus time")
+plt.ylabel("[CO2]")
+plt.xlabel("Time (decade)")
+plt.show()</code></pre>
+</section>
+
+
+
+<section data-state="plotex"><style>.plotex header:after { content: "Plotting exercises!"; }</style>
+
+<p>Sample solution 2</p>
+<pre><code class="python"> import numpy as np
+import matplotlib.pyplot as plt
+
+t = np.arange(0., 5., 0.2)
+
+plt.plot(t, t, color='xkcd:teal', linestyle=':')
+plt.plot(t, t**2, 'y--', t, t**3, 'mo')
+plt.show()</code></pre>
+</section>
+
 </div> <!-- ---------------------- END OF SLIDES -------------------------- -->
 
 
