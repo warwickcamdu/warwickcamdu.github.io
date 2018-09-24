@@ -358,7 +358,7 @@ This is a nice extra message!
 <pre><code class="python">import os
 os.chdir('Whatever directory your cereal.csv file is in')
 
-f = open('material/cereal.csv')
+f = open('cereal.csv')
 lines = f.readlines()
 for i in range(5):
     print(lines[i])
@@ -372,7 +372,7 @@ f.close()</code></pre>
 <pre><code class="python">import os
 os.chdir('Whatever directory your cereal.csv file is in')
 
-f = open('material/cereal.csv')
+f = open('cereal.csv')
 lines = f.readlines()
 for line in lines:
     line_split = line.split(',')
@@ -388,7 +388,7 @@ f.close()</code></pre>
 <pre><code class="python">import os
 os.chdir('Whatever directory your cereal.csv file is in')
 
-f = open('material/cereal.csv')
+f = open('cereal.csv')
 lines = f.readlines()[1:]
 for line in lines:
     line_split = line.split(',')
