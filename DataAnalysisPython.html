@@ -324,6 +324,26 @@ current directory is ./js
 
 </section>
 
+<section data-state="fileio"><style>.fileio header:after { content: "File input/output"; }</style>
+<p>Now let's try writing to a file. Remember: we need to use <i>'w'</i> when opening it. After that, we just need to use the <i>'write'</i> method:</p>
+<pre><code class="python">>>> myFile = open('test.txt', 'w')
+>>> myFile.write('Hello world!\n')
+13
+>>> myFile.close()
+>>> myFile = open('test.txt', 'a')
+>>> myFile.write('This is a nice extra message!')
+25
+>>> myFile.close()
+>>> myFile = open('test.txt')
+>>> content = myFile.read()
+>>> myFile.close()
+>>> print(content)
+Hello world!
+This is a nice extra message!
+</code></pre>
+
+</section>
+
 
 </div> <!-- ---------------------- END OF SLIDES -------------------------- -->
 
