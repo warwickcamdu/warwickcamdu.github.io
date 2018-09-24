@@ -621,6 +621,38 @@ array([4, 5, 6])
 </section>
 
 
+<section data-state="nppd"><style>.nppd header:after { content: "Numpy and Pandas"; }</style>
+
+<p>Numpy arrays can be concatenated and split in many different ways.</p>
+<pre><code class="python">>>> x = np.array([1, 2, 3])
+>>> y = np.array([3, 2, 1])
+>>> z = [21,21,21]
+>>> np.concatenate([x, y,z])
+array([ 1,  2,  3,  3,  2,  1, 21, 21, 21])
+>>> x = np.array([3,4,5])
+>>> grid = np.array([[1,2,3],[17,18,19]])
+>>> np.vstack([x,grid])
+array([[ 3,  4,  5],
+       [ 1,  2,  3],
+       [17, 18, 19]])
+>>> z = np.array([[9],[9]])
+>>> np.hstack([grid,z])
+array([[ 1,  2,  3,  9],
+       [17, 18, 19,  9]])
+>>> grid = np.arange(16).reshape((4,4))
+>>> grid
+array([[ 0,  1,  2,  3],
+       [ 4,  5,  6,  7],
+       [ 8,  9, 10, 11],
+       [12, 13, 14, 15]])
+>>> upper,lower = np.vsplit(grid,[2])
+>>> print (upper, lower)
+(array([[0, 1, 2, 3],
+       [4, 5, 6, 7]]), array([[ 8,  9, 10, 11],
+       [12, 13, 14, 15]]))
+</code></pre>
+</section>
+
 
 
 
