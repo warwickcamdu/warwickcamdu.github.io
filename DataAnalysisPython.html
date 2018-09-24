@@ -284,7 +284,7 @@ True
 --snip--
 'xwtpdui.dll', 'xwtpw32.dll', 'zh-CN', 'zh-HK', 'zh-TW', 'zipfldr.dll']</code></pre>
 <p>If you want to recursively go into every subfolder, you will need something like this:</p>
-<pre><code class="python">>>>import os
+<pre><code class="python">>>> import os
 >>> path = '/home/erick/Desktop'
 >>> for root,dirs,files in os.walk('.'):
 ...     print("current directory is "+root)
@@ -299,6 +299,17 @@ current directory is ./js
 </code></pre>
 </section>
 
+
+
+<section data-state="fileio"><style>.fileio header:after { content: "File input/output"; }</style>
+<p>To read or write files, you first need to open them.</p>
+<pre><code>>>> helloFile = open('C:\\Users\\your_home_folder\\hello.txt')</code></pre>
+<p>Or if you're Mac/Linux</p>
+<pre><code>>>> helloFile = open('/Users/your_home_folder/hello.txt')</code></pre>
+<p>This will open the file in <i>read-only</i> mode. If you want to open the file in <i>write</i> mode:</p>
+<pre><code>>>> helloFile = open('/Users/your_home_folder/hello.txt', 'w')</code></pre>
+
+</section>
 
 
 </div> <!-- ---------------------- END OF SLIDES -------------------------- -->
