@@ -597,7 +597,28 @@ array([[[5, 3, 2, 5, 6],
 </section>
 
 
+<section data-state="nppd"><style>.nppd header:after { content: "Numpy and Pandas"; }</style>
 
+<p>Indexing and slicing work in the same way as they do for lists.</p>
+<pre><code class="python">>>> x1 = np.array([4, 3, 4, 4, 8, 4])
+>>> x1[0]
+4
+>>> x1[-2]
+8
+>>> x2 = np.array([[3, 7, 5, 5],
+...       [0, 1, 5, 9],
+...       [3, 0, 5, 0]])
+>>> x2[2,3]
+0
+>>> x2[2,-1]
+0
+>>> x = np.arange(10)
+>>> x[:5]
+array([0, 1, 2, 3, 4])
+>>> x[4:7]
+array([4, 5, 6])
+</code></pre>
+</section>
 
 
 
