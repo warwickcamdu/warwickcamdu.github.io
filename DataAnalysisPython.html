@@ -325,14 +325,12 @@ current directory is ./js
 </section>
 
 <section data-state="fileio"><style>.fileio header:after { content: "File input/output"; }</style>
-<p>Now let's try writing to a file. Remember: we need to use <i>'w'</i> when opening it. After that, we just need to use the <i>'write'</i> method:</p>
+<p>Now let's try writing to a file. Remember: we need to use <i>'w'</i> when opening it. After that, we just need to use the <i>write</i> method:</p>
 <pre><code class="python">>>> myFile = open('test.txt', 'w')
 >>> myFile.write('Hello world!\n')
-13
 >>> myFile.close()
 >>> myFile = open('test.txt', 'a')
 >>> myFile.write('This is a nice extra message!')
-25
 >>> myFile.close()
 >>> myFile = open('test.txt')
 >>> content = myFile.read()
@@ -343,6 +341,16 @@ This is a nice extra message!
 </code></pre>
 
 </section>
+
+<section data-menu-title="String Exercises" data-state="stringsex"><style>.stringsex header:after { content: "String exercises!"; }</style>
+
+<ul>
+<li>Write a Python program to print the first 5 lines of the <a href="material/cereal.csv">cereal.csv</a> file.</li>	
+<li>Write a Python program to print the first 5 columns of the <a href="material/cereal.csv">cereal.csv</a> file.</li>
+<li>Write a Python program to print all lines of the <a href="material/cereal.csv">cereal.csv</a> file where <b>calories >= 120</b>.</li>
+</ul>
+</section>
+
 
 
 </div> <!-- ---------------------- END OF SLIDES -------------------------- -->
