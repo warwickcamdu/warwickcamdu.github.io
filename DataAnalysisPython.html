@@ -684,6 +684,60 @@ max    130.000000
 </section>
 
 
+<section data-state="nppd"><style>.nppd header:after { content: "Numpy and Pandas"; }</style>
+
+<p>Of course, that will only give you information about the numeric fields of your dataset. If you want more general information, use <code>info()</code>.</p>
+<pre><code class="python">>>> data.info()
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 5 entries, 0 to 4
+Data columns (total 2 columns):
+Country    5 non-null object
+Rank       5 non-null int64
+dtypes: int64(1), object(1)
+memory usage: 160.0+ bytes
+</code></pre>
+<p>We can, of course, sort the data set.</p>
+<pre><code class="python">>>> data.sort_values(by=['Rank'],ascending=True,inplace=False)
+    Country  Rank
+4   Nigeria    11
+1  Colombia    40
+2     Chile   100
+0    Russia   121
+3   Equador   130
+</code></pre>
+</section>
+
+
+<section data-state="nppd"><style>.nppd header:after { content: "Numpy and Pandas"; }</style>
+
+<p>You can sort by more than one column.</p>
+<pre><code class="python">>>> data = pd.DataFrame({'k1':['one']*3 + ['two']*4 + ['one']*2, 'k2':[2,1,3,3,3,4,4,2,5]})
+>>> data
+    k1  k2
+0  one   2
+1  one   1
+2  one   3
+3  two   3
+4  two   3
+5  two   4
+6  two   4
+7  one   2
+8  one   5
+>>> data.sort_values(by=['k1','k2'],ascending=[True,False],inplace=False)
+    k1  k2
+8  one   5
+2  one   3
+0  one   2
+7  one   2
+1  one   1
+5  two   4
+6  two   4
+3  two   3
+4  two   3
+</code></pre>
+</section>
+
+
 
 
 </div> <!-- ---------------------- END OF SLIDES -------------------------- -->
