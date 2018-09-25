@@ -772,6 +772,20 @@ memory usage: 160.0+ bytes
 
 <p>Now, let's try binning some data.</p>
 <pre><code class="python">data = pd.DataFrame({'names':['Alice','Bob','Charlie','Dan','Eve','Frank','Grace','Heidi','Judy','Michael','Oscar','Pat'], 'ages':[20, 22, 25, 27, 21, 23, 37, 31, 61, 45, 41, 32]})
+>>> data
+      names  ages
+0     Alice    20
+1       Bob    22
+2   Charlie    25
+3       Dan    27
+4       Eve    21
+5     Frank    23
+6     Grace    37
+7     Heidi    31
+8      Judy    61
+9   Michael    45
+10    Oscar    41
+11      Pat    32
 >>> bins = [18, 25, 35, 60, 100]
 >>> brackets = pd.cut(data['ages'],bins)
 >>> brackets
