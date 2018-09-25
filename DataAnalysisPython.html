@@ -992,8 +992,10 @@ Name: data1, dtype: float64
 <p>Sample solution 1</p>
 <pre><code class="python">import matplotlib.pyplot as plt
 import pandas as pd
-df = pd.read_csv('fdata.csv', index_col=0)
-df.plot(x=df.index, y=df.columns)
+import os
+os.chdir('Whatever directory you\'ve saved fdata.csv in')
+df = pd.read_csv('fdata.csv')
+df.plot(x="Date",y=["Open", "High", "Low", "Close"])
 plt.show()</code></pre>
 <div><img src="img-py/sol1pd.png" width="50%"></div>
 </section>
