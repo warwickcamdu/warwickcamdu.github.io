@@ -937,6 +937,30 @@ Name: data1, dtype: float64
 
 
 
+<section data-state="nppd"><style>.nppd header:after { content: "Numpy and Pandas"; }</style>
+
+<p>CSV files are pandas' best friend. Try this with <a href="material/cereal.csv">cereal.csv</a>:</p>
+<pre><code class="python">>>> import os
+>>> os.chdir('Whatever directory you've saved cereal.csv in')
+
+>>> df = pd.read_csv('cereal.csv')
+>>> df.head(5)
+                        name mfr type    ...      weight  cups     rating
+0                  100% Bran   N    C    ...         1.0  0.33  68.402973
+1          100% Natural Bran   Q    C    ...         1.0  1.00  33.983679
+2                   All-Bran   K    C    ...         1.0  0.33  59.425505
+3  All-Bran with Extra Fiber   K    C    ...         1.0  0.50  93.704912
+4             Almond Delight   R    C    ...         1.0  0.75  34.384843
+
+[5 rows x 16 columns]
+</code></pre>
+<p>You can also easily save a dataframe as a CSV file:</p>
+<pre><code class="python">>>> df.to_csv('cereal_copy.csv')
+</code></pre>
+<p>Do you see any difference between the copies?</p>
+</section>
+
+
 </div> <!-- ---------------------- END OF SLIDES -------------------------- -->
 
 
