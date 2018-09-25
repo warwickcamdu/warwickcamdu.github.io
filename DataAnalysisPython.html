@@ -897,6 +897,26 @@ Name: data1, dtype: float64
 </section>
 
 
+<section data-state="nppd"><style>.nppd header:after { content: "Numpy and Pandas"; }</style>
+
+<p>Pandas can do plotting, too! </p>
+<pre><code class="python">>>> df = pd.DataFrame({
+    'name':['john','mary','peter','jeff','bill','lisa','jose'],
+    'age':[23,78,22,19,45,33,20],
+    'gender':['M','F','M','M','M','F','M'],
+    'state':['california','dc','california','dc','california','texas','texas'],
+    'num_children':[2,0,0,3,2,1,4],
+    'num_pets':[5,1,0,5,2,2,3]
+})
+>>> import matplotlib.pyplot as plt
+>>> df.plot(kind='scatter',x='num_children',y='num_pets',color='red')
+<matplotlib.axes._subplots.AxesSubplot object at 0x7f56722e22e8>
+>>> plt.show()
+</code></pre>
+<div><img src="img-py/pdplot1.png" width="50%"></div>
+</section>
+
+
 
 </div> <!-- ---------------------- END OF SLIDES -------------------------- -->
 
