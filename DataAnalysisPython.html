@@ -750,6 +750,25 @@ memory usage: 160.0+ bytes
 
 </section>
 
+<section data-state="nppd"><style>.nppd header:after { content: "Numpy and Pandas"; }</style>
+
+<p>This is how you create a new variable based on a combination of the existing ones:</p>
+<pre><code class="python">>>> data.assign(new_variable = data['k2']*20)
+    k1  k2  new_variable
+0  one   2            40
+1  one   1            20
+2  one   3            60
+3  two   3            60
+4  two   3            60
+5  two   4            80
+6  two   4            80
+7  one   2            40
+8  one   5           100
+</code></pre>
+
+
+</section>
+
 
 
 
