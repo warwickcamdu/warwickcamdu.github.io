@@ -767,6 +767,36 @@ memory usage: 160.0+ bytes
 </code></pre>
 
 
+<section data-state="nppd"><style>.nppd header:after { content: "Numpy and Pandas"; }</style>
+
+<p>Now, let's try binning some data.</p>
+<pre><code class="python">data = pd.DataFrame({'names':['Alice','Bob','Charlie','Dan','Eve','Frank','Grace','Heidi','Judy','Michael','Oscar','Pat'], 'ages':[20, 22, 25, 27, 21, 23, 37, 31, 61, 45, 41, 32]})
+>>> bins = [18, 25, 35, 60, 100]
+>>> brackets = pd.cut(data['ages'],bins)
+>>> brackets
+0      (18, 25]
+1      (18, 25]
+2      (18, 25]
+3      (25, 35]
+4      (18, 25]
+5      (18, 25]
+6      (35, 60]
+7      (25, 35]
+8     (60, 100]
+9      (35, 60]
+10     (35, 60]
+11     (25, 35]
+Name: ages, dtype: category
+Categories (4, interval[int64]): [(18, 25] < (25, 35] < (35, 60] < (60, 100]]
+>>> pd.value_counts(brackets)
+(18, 25]     5
+(35, 60]     3
+(25, 35]     3
+(60, 100]    1
+Name: ages, dtype: int64
+</code></pre>
+
+
 </section>
 
 
