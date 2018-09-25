@@ -654,6 +654,36 @@ array([[ 0,  1,  2,  3],
 </section>
 
 
+<section data-state="nppd"><style>.nppd header:after { content: "Numpy and Pandas"; }</style>
+
+<p>The main Pandas structure we will be interested in is the <i>DataFrame</i>.</p>
+<pre><code class="python">import pandas as pd
+data = pd.DataFrame({'Country': ['Russia','Colombia','Chile','Equador','Nigeria'],
+                    'Rank':[121,40,100,130,11]})
+print(data)
+
+    Country  Rank
+0    Russia   121
+1  Colombia    40
+2     Chile   100
+3   Equador   130
+4   Nigeria    11
+</code></pre>
+<p>A quick way of having a summary of the statistics your data set is using the <code>describe()</code> method.</p>
+<pre><code class="python">data.describe()
+             Rank
+count    5.000000
+mean    80.400000
+std     52.300096
+min     11.000000
+25%     40.000000
+50%    100.000000
+75%    121.000000
+max    130.000000
+</code></pre>
+</section>
+
+
 
 
 </div> <!-- ---------------------- END OF SLIDES -------------------------- -->
