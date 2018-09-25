@@ -816,6 +816,87 @@ Name: ages, dtype: int64
 
 
 
+<section data-state="nppd"><style>.nppd header:after { content: "Numpy and Pandas"; }</style>
+
+<p>A very useful operation for datasets is grouping data and creating summaries. </p>
+<pre><code class="python">>>> df = pd.DataFrame({'key1' : ['a', 'a', 'b', 'b', 'a'],
+                   'key2' : ['one', 'two', 'one', 'two', 'one'],
+                   'data1' : np.random.randn(5),
+                   'data2' : np.random.randn(5)})
+>>> df
+  key1 key2     data1     data2
+0    a  one -0.369708 -1.215059
+1    a  two -0.341208 -0.884716
+2    b  one -0.672269  0.149367
+3    b  two -1.468556  1.386700
+4    a  one -0.366804 -0.634380
+>>> grouped = df['data1'].groupby(df['key1'])
+
+>>> grouped.mean()
+key1
+a   -0.359240
+b   -1.070413
+Name: data1, dtype: float64
+</code></pre>
+</section>
+
+
+<section data-state="nppd"><style>.nppd header:after { content: "Numpy and Pandas"; }</style>
+
+<p>There are many, many ways of accessing specific subsets of our data set. </p>
+<pre><code class="python">>>> dates = pd.date_range('20130101',periods=6)
+>>> df = pd.DataFrame(np.random.randn(6,4),index=dates,columns=list('ABCD'))
+>>> df
+                   A         B         C         D
+2013-01-01  0.482837  0.005617  1.011802 -0.817221
+2013-01-02 -1.351376  0.552897  0.503408 -0.431504
+2013-01-03 -0.244983 -0.470076 -0.489829 -0.763309
+2013-01-04  0.019689 -1.759921  0.740204  0.763700
+2013-01-05  0.607637  1.679538 -0.599785 -0.365752
+2013-01-06  1.371928 -1.148383 -1.586073  0.784124
+
+>>> df[:3]
+                   A         B         C         D
+2013-01-01  0.482837  0.005617  1.011802 -0.817221
+2013-01-02 -1.351376  0.552897  0.503408 -0.431504
+2013-01-03 -0.244983 -0.470076 -0.489829 -0.763309
+>>> df['20130101':'20130104']
+                   A         B         C         D
+2013-01-01  0.482837  0.005617  1.011802 -0.817221
+2013-01-02 -1.351376  0.552897  0.503408 -0.431504
+2013-01-03 -0.244983 -0.470076 -0.489829 -0.763309
+2013-01-04  0.019689 -1.759921  0.740204  0.763700
+</code></pre>
+</section>
+
+
+<section data-state="nppd"><style>.nppd header:after { content: "Numpy and Pandas"; }</style>
+
+<p>There are many, many ways of accessing specific subsets of our data set. </p>
+<pre><code class="python">>>> df.loc[:,['A','B']]
+                   A         B
+2013-01-01  0.482837  0.005617
+2013-01-02 -1.351376  0.552897
+2013-01-03 -0.244983 -0.470076
+2013-01-04  0.019689 -1.759921
+2013-01-05  0.607637  1.679538
+2013-01-06  1.371928 -1.148383
+>>> df.loc['20130102':'20130103',['A','B']]
+                   A         B
+2013-01-02 -1.351376  0.552897
+2013-01-03 -0.244983 -0.470076
+>>> df[df.A > 1]
+                   A         B         C         D
+2013-01-06  1.371928 -1.148383 -1.586073  0.784124
+>>> df.query('A > C')
+                   A         B         C         D
+2013-01-03 -0.244983 -0.470076 -0.489829 -0.763309
+2013-01-05  0.607637  1.679538 -0.599785 -0.365752
+2013-01-06  1.371928 -1.148383 -1.586073  0.784124
+</code></pre>
+</section>
+
+
 
 </div> <!-- ---------------------- END OF SLIDES -------------------------- -->
 
