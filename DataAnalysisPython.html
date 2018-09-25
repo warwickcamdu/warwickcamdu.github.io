@@ -910,7 +910,17 @@ Name: data1, dtype: float64
 })
 >>> import matplotlib.pyplot as plt
 >>> df.plot(kind='scatter',x='num_children',y='num_pets',color='red')
-<matplotlib.axes._subplots.AxesSubplot object at 0x7f56722e22e8>
+&lt;matplotlib.axes._subplots.AxesSubplot object at 0x7f56722e22e8&gt;
+>>> plt.show()
+</code></pre>
+<div><img src="img-py/pdplot1.png" width="50%"></div>
+</section>
+
+<section data-state="nppd"><style>.nppd header:after { content: "Numpy and Pandas"; }</style>
+
+
+<pre><code class="python">>>> df.plot(kind='bar',x='name',y='age')
+&lt;matplotlib.axes._subplots.AxesSubplot object at 0x7f56722e22e8&gt;
 >>> plt.show()
 </code></pre>
 <div><img src="img-py/pdplot1.png" width="50%"></div>
