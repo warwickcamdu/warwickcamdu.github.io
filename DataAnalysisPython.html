@@ -987,6 +987,81 @@ Name: data1, dtype: float64
 </section>
 
 
+<section data-state="nppdex"><style>.nppdex header:after { content: "Numpy/pandas exercises!"; }</style>
+
+<p>Sample solution 1</p>
+<pre><code class="python">import matplotlib.pyplot as plt
+import pandas as pd
+df = pd.read_csv('fdata.csv', index_col=0)
+df.plot(x=df.index, y=df.columns)
+plt.show()</code></pre>
+<div><img src="img-py/sol1pd.png" width="50%"></div>
+</section>
+
+<section data-state="nppdex"><style>.nppdex header:after { content: "Numpy/pandas exercises!"; }</style>
+
+<p>Sample solution 2</p>
+<pre><code class="python">import numpy as np
+x = np.ones((5,5))
+x[1:-1,1:-1] = 0
+print(x)
+
+[[1. 1. 1. 1. 1.]
+ [1. 0. 0. 0. 1.]
+ [1. 0. 0. 0. 1.]
+ [1. 0. 0. 0. 1.]
+ [1. 1. 1. 1. 1.]]</code></pre>
+</section>
+
+
+
+<section data-state="nppdex"><style>.nppdex header:after { content: "Numpy/pandas exercises!"; }</style>
+
+<p>Sample solution 3</p>
+<pre><code class="python">import numpy as np
+x = np.random.random((5,5))
+print("Original Array:")
+print(x) 
+xmin, xmax = x.min(), x.max()
+print("Minimum and Maximum Values:")
+print(xmin, xmax)
+
+Original Array:
+[[0.96108746 0.66272609 0.42670443 0.5463886  0.13583066]
+ [0.78215537 0.29811248 0.26380749 0.93835562 0.00176633]
+ [0.09763454 0.52875892 0.71247172 0.7065642  0.76375718]
+ [0.7768379  0.85771292 0.17135697 0.83372476 0.83760277]
+ [0.20412887 0.9024384  0.68057959 0.38648805 0.62763643]]
+Minimum and Maximum Values:
+0.0017663346508800526 0.9610874575010275</code></pre>
+</section>
+
+
+<section data-state="nppdex"><style>.nppdex header:after { content: "Numpy/pandas exercises!"; }</style>
+
+<p>Sample solution 4</p>
+<pre><code class="python">import pandas as pd
+import os
+os.chdir('Whatever directory you\'ve saved cereal.csv in')
+
+df = pd.read_csv('cereal.csv')
+for index, row in df.iterrows():
+    print(row['name'], row['calories'])
+
+100% Bran 70
+100% Natural Bran 120
+All-Bran 70
+All-Bran with Extra Fiber 50
+Almond Delight 110
+Apple Cinnamon Cheerios 110
+Apple Jacks 110
+(...)
+</code></pre>
+</section>
+
+
+
+
 
 </div> <!-- ---------------------- END OF SLIDES -------------------------- -->
 
