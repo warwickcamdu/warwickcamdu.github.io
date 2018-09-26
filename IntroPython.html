@@ -709,7 +709,14 @@ True
 'Erick'
 &gt;&gt;&gt; personX['age'] = 32
 &gt;&gt;&gt; personX
-{'twitter': '@erickratamero', 'last': 'Ratamero', 'age': 32, 'first': 'Erick'}</code></pre>
+{'twitter': '@erickratamero', 'last': 'Ratamero', 'age': 32, 'first': 'Erick'}
+>>> for i in personX.items():
+...     print(i)
+... 
+('first', 'Erick')
+('last', 'Ratamero')
+('twitter', '@erickratamero')
+</code></pre>
             
             <br/>
         </section>
