@@ -2,7 +2,7 @@
 Slides and training material using [Reveal.js](https://github.com/hakimel/reveal.js). Originally written for the [CAMDU training sessions](https://warwick.ac.uk/fac/sci/med/research/biomedical/facilities/camdu/trainingsessions/) in October/2018 and as support for teaching the CH922 module (Microscopy and Imaging).
 
 
-### Image Analysis with Fiji Workshop ###
+### Image Analysis with Fiji ###
 A set of slides and training material written in HTML/CSS with the [Reveal.js](https://github.com/hakimel/reveal.js) framework. Heavily inspired by the original slides from [Dave Mason](http://pcwww.liv.ac.uk/~dnmason), from the University of Liverpool [Centre for Cell Imaging](http://cci.liv.ac.uk).
 
 ### Licencing and reuse ###
