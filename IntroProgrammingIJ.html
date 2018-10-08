@@ -413,7 +413,7 @@ print(c); //"1.53"
                     
                 <pre><code class="python">&gt;&gt;&gt; l = newArray(1,3,9,4,884328881);
 &gt;&gt;&gt; n = newArray('first', 'second', 'third', 'fourth');
-&gt;&gt;&gt; m = Array.concat(a,b)
+&gt;&gt;&gt; m = Array.concat(a,b);
 &gt;&gt;&gt; print(m[6]);
 'second'</code></pre>
             
@@ -474,73 +474,6 @@ print(c); //"1.53"
 
 
 
-
-
-
-
-        <section data-state="bb">
-            <h2>Bonus</h2>
-           
-                
-                  Lists are sequences, and so are strings
-                    
-                <pre><code class="python">&gt;&gt;&gt; s = "General Assembly"
-&gt;&gt;&gt; s[0]
-'G'
-&gt;&gt;&gt; s[:7]
-'General' </code></pre>
-            
-        </section>
-
-
-
-
-
-
-
-
-
-
-        <section data-state="bb">
-            <h2>Dictionaries</h2>
-            Dictionaries store <i><font color="#e06666">key</font>: <font color="#3d85c6">value</font>
-                                    </i> pairs associatively.
-                        
-                <pre><code class="python">&gt;&gt;&gt; personX = {'first':'Erick', 'last':'Ratamero', 'twitter':'@erickratamero'}
-&gt;&gt;&gt; personX['first']
-'Erick'
-&gt;&gt;&gt; personX['age'] = 32
-&gt;&gt;&gt; personX
-{'twitter': '@erickratamero', 'last': 'Ratamero', 'age': 32, 'first': 'Erick'}
->>> for i in personX.items():
-...     print(i)
-... 
-('first', 'Erick')
-('last', 'Ratamero')
-('twitter', '@erickratamero')
-</code></pre>
-            
-            <br/>
-        </section>
-
-
-
-
-        <section data-state="bb">
-            <h2>some things you can do with Dictionaries
-                <br/>
-            </h2>
-            <pre><code class="python">&gt;&gt;&gt; list(personX.keys())
-['twitter', 'last', 'first']
-&gt;&gt;&gt; list(personX.values())
-['@erickratamero', 'Ratamero', 'Erick']</code></pre>
-            
-        </section>
-
-
-
-
-
     
     <section data-state="bb">
         
@@ -554,22 +487,6 @@ print(c); //"1.53"
 
 
 
-
-
-
-    <section data-state="bb">
-        <h2>Exercise</h2>
-        Create a dictionary to represent yourself (or someone else) with some attributes (e.g. hometown, favourite film, height)
-
-        <p>Bonus:</p>
-       Add a <b><i>list</i></b> of interests to the <b><i>dictionary</i></b>. What do you use as <b><i>key</i></b>, what do you use as <i><b>value</b></i>?
-        
-            <font color="#e06666">
-
-(Cheating encouraged)
-</font>
-     
-    </section>
 
 
 
@@ -615,12 +532,11 @@ print(c); //"1.53"
                 
                 </p>
                 
-                <pre><code class="python">for item in sequence:
-                        
-    do someting with item</code></pre>
+                <pre><code class="java">for (start; condition; increment){
+          do something
+  }</code></pre>
             
-            <br/>
-            <br/>Mind the <i>Indentation</i>
+            
         </section>
 
 
