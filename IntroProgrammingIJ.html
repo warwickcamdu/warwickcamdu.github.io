@@ -427,50 +427,47 @@ print(c); //"1.53"
 
 
         <section data-state="bb">
-            <h2>Indices</h2>
-            
-                <img src="http://i.stack.imgur.com/vIKaD.png"/>
-           
-        </section>
-
-
-
-
-
-
-
-        <section data-state="bb">
             <h2>Cool things you can do with lists
                 <br/>
             </h2>
             
-                <pre><code class="python">
-&gt;&gt;&gt; l = list(range(10))
-&gt;&gt;&gt; l
-[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-&gt;&gt;&gt; l[1:5]
-[1, 2, 3, 4]
-&gt;&gt;&gt; l[:5]
-[0, 1, 2, 3, 4]
-                                
-&gt;&gt;&gt; del l[5:]
-&gt;&gt;&gt; l
-[0, 1, 2, 3, 4] 
-&gt;&gt;&gt; l.append(5)
-&gt;&gt;&gt; l
-[0, 1, 2, 3, 4, 5] 
-&gt;&gt;&gt; l.reverse()
-&gt;&gt;&gt; l
-[5, 4, 3, 2, 1, 0]
-&gt;&gt;&gt; 5 in l
-True
-                                                
-                    </code></pre>
+                <pre><code class="java">
+// This macro demonstrates how to use the Array.* functions.
+
+  requires("1.42j");
+  a1 = newArray(10, 5, 15, 2, 1.23456);
+  a2 = Array.copy(a1);
+  list("copy", a2);
+  a2 = Array.trim(a1, 2);
+  list("trim", a2);
+  Array.sort(a1);
+  list("sort", a1);
+  Array.getStatistics(a1, min, max, mean, std);
+  print("stats");
+  print("   min: "+min);
+  print("   max: "+max);
+  print("   mean: "+mean);
+  print("   std dev: "+std);
+  Array.fill(a1, -1);
+  list("fill", a1);
+
+  a1 = newArray("one", "two", "three", "four");
+  print("");
+  a2 = Array.copy(a1);
+  list("copy", a2);
+  a2 = Array.trim(a1, 2);
+  list("trim", a2);
+  Array.sort(a1);
+  list("sort", a1);
+
+  function list(name, a) {
+      print(name);
+      for (i=0; i<a.length; i++)
+          print("   "+a[i]);
+  }
+                </code></pre>
            
             
-                <a href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists" target="_blank">https://docs.python.org/3/tutorial/datastructures.html#more-on-lists</a>
-            
-            <br/>
         </section>
 
 
