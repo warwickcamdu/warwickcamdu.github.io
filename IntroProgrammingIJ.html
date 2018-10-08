@@ -692,12 +692,9 @@ no drinks for you</code></pre>
                     Input and output can be of all different types
                 </p>
                 
-                <pre><code class="python">&gt;&gt;&gt; name = "Erick Ratamero"
-&gt;&gt;&gt; length = len(name)
-&gt;&gt;&gt; length
-18
-&gt;&gt;&gt; type(length)
-&lt;type 'int'&gt; </code></pre>
+                <pre><code class="C">name = "Erick Ratamero";
+length = lengthOf(name);
+print(length);</code></pre>
             
             <br/>
         </section>
@@ -711,7 +708,7 @@ no drinks for you</code></pre>
             <h2>Built in functions</h2>
             
             <p>
-                <a href="https://docs.python.org/3/library/functions.html" target="_blank">docs.python.org/3/library/functions.html</a>
+                <a href="https://imagej.nih.gov/ij/developer/macro/functions.html" target="_blank">https://imagej.nih.gov/ij/developer/macro/functions.html</a>
             </p>
            
         </section>
@@ -726,23 +723,19 @@ no drinks for you</code></pre>
             <p>You can <i>define</i> your own functions like this:
             </p>
           
-            <pre><code class="python">def function_name(argument(s)):4
-    action with argument(s)</code></pre>
+            <pre><code class="C">function function_name(argument(s)){
+actions with argument(s)
+return statement
+    }
+</code></pre>
            
-            <pre><code class="python">&gt;&gt;&gt; def multiply(a, b):
-...     return a * b
-...
-&gt;&gt;&gt; multiply(3,4)
-12
-
-&gt;&gt;&gt; def greet(name):
-...     print("hello "+ name)
-... 
-&gt;&gt;&gt; greet('Erick')
->hello Erick</code></pre>
+            <pre><code class="C">function calculation(x, y, sigma){
+    factor = exp(-1.0*(pow(x,2)+pow(y,2))/(2*pow(sigma,2)));
+    
+    return factor
+}</code></pre>
        
-Mind the 
-        <i>Indentation</i>
+
         
     </section>
 
