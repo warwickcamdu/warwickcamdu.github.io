@@ -197,7 +197,7 @@ height = 1.73; </code></pre>
                     <font color="#e06666"><b>bool</b></font> - boolean; binary true or false values
                 </p>
                 
-                <pre><code>True, False</code></pre>
+                <pre><code>true, false</code></pre>
 
                 
         </section>
@@ -206,13 +206,15 @@ height = 1.73; </code></pre>
 
     <section data-state="bb">
             <h2>Changing types</h2>
-            <p>'Casting' a variable to another type</p>
+            <p>'Casting' a variable to another type requires some of the <a href="https://imagej.nih.gov/ij/developer/macro/functions.html" target="_blank">built-in functions</a> we have mentioned.</p>
             <p>
                 <br/>
             </p>
-            <pre><code>int("42")
-float("1.69")
-str(1.5) </code></pre>
+            <pre><code>a = parseInt("42");
+b = parseFloat("1.69");
+c = d2s(1.5333, 2);
+print(c); //"1.53"
+ </code></pre>
             <br/>
         </section>
 
