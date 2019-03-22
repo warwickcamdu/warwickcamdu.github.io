@@ -123,6 +123,67 @@ test_tidy
 <h4>Each <font color="orange">type</font> of observation (demographic, medical, meteorological, etc.) should be a <font color="green">table</font>.</h4><br>
 </section>
 
+<section data-state="tidy"><style>.tidy header:after { content: "Real datasets, though..."; }</style>
+Common issues: <br>
+<ul>
+<li>Column headers as values instead of variable names</li> 
+<li>Multiple variables in the same column</li>  
+<li>Variables in rows <b>and</b> columns</li> 
+<li>Multiple types of obervations in the same table</li> 
+<li>Same type of observation in different tables</li>  
+  </ul>
+</section>
+
+
+<section data-state="tidy"><style>.tidy header:after { content: "Column headers as values instead of variable names"; }</style>
+<pre><code class="python">
+    religion `<$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k`
+  1 Agnostic      27        34        60        81        76       137
+  2 Atheist       12        27        37        52        35        70
+  3 Buddhist      27        21        30        34        33        58
+  4 Catholic     418       617       732       670       638      1116
+  5 Don’t k…      15        14        15        11        10        35
+  6 Evangel…     575       869      1064       982       881      1486
+  7 Hindu          1         9         7         9        11        34
+  8 Histori…     228       244       236       238       197       223
+  9 Jehovah…      20        27        24        24        21        30
+ 10 Jewish        19        19        25        25        30        95
+</code></pre><br>
+</section>
+
+
+<section data-state="tidy"><style>.tidy header:after { content: "Multiple variables in the same column"; }</style>
+<pre><code class="python">
+    iso2   year   m04  m514  m014 m1524 m2534 m3544 m4554 m5564   m65    mu
+  1 AD     1989    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
+  2 AD     1990    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
+  3 AD     1991    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
+  4 AD     1992    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
+  5 AD     1993    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
+  6 AD     1994    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
+  7 AD     1996    NA    NA     0     0     0     4     1     0     0    NA
+  8 AD     1997    NA    NA     0     0     1     2     2     1     6    NA
+  9 AD     1998    NA    NA     0     0     0     1     0     0     0    NA
+ 10 AD     1999    NA    NA     0     0     0     1     1     0     0    NA
+</code></pre><br>
+</section>
+
+
+<section data-state="tidy"><style>.tidy header:after { content: "Variables in rows and columns"; }</style>
+<pre><code class="python">
+    id     year month element    d1    d2    d3    d4    d5    d6    d7
+  1 MX17…  2010     1 tmax       NA  NA    NA      NA  NA      NA    NA
+  2 MX17…  2010     1 tmin       NA  NA    NA      NA  NA      NA    NA
+  3 MX17…  2010     2 tmax       NA  27.3  24.1    NA  NA      NA    NA
+  4 MX17…  2010     2 tmin       NA  14.4  14.4    NA  NA      NA    NA
+  5 MX17…  2010     3 tmax       NA  NA    NA      NA  32.1    NA    NA
+  6 MX17…  2010     3 tmin       NA  NA    NA      NA  14.2    NA    NA
+  7 MX17…  2010     4 tmax       NA  NA    NA      NA  NA      NA    NA
+  8 MX17…  2010     4 tmin       NA  NA    NA      NA  NA      NA    NA
+  9 MX17…  2010     5 tmax       NA  NA    NA      NA  NA      NA    NA
+ 10 MX17…  2010     5 tmin       NA  NA    NA      NA  NA      NA    NA
+</code></pre><br>
+</section>
 
 <section data-menu-title="Libraries" data-state="intro1"><style>.intro1 header:after { content: "These are some relevant libraries"; }</style>
 <ul>
