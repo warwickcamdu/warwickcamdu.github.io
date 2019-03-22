@@ -90,6 +90,31 @@ test2
 </section>
 
 
+<section data-state="tidy"><style>.tidy header:after { content: "Data semantics"; }</style>
+
+<h4>A dataset is a collection of <font color="orange">values.</font></h4><br>
+<h4>A <font color="orange">value</font> belongs to a <font color="orange">variable</font> and an <font color="orange">observation.</font></h4><br>
+<h4>A <font color="orange">variable</font> contains all <font color="orange">values</font> that measure the same attribute (height, duration, frequency).</h4><br>
+ <h4>An <font color="orange">observation</font> contains all <font color="orange">values</font> measured on the same "experiment".</h4><br>
+</section>
+
+
+<section data-state="tidy"><style>.tidy header:after { content: "Making our example dataset tidy"; }</style>
+
+<pre><code class="python">import pandas as pd
+test_tidy = pd.read_csv("test_tidy.csv")
+test_tidy
+      name condition       n  
+ 1   Alice         1      NA 
+ 2   Alice         2       8
+ 3     Bob         1       4
+ 4     Bob         2       2
+ 5   Carol         1       6
+ 6   Carol         2       9
+</code></pre>
+</section>
+
+
 <section data-menu-title="Libraries" data-state="intro1"><style>.intro1 header:after { content: "These are some relevant libraries"; }</style>
 <ul>
 <li><b><u><i>numpy:</i></u></b> NUMerical PYthon. Has multidimensional arrays, basic linear algebra, Fourier transforms, random number generation...</li>	
@@ -550,7 +575,7 @@ plt.show()
 <ul>
 	<li>Repeat the multiple plots in the same figure as a few slides ago, but using the following properties:
 		<ul>
-			<li>y = t: XKCD definition of teal, dotted line</li>
+			<li>y = t: teal, dotted line</li>
 			<li>y = t^2: Yellow, dashed line</li>
 			<li>y = t^3: Magenta circles</li>
 		</ul>
@@ -560,7 +585,6 @@ plt.show()
 <ul><li><a href="https://matplotlib.org/gallery/lines_bars_and_markers/line_styles_reference.html" target="_blank">https://matplotlib.org/gallery/lines_bars_and_markers/line_styles_reference.html</a></li>
 <li><a href="https://matplotlib.org/api/colors_api.html" target="_blank">https://matplotlib.org/api/colors_api.html</a></li>
 <li><a href="https://matplotlib.org/gallery/color/color_demo.html" target="_blank">https://matplotlib.org/gallery/color/color_demo.html</a></li>
-<li><a href="https://xkcd.com/color/rgb/" target="_blank">https://xkcd.com/color/rgb/</a></li>
 
 </ul>
 </section>
@@ -591,7 +615,7 @@ import matplotlib.pyplot as plt
 
 t = np.arange(0., 5., 0.2)
 
-plt.plot(t, t, color='xkcd:teal', linestyle=':')
+plt.plot(t, t, color='teal', linestyle=':')
 plt.plot(t, t**2, 'y--', t, t**3, 'mo')
 plt.show()</code></pre>
 <div><img src="img-py/sol2.png" width="50%"></div>
