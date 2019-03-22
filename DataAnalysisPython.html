@@ -34,7 +34,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <div class="slides">
 
 <section data-menu-title="Title">
-<h2>Introduction to Data Analysis with Python - part 2</h2>
+<h2>Introduction to Data Analysis with Python</h2>
 <h4>Erick Martins Ratamero<br>Research Fellow</h4>
 </section>
 
@@ -54,7 +54,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
 
 <section data-menu-title="Tidy data" data-state="tidy"><style>.tidy header:after { content: "Tidying your data"; }</style>
-<h2>Happy families are all alike; every unhappy family is unhappy in its own way</h2> <br>
+<h2>"Happy families are all alike; every unhappy family is unhappy in its own way"</h2> <br>
 <h4>Leo Tolstoy</h4>
  
 </section>
@@ -68,22 +68,22 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
 <section data-state="tidy"><style>.tidy header:after { content: "Data structure"; }</style>
 
-<code class="python">import pandas as pd
+<pre><code class="python">import pandas as pd
 test = pd.read_csv("test.csv")
 test
       name condition1 condition2
  1   Alice         NA          8
  2     Bob          4          2
  3   Carol          6          9
-</code>
+</code></pre>
 
-<code class="python">import pandas as pd
+<pre><code class="python">import pandas as pd
 test2 = pd.read_csv("test2.csv")
 test2
    condition      Alice      Bob        Carol
  1         1         NA        4            6
  2         2          8        2            9
-</code>
+</code></pre>
 
 <h4>Data is the same, but layout is different - no easy way of knowing it is the same data!</h4>
  
