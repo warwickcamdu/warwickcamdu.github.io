@@ -41,12 +41,52 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <section data-menu-title="Summary" data-state="intro0"><style>.intro0 header:after { content: "Summary"; }</style>
 <ul>
 <li>These slides: http://tiny.cc/camdupython2 (redirects to https://erickmartins.github.io/DataAnalysisPython.html)</li>	
+<li>Tidy data</li>
 <li>Some relevant libraries</li>
 <li>String manipulation</li>
 <li>File input/output</li>
 <li>Plotting</li>
 <li>If we have time: introduction to pandas and numpy</li> 
 </ul>
+</section>
+
+
+
+
+<section data-menu-title="Tidy data" data-state="tidy"><style>.tidy header:after { content: "Tidying your data"; }</style>
+<h2>Happy families are all alike; every unhappy family is unhappy in its own way</h2> <br>
+<h4>Leo Tolstoy</h4>
+ 
+</section>
+
+<section data-state="tidy"><style>.tidy header:after { content: "Tidying your data"; }</style>
+
+<h4>We will discuss a standardised way to link the structure of a dataset to its semantics.</h4><br>
+<h4>(i.e. we will relate the physical layout of data to its meaning in a predictable way.)</h4>
+ 
+</section>
+
+<section data-state="tidy"><style>.tidy header:after { content: "Data structure"; }</style>
+
+<code class="python">import pandas as pd
+test = pd.read_csv("test.csv")
+test
+      name condition1 condition2
+ 1   Alice         NA          8
+ 2     Bob          4          2
+ 3   Carol          6          9
+</code>
+
+<code class="python">import pandas as pd
+test2 = pd.read_csv("test2.csv")
+test2
+   condition      Alice      Bob        Carol
+ 1         1         NA        4            6
+ 2         2          8        2            9
+</code>
+
+<h4>Data is the same, but layout is different - no easy way of knowing it is the same data!</h4>
+ 
 </section>
 
 
