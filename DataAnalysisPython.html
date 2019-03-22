@@ -59,14 +59,14 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
  
 </section>
 
-<section data-state="tidy1"><style>.tidy header:after { content: "Tidying your data"; }</style>
+<section data-state="tidy1"><style>.tidy1 header:after { content: "Tidying your data"; }</style>
 
 <h4>We will discuss a standardised way to link the structure of a dataset to its semantics.</h4><br>
 <h4>(i.e. we will relate the physical layout of data to its meaning in a predictable way.)</h4>
  
 </section>
 
-<section data-state="tidy2"><style>.tidy header:after { content: "Data structure"; }</style>
+<section data-state="tidy2"><style>.tidy2 header:after { content: "Data structure"; }</style>
 
 <pre><code class="python">import pandas as pd
 test = pd.read_csv("test.csv")
@@ -90,7 +90,7 @@ test2
 </section>
 
 
-<section data-state="tidy3"><style>.tidy header:after { content: "Data semantics"; }</style>
+<section data-state="tidy3"><style>.tidy3 header:after { content: "Data semantics"; }</style>
 
 <h4>A dataset is a collection of <font color="orange">values.</font></h4><br>
 <h4>A <font color="orange">value</font> belongs to a <font color="orange">variable</font> and an <font color="orange">observation.</font></h4><br>
@@ -99,7 +99,7 @@ test2
 </section>
 
 
-<section data-state="tidy4"><style>.tidy header:after { content: "Making our example dataset tidy"; }</style>
+<section data-state="tidy4"><style>.tidy4 header:after { content: "Making our example dataset tidy"; }</style>
 
 <pre><code class="python">import pandas as pd
 test_tidy = pd.read_csv("test_tidy.csv")
@@ -116,14 +116,14 @@ test_tidy
 <h4>Tidy data depends on your <font color="red">experimental design</font>.</h4>
 </section>
 
-<section data-state="tidy5"><style>.tidy header:after { content: "Data structure from data semantics"; }</style>
+<section data-state="tidy5"><style>.tidy5 header:after { content: "Data structure from data semantics"; }</style>
 
 <h4>Each <font color="orange">variable</font> should be a <font color="green">column</font>.</h4><br>
 <h4>Each <font color="orange">observation</font> should be a <font color="green">row</font>.</h4><br>
 <h4>Each <font color="orange">type</font> of observation (demographic, medical, meteorological, etc.) should be a <font color="green">table</font>.</h4><br>
 </section>
 
-<section data-state="tidy6"><style>.tidy header:after { content: "Real datasets, though..."; }</style>
+<section data-state="tidy6"><style>.tidy6 header:after { content: "Real datasets, though..."; }</style>
 Common issues: <br>
 <ul>
 <li>Column headers as values instead of variable names</li> 
@@ -135,7 +135,7 @@ Common issues: <br>
 </section>
 
 
-<section data-state="tidy7"><style>.tidy header:after { content: "Column headers as values instead of variable names"; }</style>
+<section data-state="tidy7"><style>.tidy7 header:after { content: "Column headers as values instead of variable names"; }</style>
 <pre><code class="python">
     religion `<$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k`
   1 Agnostic      27        34        60        81        76       137
@@ -152,7 +152,7 @@ Common issues: <br>
 </section>
 
 
-<section data-state="tidy8"><style>.tidy header:after { content: "Multiple variables in the same column"; }</style>
+<section data-state="tidy8"><style>.tidy8 header:after { content: "Multiple variables in the same column"; }</style>
 <pre><code class="python">
     iso2   year   m04  m514  m014 m1524 m2534 m3544 m4554 m5564   m65    mu
   1 AD     1989    NA    NA    NA    NA    NA    NA    NA    NA    NA    NA
@@ -169,7 +169,7 @@ Common issues: <br>
 </section>
 
 
-<section data-state="tidy9"><style>.tidy header:after { content: "Variables in rows and columns"; }</style>
+<section data-state="tidy9"><style>.tidy9 header:after { content: "Variables in rows and columns"; }</style>
 <pre><code class="python">
     id     year month element    d1    d2    d3    d4    d5    d6    d7
   1 MX17…  2010     1 tmax       NA  NA    NA      NA  NA      NA    NA
