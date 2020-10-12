@@ -1,0 +1,745 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Image Analysis with Fiji</title>
+<link rel="stylesheet" href="css/reveal.css">
+<link rel="stylesheet" href="css/theme/cci.css">
+<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+<!-- Theme used for syntax highlighting of code -->
+<link rel="stylesheet" href="lib/css/zenburn.css">
+<!-- Printing and PDF exports -->
+<script>
+var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+document.getElementsByTagName( 'head' )[0].appendChild( link );
+</script>
+</head>
+<body>
+<div class="reveal">
+<!-- Header logo -->
+<!--img style="position:fixed;top:1em;right:1em;" src="img/logo_cci.png" width="15%"-->
+<!-- Slide Title -->
+<header style="position: absolute;top: 1em; left: 1em; z-index:10;"></header>
+
+
+
+<!-- ---------------------- START OF SLIDES -------------------------- -->
+
+
+<div class="slides">
+    
+<section data-menu-title="Title">
+<h1>Introduction to Assignment 1</h1>
+<br>
+<p>Navigation:
+<ul><li> Left/right arrow keys for previous/next slide</li><li>'m' key to get to navigation menu</li><li>Escape for slide overview</li></ul>
+</p>
+</section>
+
+<section data-menu-title="Instructions">
+        <h2>Assignment 1</h2>
+        <h4>Submission Deadline: 4th November 2020.<br>40% of assessed work (20% of module grade)</h4>
+         <ul>
+             <li>Read the paper by Sotak and Boyer. It can be downloaded from Moodle.</li>
+             <li>Write a well annotated ImageJ macro that implements the Laplacian of Gaussian (LoG) filter as described by either equation 1.1 or equations 1.2-1.4 of the paper. You can use the code “LoG.ijm” on Moodle as a starting point.</li>
+             <li>Write a well annotated ImageJ macro that implements a Difference of Gaussians (DoG) filter.</li>
+             <li>Write a README file that includes:
+			 <ul>
+				<li>What each macro does</li>
+				<li>Instructions of how to use both macros</li>
+				<li>Instructions of how to produce an example output for each macro</li>
+				<li>The limitations of the methods and when/why you should use LoG or DoG.</li>
+			 </ul></li>
+ </section>
+ 
+<section data-menu-title="Submission">
+        <h2>Submission</h2>
+		<ul>
+		<li>Submit your README file named YourStudentID_README.txt and a .zip archive named YourStudentID_A1.zip via Moodle containing the following 4 (or 5) files:</li>
+			 <ul>
+				<li>README file</li>
+				<li>LoG macro</li>
+				<li>DoG macro</li>
+				<li>Resulting image after the LoG macro has been applied</li>
+				<li>Resulting image after the DoG macro has been applied</li>
+				<li>(Optional) Original example image, if you choose not to use one of the sample images in Fiji.</li>
+			</ul>
+		<li>Note: <b>You must submit your README file twice</b>. Both inside the .zip file, for the peer-review, and once alone, for a plagiarism check.</li>
+		<li>You may help one another to implement the LoG and DoG methods as macros but must write your own comments and own README file.</li>
+		</ul>
+ </section>
+ 
+ <section data-menu-title="Peer Review">
+        <h2>Peer Review</h2>
+        <h4>Submission Deadline: 11th November 2020</h4>
+		You will be asked to peer-review the submissions of three other students. To do this, you will answer 5 yes/no questions about your colleague’s work. These are:
+         <ul>
+             <li>Does the README file state which version of Fiji/ImageJ should be used?</li>
+             <li>Can you reproduce the LoG example image?</li>
+             <li>Can you reproduce the DoG example image?</li>
+             <li>Can you apply the LoG macro to another image file?</li>
+			 <li>Can you apply the DoG macro to another image file?</li>
+         </ul><br>
+		 <br>
+		 There will be comment boxes after each question, so you can expand on your answers if you want to. If you answer no to any of the above questions, you should state why here, e.g. “There was a typo in the macro submitted”. There is also an overall feedback box where you can leave further comments.
+ </section>
+
+
+<section data-menu-title="Intro">
+        <h2>Why macros?</h2>
+       
+         <ul>
+             <li>Automation: do the same thing many times over</li>
+             <li>Reproducibility: do exactly the same thing every time, show the world what you've done</li>
+             <li>Sharing: let someone else do exactly the same analysis as you</li>
+             <li>Extension: do things Fiji cannot do by default</li>
+         </ul>  
+       
+                
+    </section>
+
+    <section data-menu-title="Objective">
+        <h2>"My first proper macro"</h2>
+        <h3>Objective: apply a simple analysis pipeline over a set of images</h3>
+       
+         <ul>
+             <li>Download our <a href="material/Macro1.zip">test data</a> to your desktop.</li>
+             <li>Unzip (right click and "Extract All") and rename the folder to <code>Input</code></li>
+             <li>Make another folder on the desktop called <code>Output</code></li>
+             <li>Find the ImageJ macro template "Process_Folder"<br><code>[File > New > Script...]</code><br><code>[Templates > ImageJ 1.x > Batch > Process Folder (IJ1 macro)]</code></li>
+         </ul>    
+    </section>
+    
+            <section data-state="python">
+        <h2>Process_Folder</h2>
+	<p><code>[Templates > ImageJ 1.x > Batch > Process Folder (IJ1 macro)]</code> </p> 
+    <pre><code data-trim data-noescape>
+/*
+ * Macro template to process multiple images in a folder
+ */
+
+#@ File (label = "Input directory", style = "directory") input
+#@ File (label = "Output directory", style = "directory") output
+#@ String (label = "File suffix", value = ".tif") suffix
+
+// See also Process_Folder.py for a version of this code
+// in the Python scripting language.
+
+processFolder(input);
+
+// function to scan folders/subfolders/files to find files with correct suffix
+function processFolder(input) {
+	list = getFileList(input);
+	list = Array.sort(list);
+	for (i = 0; i < list.length; i++) {
+		if(File.isDirectory(input + File.separator + list[i]))
+			processFolder(input + File.separator + list[i]);
+		if(endsWith(list[i], suffix))
+			processFile(input, output, list[i]);
+	}
+}
+
+function processFile(input, output, file) {
+	// Do the processing here by adding your own code.
+	// Leave the print statements until things work, then remove them.
+	print("Processing: " + input + File.separator + file);
+	print("Saving to: " + output);
+}
+    </code></pre>
+                  
+    </section>
+
+        <section data-state="python">
+        <h2>Hints</h2>
+       
+         <ul>
+             <li>Use each macro to make the next one.</li>
+             <li>Remember the macro recorder.</li>
+         </ul>
+		<br/>
+	<img src="img-ia/semi-meme.jpeg" width="300"/>     
+    </section>
+
+    <section data-menu-title="Task 1">
+        <h2>Task 1- Create a macro that:</h2>
+       
+         <ol>
+             <li>Opens every image and prints the image name to the log.</li>
+         </ol>  
+           <p>
+        (Hint: What do the variables input, output, file and file.seperator mean?)
+        </p>      
+    </section>
+    
+    <section data-menu-title="Task 2">
+        <h2>Task 2- Create a macro that:</h2>
+       
+         <ol>
+             <li>Opens every image, prints how many slices there are in the image and then closes the image.</li>
+         </ol>  
+         <p>i.e. you shouldn't have all of the image open at the end</p>  
+    </section>
+    
+
+                </section>
+    
+    <section data-menu-title="Task 3">
+        <h2>Task 3- Create a macro that:</h2>
+       
+         <ol>
+             <li>Opens every image, prints how many slices there are in the image...</li>
+             <li>duplicates the first slice</li>
+             <li>then saves this as a seperate image (with a suitable filename).</li>
+             <li>Closes all the images.</li>
+         </ol>        
+    </section>
+
+                </section>
+    
+    <section data-menu-title="Task 4">
+        <h2>Task 4- Create a macro that:</h2>
+         <ol>
+             <li>Opens every image, prints how many slices there are in the image then ...</li>
+	     <li>Sets the slice to 5, duplicates this frame, </li>
+	     <li>performs background subtraction then saves this as a seperate image (with a suitable filename).</li>
+             <li>Closes all the images.</li>
+         </ol>     
+    </section>
+	
+
+	<section data-menu-title="Task 5">
+        <h2>Task 5- Create a macro that:</h2>
+         <ol>
+             <li>Opens every image, prints how many slices there are in the image then ...</li>
+	     <li>Loops through every individual slice of the image, subtracts the background and saves each as new image.</li>
+             <li>Closes all the images.</li>
+         </ol>     
+    </section>
+	
+	
+    <section data-menu-title="Extension task 6">
+        <h2>Extension task 6- Create a macro that:</h2>
+         <ol>
+	     <li>Opens every image, prints how many slices there are in the image then ...</li>
+	     <li>Loops through every individual slice of the image and saves each as new image.</li>
+             <li>Does a Z projection between slices 3 and 7 and measures the "mean gray value" of this projection.</li>
+             <li>Closes all the images and then saves the results table as a .csv file.</li>
+         </ol>     
+    </section>
+	
+    <section data-menu-title="Solution 1">
+    <h2>Solution 1:</h2>
+    <pre><code data-trim data-noescape>
+
+#@ File (label = "Input directory", style = "directory") input
+#@ File (label = "Output directory", style = "directory") output
+#@ String (label = "File suffix", value = ".tif") suffix
+
+processFolder(input);
+
+// function to scan folders/subfolders/files to find files with correct suffix
+function processFolder(input) {
+	list = getFileList(input);
+	list = Array.sort(list);
+	for (i = 0; i < list.length; i++) {
+		if(File.isDirectory(input + File.separator + list[i]))
+			processFolder(input + File.separator + list[i]);
+		if(endsWith(list[i], suffix))
+			processFile(input, output, list[i]);
+	}
+}
+
+function processFile(input, output, file) {	
+	print(file);
+	// or print(input+ File.seperator + file);
+}
+    </code></pre>
+    </section>
+	
+    <section data-menu-title="Solution 2">
+    <h2>Solution 2:</h2>
+    <pre><code data-trim data-noescape>
+
+#@ File (label = "Input directory", style = "directory") input
+#@ File (label = "Output directory", style = "directory") output
+#@ String (label = "File suffix", value = ".tif") suffix
+
+processFolder(input);
+
+// function to scan folders/subfolders/files to find files with correct suffix
+function processFolder(input) {
+	list = getFileList(input);
+	list = Array.sort(list);
+	for (i = 0; i < list.length; i++) {
+		if(File.isDirectory(input + File.separator + list[i]))
+			processFolder(input + File.separator + list[i]);
+		if(endsWith(list[i], suffix))
+			processFile(input, output, list[i]);
+	}
+}
+
+function processFile(input, output, file) {
+	
+	open(input+File.separator+file);
+	print(nSlices);
+	close();
+}
+    </code></pre>
+    </section>
+	
+    <section data-menu-title="Solution 3">
+    <h2>Solution 3:</h2>
+    <pre><code data-trim data-noescape>
+#@ File (label = "Input directory", style = "directory") input
+#@ File (label = "Output directory", style = "directory") output
+#@ String (label = "File suffix", value = ".tif") suffix
+
+processFolder(input);
+
+// function to scan folders/subfolders/files to find files with correct suffix
+function processFolder(input) {
+	list = getFileList(input);
+	list = Array.sort(list);
+	for (i = 0; i < list.length; i++) {
+		if(File.isDirectory(input + File.separator + list[i]))
+			processFolder(input + File.separator + list[i]);
+		if(endsWith(list[i], suffix))
+			processFile(input, output, list[i]);
+	}
+}
+
+function processFile(input, output, file) {	
+	open(input+"/"+file);
+	print(nSlices);
+	run("Duplicate...", " ");
+	saveAs("Tiff", output+File.separator+File.nameWithoutExtension+"_slice1.tiff");
+	close();
+	close();
+	//or close("*")
+}
+    </code></pre>
+    </section>
+	
+    <section data-menu-title="Solution 4">
+    <h2>Solution 4:</h2>
+    <pre><code data-trim data-noescape>
+#@ File (label = "Input directory", style = "directory") input
+#@ File (label = "Output directory", style = "directory") output
+#@ String (label = "File suffix", value = ".tif") suffix
+
+processFolder(input);
+
+// function to scan folders/subfolders/files to find files with correct suffix
+function processFolder(input) {
+	list = getFileList(input);
+	list = Array.sort(list);
+	for (i = 0; i < list.length; i++) {
+		if(File.isDirectory(input + File.separator + list[i]))
+			processFolder(input + File.separator + list[i]);
+		if(endsWith(list[i], suffix))
+			processFile(input, output, list[i]);
+	}
+}
+
+function processFile(input, output, file) {	
+	open(input+"/"+file);
+	print(nSlices);
+	setSlice(5);
+	run("Duplicate...", " ");
+	run("Subtract Background...", "rolling=20");
+	saveAs("tiff", output+File.separator+File.nameWithoutExtension+"_slice5"+".tiff");
+	close();
+	close();
+}
+    </code></pre>
+    </section>
+	
+    <section data-menu-title="Solution 5">
+    <h2>Solution 5:</h2>
+    <pre><code data-trim data-noescape>
+#@ File (label = "Input directory", style = "directory") input
+#@ File (label = "Output directory", style = "directory") output
+#@ String (label = "File suffix", value = ".tif") suffix
+
+processFolder(input);
+
+// function to scan folders/subfolders/files to find files with correct suffix
+function processFolder(input) {
+	list = getFileList(input);
+	list = Array.sort(list);
+	for (i = 0; i < list.length; i++) {
+		if(File.isDirectory(input + File.separator + list[i]))
+			processFolder(input + File.separator + list[i]);
+		if(endsWith(list[i], suffix))
+			processFile(input, output, list[i]);
+	}
+}
+
+function processFile(input, output, file) {	
+	open(input+"/"+file);
+	print(nSlices);
+	for (i=1; i<=nSlices; i++){
+		setSlice(i);
+		run("Duplicate...", " ");
+		run("Subtract Background...", "rolling=20");
+		saveAs("tiff", output+File.separator+File.nameWithoutExtension+"_slice"+i+".tiff");
+		close();
+	}
+	close();
+}
+    </code></pre>
+    </section>
+	    
+    <section data-menu-title="Solution 6">
+    <h2>Solution 6:</h2>
+    <pre><code data-trim data-noescape>
+#@ File (label = "Input directory", style = "directory") input
+#@ File (label = "Output directory", style = "directory") output
+#@ String (label = "File suffix", value = ".tif") suffix
+
+processFolder(input);
+
+// function to scan folders/subfolders/files to find files with correct suffix
+function processFolder(input) {
+	list = getFileList(input);
+	list = Array.sort(list);
+	for (i = 0; i < list.length; i++) {
+		if(File.isDirectory(input + File.separator + list[i]))
+			processFolder(input + File.separator + list[i]);
+		if(endsWith(list[i], suffix))
+			processFile(input, output, list[i]);
+	}
+}
+
+function processFile(input, output, file) {	
+	open(input+"/"+file);
+	print(nSlices);
+	for (i=1; i<=nSlices; i++){
+		setSlice(i);
+		run("Duplicate...", " ");
+		run("Subtract Background...", "rolling=20");
+		saveAs("tiff", output+File.separator+File.nameWithoutExtension+"_slice"+i+".tiff");
+		close();
+	}
+	run("Z Project...", "start=3 stop=7 projection=[Average Intensity]");
+	run("Set Measurements...", "mean redirect=None decimal=7");
+	run("Measure");
+	run("Subtract Background...", "rolling=100");
+	saveAs("tiff", output+File.separator+File.nameWithoutExtension+"_projection_BackSubtract.tiff");
+	close("*");
+}
+
+// Note this is outside the processFile function 
+saveAs("Results", output+File.separator+"MeanIntensity.csv");
+    </code></pre>
+    </section>
+	
+<div class="slides">
+    <section data-menu-title="Session 7">
+<h2>Assembling a ImageJ macro- Session 7</h2>
+	    <h4>Sam Garforth,<br> Daniel Moore,<br>Lewis Mosby,<br><b>PhD helpers</b></h4>
+	    
+	    <p> Hit <b>m</b> to see the plan for today </p>
+</section>
+	
+    <section data-menu-title="Objective2">
+        <h2>A more complex FIJI macro</h2>
+        <h3>Objective: a more advanced macro similar to the assignment</h3>
+       
+         <ul>
+             <li>On the microscopy moodle page download all 6 zip files in the data folder under ImageJ assignment details (A1-3 and B1-3).</li>
+             <li>Unzip and put all six images in a desktop folder called <code>Input</code>.</li>
+             <li>Make another folder on the desktop called <code>Output</code>.</li>
+             <li>Find the ImageJ macro template "Process_Folder"<br><code>[File > New > Script...]</code><br><code>[Templates > ImageJ 1.x > Batch > Process Folder (IJ1 macro)]</code></li>
+         </ul>    
+    </section>
+	
+	<section data-state="python">
+        <h2>Introduction</h2>
+       
+         <ul>
+             <li>There are six z-stack images of cells. Each has three channels: a cytoplasmic marker (1), a brightfield image (2) and a fluorescence image (3).</li>
+             <li>Whilst the first two channels could be useful for cell segmentation, all we want here is an accurate count of the number of foci in the third channel.</li>
+	     <li>We will try two methods of finding the number of foci: thresholding versus finding maxima.</li>
+	     <li>There's multiple ways to do these tasks and lots of them have validity.</li>
+	</ul>  
+    </section>
+	    
+    <section data-menu-title="Task 1">
+        <h2>Task 1- Create a macro that:</h2>
+         <ol>
+             <li>Opens every image and performs a z-projection on the fluorescence channel.</li>
+	     <li>Saves a thresholded version of this projection.</li>
+         </ol> 
+	    <p> You'll want to close all images as you move onto the next file. Remember to generalise your code so that the image name doesn't matter.</p>
+    </section>
+	
+    <section data-menu-title="Task 2">
+        <h2>Task 2- Create a macro that:</h2>
+         <ol>
+             <li>Opens every image and performs a z-projection on the fluorescence channel.</li>
+	     <li>Saves a thresholded version of this projection.</li>
+	     <li>Measures the area and centre of mass of each thresholded spot and saves it as a csv file.</li>
+         </ol> 
+    </section>
+	
+    <section data-menu-title="Task 3">
+        <h2>Task 3- Create a macro that:</h2>
+         <ol>
+             <li>Opens every image and performs a z-projection on the fluorescence channel.</li>
+	     <li>Applies the find_maxima function and saves a list of foci locations as csv file.</li>
+         </ol> 
+    </section>
+	
+  <section data-menu-title="Task 4">
+        <h2>Task 4- Create a macro that:</h2>
+         <ol>
+             <li>Opens every image and performs a z-projection on the fluorescence channel.</li>
+	     <li>Counts the foci in the each image using whichever method you prefer.</li>
+	     <li>Saves a csv file with the total number of foci in all images in the folder.</li>
+         </ol> 
+	  <p> Hint: consider how you would return a variable from the processFile function.</p>
+    </section>
+	
+	
+    <section data-menu-title="Solution 1">
+    <h2>Solution 1:</h2>
+    <pre><code data-trim data-noescape>
+
+
+#@ File (label = "Input directory", style = "directory") input
+#@ File (label = "Output directory", style = "directory") output
+#@ String (label = "File suffix", value = ".tif") suffix
+
+processFolder(input);
+
+// function to scan folders/subfolders/files to find files with correct suffix
+function processFolder(input) {
+	list = getFileList(input);
+	list = Array.sort(list);
+	for (i = 0; i < list.length; i++) {
+		if(File.isDirectory(input + File.separator + list[i]))
+			processFolder(input + File.separator + list[i]);
+		if(endsWith(list[i], suffix))
+			processFile(input, output, list[i]);
+	}
+}
+
+function processFile(input, output, file) {
+	open(input+"/"+file);
+	original = getTitle();
+	orig_name = File.nameWithoutExtension;
+	run("Duplicate...", "duplicate channels=3");
+	ch3 = getTitle();
+	run("Z Project...", "projection=[Max Intensity]");
+	selectWindow(original);
+	close();
+	selectWindow(ch3);
+	close();
+	run("Auto Threshold", "method=MaxEntropy white");
+	saveAs("tiff", output+File.separator+orig_name + "_thresh.tiff");
+	close();
+}
+    </code></pre>
+    </section>
+	    
+    <section data-menu-title="Solution 2">
+    <h2>Solution 2:</h2>
+    <pre><code data-trim data-noescape>
+#@ File (label = "Input directory", style = "directory") input
+#@ File (label = "Output directory", style = "directory") output
+#@ String (label = "File suffix", value = ".tif") suffix
+
+processFolder(input);
+
+function processFolder(input) {
+	list = getFileList(input);
+	list = Array.sort(list);
+	for (i = 0; i < list.length; i++) {
+		if(File.isDirectory(input + File.separator + list[i]))
+			processFolder(input + File.separator + list[i]);
+		if(endsWith(list[i], suffix))
+			processFile(input, output, list[i]);
+	}
+}
+
+function processFile(input, output, file) {
+	open(input+"/"+file);
+	original = getTitle();
+	orig_name = File.nameWithoutExtension;
+	run("Duplicate...", "duplicate channels=3");
+	ch3 = getTitle();
+	run("Z Project...", "projection=[Max Intensity]");
+	selectWindow(original);
+	close();
+	selectWindow(ch3);
+	close();
+	run("Auto Threshold", "method=MaxEntropy white");
+	thresh = getTitle();
+	run("Set Measurements...", "area center redirect=None decimal=7");
+	run("Analyze Particles...", "size=10-Infinity show=Outlines display clear");
+	saveAs("tiff", output+File.separator+orig_name + "_outlines.tiff");
+	close();
+	selectWindow(thresh);
+	close();
+	selectWindow("Results"); 
+	saveAs("results", output+File.separator+orig_name + "_results.csv");
+	run("Close");
+}
+    </code></pre>
+    </section>
+	 
+    <section data-menu-title="Solution 3">
+    <h2>Solution 3:</h2>
+    <pre><code data-trim data-noescape>
+
+#@ File (label = "Input directory", style = "directory") input
+#@ File (label = "Output directory", style = "directory") output
+#@ String (label = "File suffix", value = ".tif") suffix
+
+processFolder(input);
+
+function processFolder(input) {
+	
+	list = getFileList(input);
+	list = Array.sort(list);
+	for (i = 0; i < list.length; i++) {
+		if(File.isDirectory(input + File.separator + list[i]))
+			processFolder(input + File.separator + list[i]);
+		if(endsWith(list[i], suffix))
+			processFile(input, output, list[i]);
+	}
+	
+}
+
+function processFile(input, output, file) {
+	open(input+"/"+file);
+	original = getTitle();
+	orig_name = File.nameWithoutExtension;
+	run("Duplicate...", "duplicate channels=3");
+	ch3 = getTitle();
+	run("Z Project...", "projection=[Max Intensity]");
+	selectWindow(original);
+	close();
+	selectWindow(ch3);
+	close();
+	run("Find Maxima...", "prominence=80 output=List");
+	close();
+	selectWindow("Results"); 
+	saveAs("results", output+File.separator+orig_name + "_maxima.csv");
+	run("Close");
+	
+}
+    </code></pre>
+    </section>
+
+    <section data-menu-title="Solution 4">
+    <h2>Solution 4:</h2>
+    <pre><code data-trim data-noescape>
+
+#@ File (label = "Input directory", style = "directory") input
+#@ File (label = "Output directory", style = "directory") output
+#@ String (label = "File suffix", value = ".tif") suffix
+
+processFolder(input);
+
+function processFolder(input) {
+	total = 0;
+	f = File.open(output+File.separator+"totals.csv");
+	print(f, "file,count");
+	list = getFileList(input);
+	list = Array.sort(list);
+	for (i = 0; i < list.length; i++) {
+		if(File.isDirectory(input + File.separator + list[i]))
+			processFolder(input + File.separator + list[i]);
+		if(endsWith(list[i], suffix)){
+			result = processFile(input, output, list[i]);
+			print(f, list[i]+","+result);
+			total = total + result;
+		}
+	}
+	print(f, "total,"+total);
+	File.close(f);
+}
+
+function processFile(input, output, file) {
+	open(input+"/"+file);
+	original = getTitle();
+	orig_name = File.nameWithoutExtension;
+	run("Duplicate...", "duplicate channels=3");
+	ch3 = getTitle();
+	run("Z Project...", "projection=[Max Intensity]");
+	selectWindow(original);
+	close();
+	selectWindow(ch3);
+	close();
+	run("Find Maxima...", "prominence=80 output=List");
+	close();
+	selectWindow("Results"); 
+	saveAs("results", output+File.separator+orig_name + "_maxima.csv");
+	results = nResults;
+	run("Close");
+	return results;
+}
+    </code></pre>
+    </section>
+	    
+    
+    <section data-menu-title="Last few things">
+        <h2>Last few things</h2>
+       
+         <ol>
+             <li>Good luck with the assignment.</li>
+             <li>All details should be on Moodle. </li>
+             <li>Anything unclear you are free to contact any of us:
+		 sam.garforth@warwick.ac.uk,Daniel.J.Moore@warwick.ac.uk, L.S.Mosby@warwick.ac.uk </li>
+             <li>Help each other (within reason).</li>
+         </ol>        
+    </section>
+
+                </section>
+	    
+ <!-- ---------------------- END OF SLIDES -------------------------- -->
+
+
+</div>
+<!-- Footer -->
+<img style="position:fixed;bottom:0.5em;right:0.5em;" src="img/logo_WMS.jpg" width="10%">
+<!--img style="position:fixed;bottom:1em;left:1em;" src="img/logo_tw.png" width="20%"-->
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+// More info about config & dependencies:
+// - https://github.com/hakimel/reveal.js#configuration
+// - https://github.com/hakimel/reveal.js#dependencies
+Reveal.initialize({
+    controls: false,
+	slideNumber: true, //-- Added for development
+dependencies: [
+{ src: 'plugin/markdown/marked.js' },
+{ src: 'plugin/markdown/markdown.js' },
+{ src: 'plugin/notes/notes.js', async: true },
+{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+{ src: 'plugin/menu/menu.js' }
+],
+menu: {
+hideMissingTitles: true,
+themes: false,
+transitions: false,
+//markers: true,
+numbers: true,
+openButton: false,
+titleSelector: 'span.menu-title'
+
+}
+});
+</script>
+</body>
+</html>
