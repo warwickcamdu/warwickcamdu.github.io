@@ -185,7 +185,9 @@ print("Image contains: " + nSlices + " slices");
 <ul>
 <li>Open <a href="material/Stitching_Overlap.zip"><code>Stitching_Overlap.zip</code></a>. Unzip to the desktop.</li>
 <li>Run <code>[Plugins > Stitching > Grid/Collection Stitching]</code> again</li>
-<li>Change the directory, filename and overlap.</li>
+<li>Change the <code>Tile overlap [%]</code> to 10</li>
+<li>Change the directory and filename</li>
+<li>Select the <code>Add files as ROIs</code> and <code>Compute Overlap</code> boxes</li>
 <li>Hit OK</li>
 </ul>
 <img class="third fragment" src="img-ia/stitch_10.png"/>
@@ -230,7 +232,7 @@ print("Image contains: " + nSlices + " slices");
 <section data-state="apps20"><style>.apps20 header:after { content: "Batch Processing"; }</style>
 <p>Use the macro recorder and The Batch Macro function to:
 <ul class="left half">
-<li>Calibrate the image to 0.1 microns per pixel</li>
+<li>Set the scale of the image to 0.1 microns per pixel</li>
 <li>Draw a 10&mu;m green scale bar in the bottom left corner</li>
 <li>Write the filename onto each image (in red) (<a href="https://imagej.nih.gov/ij/developer/macro/functions.html#getTitle"><i class="fa fa-external-link"></i></a>)</li>
 <li>Print out the filename and spot count to the log (<a href="https://imagej.nih.gov/ij/docs/guide/146-29.html#sub:Find-Maxima"><i class="fa fa-external-link"></i></a>)</li>
