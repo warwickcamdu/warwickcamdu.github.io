@@ -1,0 +1,268 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Image Analysis with Fiji</title>
+<link rel="stylesheet" href="css/reveal.css">
+<link rel="stylesheet" href="css/theme/cci.css">
+<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+<!-- Theme used for syntax highlighting of code -->
+<link rel="stylesheet" href="lib/css/zenburn.css">
+<!-- Printing and PDF exports -->
+<script>
+var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+document.getElementsByTagName( 'head' )[0].appendChild( link );
+</script>
+</head>
+<body>
+<div class="reveal">
+<!-- Header logo -->
+<!--img style="position:fixed;top:1em;right:1em;" src="img/logo_cci.png" width="15%"-->
+<!-- Slide Title -->
+<header style="position: absolute;top: 1em; left: 1em; z-index:10;"></header>
+
+
+
+<!-- ---------------------- START OF SLIDES -------------------------- -->
+
+
+
+<div class="slides">
+
+<section data-menu-title="Title">
+<h1>Segmentation</h1>
+<h3>Laura Cooper<br>Research Fellow, CAMDU</h3>
+<br>
+<p>Navigation:
+<ul><li> Left/right arrow keys for previous/next slide</li><li>'m' key to get to navigation menu</li><li>Escape for slide overview</li></ul>
+</p>
+</section>
+
+<section data-menu-title="Acknowledgements" data-state="intro0a">
+	<h1>Acknowledgements</h1>
+	<p>Slides adpated from presentations by:
+	<ul>
+	<li>Dave Mason, formerly University of Liverpool: <a target="_blank" href="https://pcwww.liv.ac.uk/~dnmason/ia.html">https://pcwww.liv.ac.uk/~dnmason/ia.html</a></li>
+	<li>Erick Martins Ratamero, formerly University of Warwick</li>
+	</ul>
+	</p>
+</section>
+
+<section data-menu-title="Assignment 2" data-state="assign2"><style>.assign2 header:after { content: "Assignment 2"; }</style>
+<h1>Before Assignment 2</h1>
+<p>Before starting the assignment it may be helpful to:</p>
+<ul>
+<li>Read the detailed description of the assignment on Moodle</li>
+<li>Complete the batch processing excercises from <a href="https://laura190.github.io/warwickcamdu.github.io/W2.html">Workshop 2</a> (slide 19)</li>
+<li>Complete the measurement excercises from <a href="https://laura190.github.io/warwickcamdu.github.io/W3.html">Workshop 3</a> (slide 14)</li>
+<li>Complete the excercises from today</li>
+</ul>
+<p>Some of the skills learnt in these exercises will be useful for the assignment.</p>
+</section>
+
+<section data-state="assign2"><style>.assign2 header:after { content: "Assignment 2"; }</style>
+<h1>Assignment 2</h1>
+<ul>
+<li>Read the paper by Alabert et al. which is available on Moodle</li>
+<li>Download the dataset provided on Moodle (Demo)</li>
+<li>Write a well annotated ImageJ macro (or macros) that counts the foci inside each cell. This will involve:
+<ul>
+<li>Identifying cell boundaries</li>
+<li>Detecting the relevant foci in the GFP channel</li>
+<li>Assigning the foci to specific cells</li>
+</ul></li>
+</ul>
+</section>
+
+<section data-state="assign2"><style>.assign2 header:after { content: "Assignment 2"; }</style>
+<ul class="half left">
+<li>Write a report that contains the following sections:</li>
+<ul>
+<li>Introduction, include a summary of the Alabert et al. paper</li>
+<li>Method</li>
+<li>Results, include bar graphs</li>
+<li>Discussion</li>
+<li>Bibliography</li>
+</ul></li>
+</ul>
+<img class="half right" width=1200 src="img-lc/Picture1.png"/>
+<ul>
+<li>Submit your report as YourStudentID_A2.pdf and a zip archive called YourStudentID_A2.zip containing
+<ul>
+<li>Your macro(s)</li>
+<li>Six .tif files with the outlines of the segmented cells</li>
+<li>(Optional) README file</li>
+</ul></li>
+</ul>
+</section>
+
+<!-- ---------------------- APPLICATIONS SEGMENTATION AND CCA -------------------------- -->
+
+
+
+<section data-menu-title="Segmentation" data-state="apps10z"><style>.apps10z header:after { content: ""; }</style>
+<h1>Applications: Segmentation</h1>
+<h4>What is segmentation? thresholding, Connected Component Analysis</h4>
+</section>
+
+<section data-state="apps10y"><style>.apps10y header:after { content: "Segmentation: Before we start"; }</style>
+<p>Fiji has an odd way of dealing with masks</p>
+<img class="third" src="img-ia/setupFiji1.png"/>
+<img class="third" src="img-ia/setupFiji2.png"/>
+<p>Run <code>[Process > Binary > Options]</code> and check <code>Black Background</code>. Hit OK.</p>
+</section> 
+
+<section data-state="apps10"><style>.apps10 header:after { content: "Segmentation: Theory"; }</style>
+<p>Segmentation is the separation of an image into areas of interest and areas that are not of interest</p>
+<img class="left half" src="img-ia/seg_03.png"/><img data-fragment-index="1" class="fragment right half" src="img-ia/seg_04.png"/>
+<p data-fragment-index="1" class="clear fragment">The end point for most segmentation is a binary mask (false/true, 0/255)</p>
+</section> 
+<section data-state="apps10"><style>.apps10 header:after { content: "Segmentation: Theory"; }</style>
+<p>For most applications, intensity-based thresholding works well. This relies on the signal being higher intensity than the background.</p>
+<img class="half" src="img-ia/seg_05.png"/>
+<p>We use a <i>Threshold</i> to pick a cutoff.</p>
+</section> 
+
+<section data-state="apps11"><style>.apps11 header:after { content: "Segmentation: Hands On"; }</style>
+<ul><li>Open <a href="material/07-nuclei.tif"><code>07-nuclei.tif</code></a></li>
+<li>Run <code>[Image > Adjust > Threshold]</code></li>
+<li>Set the lower threshold to 0, 10 and 253, note how the image changes.</li></ul>
+<img class="third" srmc="img-ia/seg_06.png"/><span>&nbsp;&nbsp;</span><img class="third" src="img-ia/seg_07.png"/><span>&nbsp;&nbsp;</span><img class="third" src="img-ia/seg_08.png"/>
+</section>
+
+<section data-state="apps11"><style>.apps11 header:after { content: "Segmentation: Hands On"; }</style>
+<p>Sometimes you will want to automatically set a threshold. Use the dropdown and <code>Auto</code> button</p><p>You can trial all autothresholding methods using <code>[Image > Adjust > Auto Threshold]</code> and select 'Try All'</p>
+<img class="third" src="img-ia/seg_05.png"/><img class="quart fragment" src="img-ia/seg_101.png"/><img class="third fragment" src="img-ia/seg_102.png"/>
+</section>
+
+<section data-state="apps11"><style>.apps11 header:after { content: "Segmentation: Hands On"; }</style>
+<p>Hit 'Apply' to create a mask based on the current Threshold</p>
+<img class="left third" src="img-ia/seg_09.png"/>
+<div class="fragment">
+<div class="right twothirds">
+<p>What can you do with a mask?</p>
+<ol class="half right">
+<li>Count</li>
+<li>Measure</li>
+<li>Visualise</li></ol>
+</section>
+
+<section data-menu-title="Connected Component Analysis" data-state="apps12"><style>.apps12 header:after { content: "Segmentation: Object Counting"; }</style>
+<h1>Connected Component Analysis</h1>
+</section>
+
+<section data-state="apps12"><style>.apps12 header:after { content: "Segmentation: Object Counting"; }</style>
+<p>Connected component analysis (CCA) is used to identify contiguous objects in a mask</p>
+<ul class="half left"><li>Open <a href="material/08-nucleiMask.tif"><code>08-nucleiMask.tif</code></a> (or use yours from the last step)</li>
+<li>Run <code>[Analyze > Analyze Particles]</code></li>
+<li>Use the settings on the right, hit OK</li>
+<li>You should have a results table with a Count of 31 (you may also have some other stats but we'll come to these later)</li> </ul>
+<img class="right third" src="img-ia/seg_CCA_1.png"/>
+</section>
+<section data-state="apps12"><style>.apps12 header:after { content: "Segmentation: Object Counting"; }</style>
+<p>But...there are at least 3 problems with this:</p>
+<ol><li>Single pixel spots are counted as objects</li>
+<li>Edge nuclei are counted</li>
+<li>Some nuclei are touching</li>
+</ol><br>
+<img class="third" src="img-ia/seg_CCA_2b.png"/>
+</section>
+<section data-state="apps12"><style>.apps12 header:after { content: "Segmentation: Object Counting"; }</style>
+<p>A quick fix for separating partially-touching roughly circular objects is to use <code>[Process > Binary > Watershed]</code> before running <code>[Analyze > Analyze Particles]</code></p>
+<img class="third" src="img-ia/seg_CCA_4.png"/><span>&nbsp;&nbsp;&nbsp;</span><img class="third fragment" src="img-ia/seg_CCA_5.png"/>
+</section>
+
+<section data-state="apps13"><style>.apps13 header:after { content: "Segmentation: Making Measurements"; }</style>
+<p>Analyze Particles comes with the option to <code>Display Results</code></p>
+<img class="third left" src="img-ia/seg_CCA_6.png"/>
+<img data-fragment-index="2" class="third left fragment" src="img-ia/seg_CCA_8.png"/>
+<img class="third fragment left" data-fragment-index="1" src="img-ia/seg_CCA_7.png"/>
+<ul><li>The results table will have a column for anything selected in <code>[Analyze > Set Measurements]</code> and one row per object</li>
+<li>Measurements (including intensity - labelled purple above) are made on the mask!</li></ul>
+</section>
+<section data-state="apps13"><style>.apps13 header:after { content: "Segmentation: Making Measurements"; }</style>
+<p>To apply measurements to the original image: check <code>Add to Manager</code> in Analyze Particles, open the <a href="material/07-nuclei.tif"><code>original image</code></a>, then run <code>[More > Multi Measure]</code></p>
+<img class="third" src="img-ia/seg_CCA_9b.png"/>
+<img class="third fragment" src="img-ia/seg_CCA_9.png"/>
+<img class="third fragment" src="img-ia/seg_CCA_9d.png"/>
+<p>Don't forget <code>[Analyze > Set Measurements]</code> to pick parameters</p>
+</section>
+
+<section data-state="apps14"><style>.apps14 header:after { content: "Segmentation: Visualisation"; }</style>
+<p>You may want to create an output or display image showing the results of CCA or segmentation. Analyze particles has several useful outputs:</p>
+<img class="third" src="img-ia/seg_CCA_10a.png"/>
+<img class="third fragment" src="img-ia/seg_CCA_10.png"/>
+<!-- <img class="third fragment" src="img-ia/seg_CCA_10b.png"/> -->
+<p>Count masks are very useful in combination with <code>[Image > Look Up Tables > Glasbey]</code>-style (IE random) LUTs</p>
+</section>
+<section data-state="apps14"><style>.apps14 header:after { content: "Segmentation: Visualisation"; }</style>
+<p>Another trick is to turn the mask into a composite selection then draw it into the original</p>
+<ul class="twothirds left"><li>Open <a href="material/08-nucleiMask.tif"><code>08-nucleiMask.tif</code></a></li>
+<li>Run <code>[Edit > Selection > Create Selection]</code></li>
+<li>If the black area is selected, run <code>[Edit > Selection > Make Inverse]</code>. Add it to the ROI manager ('t')</li>
+<li>Open the <a href="material/07-nuclei.tif"><code>original image</code></a></li>
+<li>Convert it to RGB <code>[Image > Type > RGB Color]</code> (remember what happened with the <a href="#/36">Scale Bar</a>?)</li>
+<li>Select the ROI, then run <code>[Edit > Draw]</code> (this will use the current foreground colour and line width)</li>
+</ul>
+<img class="right third" src="img-ia/seg_CCA_12.png"/>
+</section>
+<section data-state="apps14"><style>.apps14 header:after { content: "Segmentation: Visualisation"; }</style>
+<section>
+<p>Example visualisation of woundhealing</p>
+<!-- <a href="https://cci.liv.ac.uk/img/gallery/woundhealing.mp4" target="_blank"> -->
+<img class="third" src="img-ia/seg_CCA_13.png"/>
+<p>From the <a href="http://cci.liv.ac.uk/gallery.html" target="_blank">CCI website gallery</a>. Data c/o <a href="https://www.liverpool.ac.uk/integrative-biology/staff/daimark-bennett/" target="_blank">Daimark Bennett</a></p>
+<p><i class="fa fa-chevron-circle-down"></i> for movie</p>
+</section>
+<section>
+<video loop data-autoplay class="half" src="https://cci.liv.ac.uk/img/gallery/woundhealing.mp4"></video>
+<!-- </a> -->
+<p>From the <a href="http://cci.liv.ac.uk/gallery.html" target="_blank">CCI website gallery</a>. Data c/o <a href="https://www.liverpool.ac.uk/integrative-biology/staff/daimark-bennett/" target="_blank">Daimark Bennett</a></p>
+</section>
+</section>
+
+
+</div> <!-- ---------------------- END OF SLIDES -------------------------- -->
+
+
+</div>
+<!-- Footer -->
+<img style="position:fixed;bottom:1em;right:1em;" src="img/logo_WMS.jpg" width="10%">
+<!--img style="position:fixed;bottom:1em;left:1em;" src="img/logo_tw.png" width="20%"-->
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+// More info about config & dependencies:
+// - https://github.com/hakimel/reveal.js#configuration
+// - https://github.com/hakimel/reveal.js#dependencies
+Reveal.initialize({
+    controls: false,
+	slideNumber: true, //-- Added for development
+dependencies: [
+{ src: 'plugin/markdown/marked.js' },
+{ src: 'plugin/markdown/markdown.js' },
+{ src: 'plugin/notes/notes.js', async: true },
+{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+{ src: 'plugin/menu/menu.js' }
+],
+menu: {
+hideMissingTitles: true,
+themes: false,
+transitions: false,
+//markers: true,
+numbers: true,
+openButton: false,
+titleSelector: 'span.menu-title'
+
+}
+});
+</script>
+</body>
+</html>

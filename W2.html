@@ -1,0 +1,298 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Image Analysis with Fiji</title>
+<link rel="stylesheet" href="css/reveal.css">
+<link rel="stylesheet" href="css/theme/cci.css">
+<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+<!-- Theme used for syntax highlighting of code -->
+<link rel="stylesheet" href="lib/css/zenburn.css">
+<!-- Printing and PDF exports -->
+<script>
+var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+document.getElementsByTagName( 'head' )[0].appendChild( link );
+</script>
+</head>
+<body>
+<div class="reveal">
+<!-- Header logo -->
+<!--img style="position:fixed;top:1em;right:1em;" src="img/logo_cci.png" width="15%"-->
+<!-- Slide Title -->
+<header style="position: absolute;top: 1em; left: 1em; z-index:10;"></header>
+
+
+
+<!-- ---------------------- START OF SLIDES -------------------------- -->
+
+
+
+<div class="slides">
+
+<section data-menu-title="Title">
+<h1>More Pre-Processing</h1>
+<h3>Laura Cooper<br>Research Fellow, CAMDU</h3>
+<br>
+<p>Navigation:
+<ul><li> Left/right arrow keys for previous/next slide</li><li>'m' key to get to navigation menu</li><li>Escape for slide overview</li></ul>
+</p>
+</section>
+
+<section data-menu-title="Acknowledgements" data-state="intro0a">
+	<h1>Acknowledgements</h1>
+	<p>Slides adpated from presentations by:
+	<ul>
+	<li>Dave Mason, formerly University of Liverpool: <a target="_blank" href="https://pcwww.liv.ac.uk/~dnmason/ia.html">https://pcwww.liv.ac.uk/~dnmason/ia.html</a></li>
+	<li>Erick Martins Ratamero, formerly University of Warwick</li>
+	<li>Lewis Mosby, University of Warwick</li>
+	<li>Philo van Kemenade (<a href="twitter.com/phivk">@phivk</a>)</li>
+        <li>Some material also from <a href="https://imagej.net/Introduction_into_Macro_Programming">ImageJ website</a></li>
+        </ul>
+	</p>
+</section>
+
+<section data-menu-title="Deconvolution" data-state="decon">
+<h1>Recap</h1>
+<ul class="left half">
+<li>When aquiring an image, we detect the point spread function (PSF). It blurs every point in the image</li>
+<li>Fourier transforms can be used speed up convolution. Convolution in the spatial domain is the same as multiplication in the frequency domain</li>
+<li class="fragment">Image formation in the microscope can be understood as convolution between the object being imaged and the PSF of the imaging system</li>
+</ul>
+<img class="fragment right third" src="img-lc/PSF.png"/>
+</section>
+
+<section data-state="decon">
+<h1>Approximating the PSF</h1>
+<ul class="left half">
+<li>PSF are approximated by imaging very small beads. If the beads are smaller than the resolution, the outputs will be the PSF.</li>
+<li>Theoretical PSF are sometimes used, often approximated as a Gaussian function.</li>
+<li>If we have the PSF and the image can we reconstruct the object?</li>
+</ul>
+<img class="right third" src="img-lc/PSF.png"/>
+</section>
+
+<section data-state="decon">
+<h1>Deconvolution</h1>
+<ul class="left half">
+<li>In the spatial domain, let an image, I, be an object, O, convolved with a PSF, P. i.e. I=O*P</li>
+<li>Then, in the frequency domain, we have the F(I)=F(O) x F(P), where F represent the Fourier transform</li>
+<li>So F(O)=F(I) &divide F(P)</li>
+<li>By taking the inverse Fourier transform of F(O), we obtain O, the object.</li>
+<li>This is known as <b>naive deconvolution</b></li>
+</ul>
+<img class="right third" src="img-lc/PSF.png"/>
+</section>
+
+<section data-state="decon">
+<h1>Deconvolution Issues</h1>
+<ul>
+<li>Extremely sensitive to noise</li>
+<li>Can have artifacts if the light source is not constant</li>
+<li>More advanced methods are very computationally intesive</li>
+</ul>
+</section>
+
+<section data-state="fiji2"><style>.fiji2 header:after { content: "Fiji Basics"; }</style>
+<h1>Useful FIJI tips</h1>
+<ul class="left half">
+<li>Zoom using +/- keys</li>
+<li>When zoomed in, pan by holding space and click-dragging with mouse</li>
+<li>Hit 'Enter' to bring the Fiji window to the front</li>
+<li>Find:
+<ul><li>infobar (top left of image): gives info on the image</li>
+<li>statusbar (bottom left of toolbar): gives current cursor coordinates and intensity readout</li>
+</ul>
+</ul>
+<img  class="right third" src="img-ia/fiji8.png"/>
+</section>
+
+<section data-state="fiji2"><style>.fiji2 header:after { content: "Fiji Basics"; }</style>
+<h1>ImageJ Macro Recap</h1>
+<h2>What does this code do?</h2>
+<pre><code class="C">for(i = 0; i < nSlices; i++){
+    print(i);
+}
+</code></pre>
+<code>nSlices</code> and <code>print</code> are <a href=https://imagej.nih.gov/ij/developer/macro/functions.html>built in functions</a>
+</section>
+
+<section data-state="fiji2"><style>.fiji2 header:after { content: "Fiji Basics"; }</style>
+<h1>Improved solution</h1>
+<pre><code class="C">
+// Open input window to enter input file
+#@ File (label = "Input directory", style = "file") input
+open(input);
+// Or: open('/Downloads/test/example1.tif');
+
+// Count number of slices in image
+for(i = 1; i <= nSlices; i++){
+    print("Slice: " + i);
+}
+print("Image contains: " + nSlices + " slices");
+</code></pre>
+<code>#@</code> indicates a <a href=https://imagej.net/Script_parameters>script paramter</a>
+    </section>
+
+<!-- ---------------------- APPLICATIONS -------------------------- -->
+
+<section data-menu-title="Stitching" data-state="apps40z"><style>.apps40z header:after { content: ""; }</style>
+<h1>Applications: Stitching</h1>
+<h4>Resolution vs field size, stitching, using overlaps, issues and bugs</h4>
+</section>
+
+<section data-state="apps40"><style>.apps40 header:after { content: "Image Stitching"; }</style>
+<p>Increasing <b>resolution</b> almost always leads to a reduced <b>field</b></p>
+<img class="twothirds" src="img-ia/stitch_01.png"/>
+<p>Often you will want both!</p>
+</section>
+<section data-state="apps40"><style>.apps40 header:after { content: "Image Stitching"; }</style>
+<p>We can achieve this with tile scanning (i.e. imaging multiple adjacent fields)</p>
+<img class="twothirds" src="img-ia/stitch_02.png"/>
+<p>Stitching is the method used to put them back together again</p>
+</section>
+
+<section data-state="apps41"><style>.apps41 header:after { content: "Image Stitching: no overlap"; }</style>
+<p>Images acquired as adjacent frames (zero overlap)</p>
+<div class="left twothirds" style="font-size:80%">
+<ul>
+<li>Open <a href="material/Stitching_noOverlap.zip"><code>Stitching_noOverlap.zip</code></a>. Unzip to the desktop.</li>
+<li>Run <code>[Plugins > Stitching > Grid/Collection Stitching]</code></li>
+<li>Select: Column by Column | Up &amp; Right</li>
+<li>Settings:
+<ul><li>Grid Size: 2x2</li>
+<li>Tile Overlap: 0</li>
+<li>Directory: {path to your folder}</li>
+<li>File Names: replace the numbers with <code>{i}</code> zero pad with more <code>i</code> - noOverlap_{iii}.tif</li>
+<li>Uncheck all the options [OPTIONAL] Check add as ROI</li></ul>
+</li>
+<li>Hit OK (accept fast fusion)</li>
+</ul>
+<!-- <img class="third" src="img-ia/stitch_05.png"/> -->
+</div>
+<img class="third" src="img-ia/stitch_04.png"/>
+</section>
+
+<section data-state="apps41"><style>.apps41 header:after { content: "Image Stitching: no overlap"; }</style>
+<p>Run <code>[Plugins > Stitching > Grid/Collection Stitching]</code> again</p>
+<p>Check the settings are as before but add "compute overlap" and hit OK</p>
+</section>
+
+<section data-state="apps42"><style>.apps42 header:after { content: "Image Stitching: 10% overlap"; }</style>
+<ul>
+<li>Open <a href="material/Stitching_Overlap.zip"><code>Stitching_Overlap.zip</code></a>. Unzip to the desktop.</li>
+<li>Run <code>[Plugins > Stitching > Grid/Collection Stitching]</code> again</li>
+<li>Change the <code>Tile overlap [%]</code> to 10</li>
+<li>Change the directory and filename</li>
+<li>Select the <code>Add files as ROIs</code> and <code>Compute Overlap</code> boxes</li>
+<li>Hit OK</li>
+</ul>
+<img class="third fragment" src="img-ia/stitch_10.png"/>
+<div class="half right fragment">
+<p>Two things to remember when using Grid/Collection Stitching:</p>
+<ol>
+<li>All calibration information is stripped</l>
+<li>Stitching will have a harder time with sparse features or uneven illumination (<a href="https://postacquisition.wordpress.com/2015/06/17/its-a-stitch-up/" target="_blank">example here</a>)</li>
+</ol>
+</div>
+</section>
+
+<section data-state="apps43"><style>.apps43 header:after { content: "Image Stitching: Issues"; }</style>
+<p>The most important point is to know your data!</p>
+<ul>
+<li>Grid layout (dimensions and order!)</li>
+<li>Overlap</li>
+<li>Calibration</li>
+</ul>
+</section>
+
+<!-- ---------------------- APPLICATIONS BATCH PROCESSING -------------------------- -->
+
+<section data-menu-title="Batch Processing" data-state="apps20z"><style>.apps20z header:after { content: ""; }</style>
+<h1>Applications: Batch Processing</h1>
+<h4>Why batch process? File conversion, batch processing, scripting</h4>
+</section>
+
+
+<section data-state="apps20"><style>.apps20 header:after { content: "Batch Processing"; }</style>
+<p>Manual analysis can be laborious, error prone and not provide the provenance required. Batch processing allows the same processing to be run on multiple images. The built-in <code>[Process > Batch]</code> menu has lots of useful functions.</p>
+
+<ul class="left half"> 
+<li>Download <a href="material/BBBC008_partial.zip">this zip file</a> to the desktop and unzip it. It contains a subset of dataset BBBC008 from the <a href="https://data.broadinstitute.org/bbbc/BBBC008/" target="_blank">Broad Bioimage Benchmark Collection</a> to try it out.</li>
+<li>Create an empty folder on your desktop called Output</li>
+<li>Try <code>[Process > Batch > Convert...]</code> </li>
+<li>Try <code>[Process > Batch > Macro...]</code> </li>
+</ul>
+<img class="right half" src="img-ia/batch_01.png"/>
+</section> 
+
+<section data-state="apps20"><style>.apps20 header:after { content: "Batch Processing"; }</style>
+<p>Use the macro recorder and The Batch Macro function to:
+<ul class="left half">
+<li>Set the scale of the image to 0.1 microns per pixel</li>
+<li>Draw a 10&mu;m green scale bar in the bottom left corner</li>
+<li>Write the filename onto each image (in red) (<a href="https://imagej.nih.gov/ij/developer/macro/functions.html#getTitle"><i class="fa fa-external-link"></i></a>)</li>
+<li>Print out the filename and spot count to the log (<a href="https://imagej.nih.gov/ij/docs/guide/146-29.html#sub:Find-Maxima"><i class="fa fa-external-link"></i></a>)</li>
+</ul>
+<img class="right half" src="img-ia/batch_12.png"/>
+</section> 
+
+<section data-menu-title="More things to try">
+<div>
+<h1>More things to try:</h1>
+<ul>
+<li>Crop an image </li>
+<li>Rename an image</li>
+<li>Scale an image</li>
+<li>Invert an image </li>
+<li>Using a colour image, separate the colours into separate images</li>
+<li>Using a 3D image, apply a Z-projection</li>
+<li>Duplicate an image, apply a filter to one of the copies, use the <code>Image Calculator</code> to subtract the filtered image from the original</li>
+</ul>
+<p><b>Before you start remember: <code>[Plugins > Macros > Record]</code></b></p>
+</section>
+</div>
+
+</div> <!-- ---------------------- END OF SLIDES -------------------------- -->
+
+
+</div>
+<!-- Footer -->
+<img style="position:fixed;bottom:1em;right:1em;" src="img/logo_WMS.jpg" width="10%">
+<!--img style="position:fixed;bottom:1em;left:1em;" src="img/logo_tw.png" width="20%"-->
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+// More info about config & dependencies:
+// - https://github.com/hakimel/reveal.js#configuration
+// - https://github.com/hakimel/reveal.js#dependencies
+Reveal.initialize({
+    controls: false,
+	slideNumber: true, //-- Added for development
+dependencies: [
+{ src: 'plugin/markdown/marked.js' },
+{ src: 'plugin/markdown/markdown.js' },
+{ src: 'plugin/notes/notes.js', async: true },
+{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+{ src: 'plugin/menu/menu.js' }
+],
+menu: {
+hideMissingTitles: true,
+themes: false,
+transitions: false,
+//markers: true,
+numbers: true,
+openButton: false,
+titleSelector: 'span.menu-title'
+
+}
+});
+</script>
+</body>
+</html>
