@@ -1,0 +1,285 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Image Analysis with Fiji</title>
+<link rel="stylesheet" href="css/reveal.css">
+<link rel="stylesheet" href="css/theme/cci.css">
+<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+<!-- Theme used for syntax highlighting of code -->
+<link rel="stylesheet" href="lib/css/zenburn.css">
+<!-- Printing and PDF exports -->
+<script>
+var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+document.getElementsByTagName( 'head' )[0].appendChild( link );
+</script>
+</head>
+<body>
+<div class="reveal">
+<!-- Header logo -->
+<!--img style="position:fixed;top:1em;right:1em;" src="img/logo_cci.png" width="15%"-->
+<!-- Slide Title -->
+<header style="position: absolute;top: 1em; left: 1em; z-index:10;"></header>
+
+
+
+<!-- ---------------------- START OF SLIDES -------------------------- -->
+
+
+
+<div class="slides">
+
+<section data-menu-title="Title">
+<h1>Introduction to Image Analysis</h1>
+<h3>Laura Cooper<br>Research Fellow, CAMDU</h3>
+<br>
+<p>Navigation:
+<ul><li> Left/right arrow keys for previous/next slide</li><li>'m' key to get to navigation menu</li><li>Escape for slide overview</li></ul>
+</p>
+</section>
+
+<section data-menu-title="Links and Resources" data-state="intro0"><!--<style>.intro0 header:after { content: "Links and Resources"; } font-size: 500%</style>-->
+<ul>
+<h1>Links and Resources</h1>
+<li>These slides are on Moodle</li>	
+<li>Where to find help:</li>
+	<ul>
+	<li><a target="_blank" href="https://imagej.net">ImageJ Website</a></li>
+	<li><a target="_blank" href="https://forum.image.sc">Image.sc Forum</a></li>
+	<li><a target="_blank" href="http://www.warwick.ac.uk/camdu">CAMDU Website</a></li><li><a target="_blank" href="https://moodle.warwick.ac.uk/mod/forum/view.php?id=1096240">Moodle Forum</a></li>
+	<li>During the Workshops</li>
+	</ul>
+<li>Further Reading:</li>
+<ul><li>The Image Processing Handbook, John C. Russ, CRC Press, 5th edition, 2007</li><li>Bioimage Data Analysis, Kota Miura et al., Wiley-VCH, 2016</li><li>Pete Bankhead's "Analyzing Fluorescence microscopy images with ImageJ" <a target="_blank" href="https://petebankhead.gitbooks.io/imagej-intro/content/">gitbook</a> - uncredited images come from there!</li></ul>
+</ul>
+</section>
+
+<section data-menu-title="Acknowledgements" data-state="intro0a">
+	<h1>Acknowledgements</h1>
+	<p>Slides adpated from presentations by:
+	<ul>
+	<li>Dave Mason, formerly University of Liverpool: <a target="_blank" href="https://pcwww.liv.ac.uk/~dnmason/ia.html">https://pcwww.liv.ac.uk/~dnmason/ia.html</a></li>
+	<li>Erick Martins Ratamero, formerly University of Warwick</li>
+	</ul>
+	</p>
+</section>
+
+<section data-menu-title="Course Schedule" data-state="intro0b">
+	<h1>Image Analysis Schedule</h1>
+	<p>
+	<ul>
+	<li>15th October: Lecture, Workshop 1, Release Assignment 1</li>
+	<li>Workshops 2 and 3</li>
+	<li>4th November: Assignment 1 deadline</li>
+	<li>5th November: Workshop 4, Release Assignment 2</li>
+	<li>11th November: Deadline for Peer Review of Assignment 1</li>
+	<li>Workshops 5 and 6</li>
+	<li>6th December: Assignment 2 deadline</li>
+	</ul>
+	</p>
+</section>
+
+<section data-menu-title="You have images, now what?" data-state="intro1y"><style>.intro1y header:after { content: ""; }</style>
+<h2>Image Analysis</h2>
+<ul>
+<li>There's more data than ever</li>
+<li>We need it to be quantitative</li>
+<li>We need it to be non-subjective</li>
+<li>We need it to be automated</li>
+</ul>
+</section>
+
+<section data-state="intro1y"><style>.intro1y header:after { content: ""; }</style>
+<h2>Example - Find the Root</h2>
+<h4>Image courtesy of T. Roose, University of Southampton</h4>
+<div style="position:relative; width:719px; height:533px; margin:0 auto;">
+<img  class="fragment fade-out" data-fragment-index="0" width="1438" height="1066" src="img-lc/Root1p2um.png" style="position:absolute;top:0;left:0;"/>
+<img  class="fragment fade-in" data-fragment-index="0" width="1438" height="1066" src="img-lc/Root1p2umHighlight.png" style="position:absolute;top:0;left:0;"/>
+</div>
+</section>
+<section data-state="intro1y"><style>.intro1y header:after { content: ""; }</style>
+<h2>Example - Find the Roots</h2>
+<h4>Image courtesy of T. Roose, University of Southampton</h4>
+<div style="position:relative; width:719px; height:533px; margin:0 auto;">
+<img  class="fragment fade-out" data-fragment-index="0" width="1438" height="1066" src="img-lc/Root50um.png" style="position:absolute;top:0;left:0;"/>
+<img  class="fragment fade-in" data-fragment-index="0" width="1438" height="1066" src="img-lc/Root50umHighlight.png" style="position:absolute;top:0;left:0;"/>
+</div>
+</section>
+<section data-state="intro1y"><style>.intro1y header:after { content: ""; }</style>
+<h2>Example - Find the Root</h2>
+<div style="position:relative; width:719px; height:533px; margin:0 auto;">
+<img  class="fragment fade-out" data-fragment-index="0" width="1438" height="1066" src="img-lc/Root60um.png" style="position:absolute;top:0;left:0;"/>
+<img  class="fragment fade-in" data-fragment-index="0" width="1438" height="1066" src="img-lc/Root60umHighlight.png" style="position:absolute;top:0;left:0;"/>
+</div>
+</section>
+
+<section data-menu-title="How an image is Formed" data-state="intro1z"><style>.intro1z header:after { content: ""; }</style>
+<h1>How an Image is Formed</h1>
+<div><img  class="half" src="img-ia/scopes1.png"/>
+<img  class="half" src="img-ia/scopes2.png"/></div>
+<p>Widefield and Confocal microscopes acquire images in different ways.</p>
+</section>
+
+<section data-state="intro1z"><style>.intro1z header:after { content: "How an image is formed"; }</style>
+<div><img  class="half" src="img-ia/acq_widefield.png"/>
+<img class="half fragment" src="img-ia/acq_lsm.png"/></div>
+<p>Widefield and laser-scanning microscopes acquire images in different ways.</p>
+</section>
+<section data-state="intro1z"><style>.intro1z header:after { content: "How an image is formed"; }</style>
+<img  class="imbox" src="img-ia/detector.png"/>
+<p>Detectors collect photons and convert them to a voltage</p>
+</section>
+<section data-state="intro1z"><style>.intro1z header:after { content: "How an image is formed"; }</style>
+<img  class="imbox" src="img-ia/ad_1.png"/>
+<p>The A/D converter determines the dynamic range of the data</p>
+</section>
+<section data-state="intro1z"><style>.intro1z header:after { content: "How an image is formed"; }</style>
+<img  class="imbox" src="img-ia/bd1.png"/>
+<p></p>
+</section>
+<section data-state="intro1z"><style>.intro1z header:after { content: "How an image is formed"; }</style>
+<img  class="imbox" src="img-ia/bd2.png"/>
+<p></p>
+</section>
+<section data-state="intro1z"><style>.intro1z header:after { content: "How an image is formed"; }</style>
+<img  class="imbox" src="img-ia/bd3.png"/>
+<p>Unless you have good reason not to, always collect data at the highest possible bit depth</p>
+</section>
+<section data-state="intro1z"><style>.intro1z header:after { content: "How an image is formed"; }</style>
+	<img class="left half" src="img-ia/bd3.png"/>
+	<p class="right half fragment">32 bit is a special data type called <a href="https://en.wikipedia.org/wiki/Floating-point_arithmetic#Floating-point_numbers" target="_blank">floating point</a>. Pixels can have non-integer values which can be useful in applications like ratiometric imaging.</p>
+</section>
+
+<section data-menu-title="Understanding Digital Images" data-state="udi"><style>.udi header:after { content: "Understanding Digital Images"; }</style>
+<h1>Understanding Digital Images</h1>
+</section>
+<section data-state="udi"><style>.udi header:after { content: "Understanding Digital Images"; }</style>
+<h2>Histograms</h2>
+	<img class="half" src="img-lc/HistoComp.PNG"/>
+	<p class="half"><ul>
+	<li>Images are an array of intensity values. The intensity histogram shows the number (on the y-axis) of each intensity value (on the x-axis) and thus the distribution of intensities <br> 
+	<li>Images that look the same can contain different pixel values<br> 
+	<li>Images that look different can still contain the same pixel values</ul></p>
+</section>
+<section data-state="udi"><style>.udi header:after { content: "Understanding Digital Images"; }</style>
+<h2>Be careful</h2>
+<p class="left">If we stretch the histogram so that the intensity value of every pixel is effectively doubled, this increases the contrast in the image. However, the maximum intensity value in the image is now outside the bounds of the scale!</p>
+<img class="half left" src="img-ia/intensity_14a.png"/>
+<img class="right half" src="img-ia/intensity_15.png"/>
+<p><ul>
+<li>Values falling beyond the new White point are dumped into the top bin of the histogram (i.e. 256 in an 8-bit image) and information from the image is lost
+<li>Be warned: removing information from an image is deemed an unacceptable maniplulation and can constitute academic fraud!
+<li>For an excellent review of permissible image manipulation see: <a target="_blank" href="https://doi.org/10.1083/jcb.200406019">Rossner &amp; Yamada (2004): "What's in a picture? The temptation of image manipulation"</a>
+</ul></p>
+</section>
+
+<section data-state="udi"><style>.udi header:after { content: "Understanding Digital Images"; }</style>
+<h2>Stacks - Multidimensional Images</h2>
+<p>Some file formats (e.g. TIF) can store multiple images in one file which are called stacks</p>
+<img class="third" src="img-ia/stacks_01.png"/>
+<img data-fragment-index="1" class="twothirds fragment" src="img-ia/stacks_02.png"/>
+<p class="fragment" data-fragment-index="1">When more than one dimension (time, z, channel) is included, the images are still stored in a linear stack so it's critical to know the dimension order (eg, XYCZT, XYZTC etc) so you can navigate the stack correctly.</p>
+</section>
+
+<section data-menu-title="Digital Imaging and Colour" data-state="fiji7z"><style>.fiji7z header:after { content: ""; }</style>
+<h1>Colour in Digital Imaging</h1>
+<h4>What is colour? How and when to use LUTs</h4>
+</section>
+
+<section data-state="fiji7"><style>.fiji7 header:after { content: "Colour"; }</style>
+<p>Colour in your images is (almost always) dictated by arbitrary lookup tables</p>
+<img class="half" src="img-ia/colour_02.png"/>
+<img data-fragment-index="1" class="third fragment" src="img-ia/colourLUT1.png"/>
+<p class="fragment" data-fragment-index="1">Lookup tables (LUTs) translate an intensity (1-256 for 8 bit) to an RGB display value</p>
+</section>
+<section data-state="fiji7"><style>.fiji7 header:after { content: "Colour"; }</style>
+<p>Colour in your images is (almost always) dictated by arbitrary lookup tables</p>
+<img class="third" src="img-ia/colourLUT2.png"/>
+<img data-fragment-index="1" class="third fragment" src="img-ia/colourLUT3.png"/>
+<p>Lookup tables (LUTs) translate an intensity (1-256 for 8 bit) to an RGB display value</p>
+</section>
+<section data-state="fiji7"><style>.fiji7 header:after { content: "Colour"; }</style>
+<p>You can use whatever colours you want (they are arbitrary after all), but the most reliable contrast is greyscale</p>
+<img src="img-ia/colour_05.png"/>
+<p class="subtle">More info on colour and sensitivity of the human eye <a href="https://postacquisition.wordpress.com/2015/04/15/see-the-world-in-black-and-white/" target="_blank">here</a></p>
+<!-- <ol><li>Combinations for multichannel images</li><li>Colour Blindness</li></ol> -->
+</section>
+<section data-state="fiji8"><style>.fiji8 header:after { content: "Colour: Combinations"; }</style>
+<p>Additive and Subtractive Colours can be mixed in defined ways</p>
+<img class="half" src="img-ia/colour_06.png"/>
+<p>Non 'pure' colours cannot be combined in reliable ways (as they contain a mix of other channels)
+</section>
+<section data-state="fiji8"><style>.fiji8 header:after { content: "Colour: Combinations"; }</style>
+<p>BUT! Interpretation is <i>highly</i> context dependent!</p>
+<a href="https://twitter.com/dn_mason/status/1034380257451810816" target="_blank"><img class="third" src="img-ia/colour_07.png"/></a><img class="third" src="img-ia/colour_08.png"/><img data-fragment-index="1" class="third fragment" src="img-ia/colour_11.png"/>
+<p data-fragment-index="1" class="fragment"><a href="https://en.wikipedia.org/wiki/The_dress">https://en.wikipedia.org/wiki/The_dress</a></p>
+</section>
+<section data-state="fiji8b"><style>.fiji8b header:after { content: "Colour: R/G Colour blindness"; }</style>
+<p>~10% of the population have trouble discerning Red and Green. Consider using Green and Magenta instead which still combine to white.</p>
+<img src="img-ia/colour_10.png"/>
+</section>
+
+<section data-menu-title="Introduction to ImageJ" data-state="fijiz"><style>.fiji1z header:after { content: ""; }</style>
+<h1>Introduction to ImageJ &amp; Fiji</h1>
+<h4>A cross platform, open source, Java-based image processing program</h4>
+</section>
+
+<section data-state="fiji1"><style>.fiji1 header:after { content: "Introducing ImageJ and Fiji"; }</style>
+<img class="imleft" src="img-ia/fiji1.png"/>
+<ul class="half right">
+<p>ImageJ is a java program for image processing and analysis.<br>Fiji extends this via plugins.</p>
+<li>Open Source (free to modify)</li>
+<li>Extensible (plugins)</li>
+<li>Cross-Platform (Java-Based)</li>
+<li>Scriptable for Automation</li>
+<li>Vast Functionality</li>
+<li>Includes the Bioformats Library</li>
+<br>
+<p>We will use Fiji and ImageJ interchangeably</p>
+</ul>
+</section>
+
+</div> <!-- ---------------------- END OF SLIDES -------------------------- -->
+
+
+</div>
+<!-- Footer -->
+<img style="position:fixed;bottom:1em;right:1em;" src="img/logo_WMS.jpg" width="10%">
+<!--img style="position:fixed;bottom:1em;left:1em;" src="img/logo_tw.png" width="20%"-->
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+// More info about config & dependencies:
+// - https://github.com/hakimel/reveal.js#configuration
+// - https://github.com/hakimel/reveal.js#dependencies
+Reveal.initialize({
+    controls: false,
+	slideNumber: true, //-- Added for development
+dependencies: [
+{ src: 'plugin/markdown/marked.js' },
+{ src: 'plugin/markdown/markdown.js' },
+{ src: 'plugin/notes/notes.js', async: true },
+{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+{ src: 'plugin/menu/menu.js' }
+],
+menu: {
+hideMissingTitles: true,
+themes: false,
+transitions: false,
+//markers: true,
+numbers: true,
+openButton: false,
+titleSelector: 'span.menu-title'
+
+}
+});
+</script>
+</body>
+</html>
