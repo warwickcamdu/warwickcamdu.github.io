@@ -102,54 +102,6 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 </ul>
 </section>
 
-<!-- ---------------------- APPLICATIONS BATCH PROCESSING -------------------------- -->
-
-<section data-menu-title="Batch Processing" data-state="apps20z"><style>.apps20z header:after { content: ""; }</style>
-<h1>Applications: Batch Processing</h1>
-<h4>Why batch process? File conversion, batch processing, scripting</h4>
-</section>
-
-
-<section data-state="apps20"><style>.apps20 header:after { content: "Batch Processing"; }</style>
-<p>Manual analysis can be laborious, error prone and not provide the provenance required. Batch processing allows the same processing to be run on multiple images. The built-in <code>[Process > Batch]</code> menu has lots of useful functions.</p>
-
-<ul class="left half"> 
-<li>Download <a href="material/BBBC008_partial.zip">this zip file</a> to the desktop and unzip it. It contains a subset of dataset BBBC008 from the <a href="https://data.broadinstitute.org/bbbc/BBBC008/" target="_blank">Broad Bioimage Benchmark Collection</a> to try it out.</li>
-<li>Create an empty folder on your desktop called Output</li>
-<li>Try <code>[Process > Batch > Convert...]</code> </li>
-<li>Try <code>[Process > Batch > Macro...]</code> </li>
-</ul>
-<img class="right half" src="img-ia/batch_01.png"/>
-</section> 
-
-<section data-state="apps20"><style>.apps20 header:after { content: "Batch Processing"; }</style>
-<p>Use the macro recorder and The Batch Macro function to:
-<ul class="left half">
-<li>Set the scale of the image to 0.1 microns per pixel</li>
-<li>Draw a 10&mu;m green scale bar in the bottom left corner</li>
-<li>Write the filename onto each image (in red) (<a href="https://imagej.nih.gov/ij/developer/macro/functions.html#getTitle"><i class="fa fa-external-link"></i></a>)</li>
-<li>Print out the filename and spot count to the log (<a href="https://imagej.nih.gov/ij/docs/guide/146-29.html#sub:Find-Maxima"><i class="fa fa-external-link"></i></a>)</li>
-</ul>
-<img class="right half" src="img-ia/batch_12.png"/>
-</section> 
-
-<section data-menu-title="More things to try">
-<div>
-<h1>More things to try:</h1>
-<ul>
-<li>Crop an image </li>
-<li>Rename an image</li>
-<li>Scale an image</li>
-<li>Invert an image </li>
-<li>Using a colour image, separate the colours into separate images</li>
-<li>Using a 3D image, apply a Z-projection</li>
-<li>Duplicate an image, apply a filter to one of the copies, use the <code>Image Calculator</code> to subtract the filtered image from the original</li>
-</ul>
-<p><b>Before you start remember: <code>[Plugins > Macros > Record]</code></b></p>
-</section>
-</div>
-
-
 </div> <!-- ---------------------- END OF SLIDES -------------------------- -->
 
 <!-- Footer -->
