@@ -32,7 +32,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <div class="slides">
 
 <section data-menu-title="Title">
-<h1>Using Results and Tracking</h1>
+<h1>Tracking</h1>
 <h3>Laura Cooper<br>Research Fellow, CAMDU</h3>
 <br>
 <p>Navigation:
@@ -55,43 +55,6 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 	</ul>
 	</p>
 </section>
-
-<section data-menu-title="Managing Results" data-state="res1"><style>.res1 header:after { content: ""; }</style>
-<h1>Managing Results</h1>
-<h4>How to get values from results window, how to add custom results</h4>
-</section>
-
-<section data-state="res1"><style>.res1 header:after { content: ""; }</style>
-<h1>Built-in Functions</h1>
-<p>There are some useful <a href="https://imagej.nih.gov/ij/developer/macro/functions.html">Built-in Functions</a> for managing results in Fiji:</p>
-<p>
-<ul>
-<li><a href="https://imagej.nih.gov/ij/developer/macro/functions.html#getStatistics">getStatistics()</a></li>
-<li><a href="https://imagej.nih.gov/ij/developer/macro/functions.html#getResult">getResult("Column", row)</a></li>
-<li><a href="https://imagej.nih.gov/ij/developer/macro/functions.html#getResult">setResult("Column", row, value)</a> and <a href="https://imagej.nih.gov/ij/developer/macro/functions.html#updateResults">updateResults()</a></li>
-<li><a href="https://imagej.nih.gov/ij/developer/macro/functions.html#nResults">nResults</a> or <a href="https://imagej.nih.gov/ij/developer/macro/functions.html#results-count">getValue("results.count")</a></li>
-</ul>
-</p>
-</section>
-
-<section data-state="res1"><style>.res1 header:after { content: ""; }</style>
-<h1>Results windows</h1>
-<ul>
-<li>You can only have one active results window at a time. This must be named "Results".</li> <li>Other results windows should be renamed. You can use <a href="https://imagej.nih.gov/ij/developer/macro/functions.html#IJ.renameResults">IJ.renameResults</a> to do this.</li>
-<li>To make a renamed results window active again, just rename it back to "Results" and rename the previously active window something else</li>
-</ul>
-</section>
-
-<section data-state="res1"><style>.res1 header:after { content: ""; }</style>
-<h1>Bar graphs</h1>
-<ul>
-<li>Fiji is not designed to create graphs</li>
-<li>You will need to export your results to another programme (e.g. excel, python, matlab, ...)</li>
-<li><a href="https://imagej.nih.gov/ij/developer/macro/functions.html#saveAs">saveAs(format, path)</a></li>
-<li>I would recommend exporting the results as a .csv (comma separated value) file</li>
-</ul>
-</section>
-
 
 <!-- ---------------------- APPLICATIONS TRACKING -------------------------- -->
 
