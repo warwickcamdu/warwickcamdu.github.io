@@ -31,7 +31,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <div class="slides">
 
 <section data-menu-title="Title">
-<h1>Deconvolution</h1>
+<h1>Measurements and Batch Processing</h1>
 <h3>Laura Cooper<br>Research Fellow, CAMDU</h3>
 <br>
 <p>Navigation:
@@ -52,45 +52,18 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 	</p>
 </section>
 
-<section data-menu-title="Deconvolution" data-state="decon">
-<h1>Recap</h1>
+<section data-state="fiji2"><style>.fiji2 header:after { content: "Fiji Basics"; }</style>
+<h1>Useful FIJI tips</h1>
 <ul class="left half">
-<li>When aquiring an image, we detect the point spread function (PSF). It blurs every point in the image</li>
-<li>Fourier transforms can be used speed up convolution. Convolution in the spatial domain is the same as multiplication in the frequency domain</li>
-<li class="fragment">Image formation in the microscope can be understood as convolution between the object being imaged and the PSF of the imaging system</li>
+<li>Zoom using +/- keys</li>
+<li>When zoomed in, pan by holding space and click-dragging with mouse</li>
+<li>Hit 'Enter' to bring the Fiji window to the front</li>
+<li>Find:
+<ul><li>infobar (top left of image): gives info on the image</li>
+<li>statusbar (bottom left of toolbar): gives current cursor coordinates and intensity readout</li>
 </ul>
-<img class="fragment right third" src="img-lc/PSF.png"/>
-</section>
-
-<section data-state="decon">
-<h1>Approximating the PSF</h1>
-<ul class="left half">
-<li>PSF are approximated by imaging very small beads. If the beads are smaller than the resolution, the outputs will be the PSF.</li>
-<li>Theoretical PSF are sometimes used, often approximated as a Gaussian function.</li>
-<li>If we have the PSF and the image can we reconstruct the object?</li>
 </ul>
-<img class="right third" src="img-lc/PSF.png"/>
-</section>
-
-<section data-state="decon">
-<h1>Deconvolution</h1>
-<ul class="left half">
-<li>In the spatial domain, let an image, I, be an object, O, convolved with a PSF, P. i.e. I=O*P</li>
-<li>Then, in the frequency domain, we have the F(I)=F(O) x F(P), where F represent the Fourier transform</li>
-<li>So F(O)=F(I) &divide F(P)</li>
-<li>By taking the inverse Fourier transform of F(O), we obtain O, the object.</li>
-<li>This is known as <b>naive deconvolution</b></li>
-</ul>
-<img class="right third" src="img-lc/PSF.png"/>
-</section>
-
-<section data-state="decon">
-<h1>Deconvolution Issues</h1>
-<ul>
-<li>Extremely sensitive to noise</li>
-<li>Can have artifacts if the light source is not constant</li>
-<li>More advanced methods are very computationally intesive</li>
-</ul>
+<img  class="right third" src="img-ia/fiji8.png"/>
 </section>
 
 <section data-state="fiji2"><style>.fiji2 header:after { content: "Fiji Basics"; }</style>
@@ -133,20 +106,6 @@ run("Merge Channels...",
      "red=[Edges of " + title + "] green=" + title + " blue=" + title + " gray=*None*");</code></pre>
         
     </section>
-    
-<section data-state="fiji2"><style>.fiji2 header:after { content: "Fiji Basics"; }</style>
-<h1>Useful FIJI tips</h1>
-<ul class="left half">
-<li>Zoom using +/- keys</li>
-<li>When zoomed in, pan by holding space and click-dragging with mouse</li>
-<li>Hit 'Enter' to bring the Fiji window to the front</li>
-<li>Find:
-<ul><li>infobar (top left of image): gives info on the image</li>
-<li>statusbar (bottom left of toolbar): gives current cursor coordinates and intensity readout</li>
-</ul>
-</ul>
-<img  class="right third" src="img-ia/fiji8.png"/>
-</section>
 
 <!-- ----------------------- Measurements ----------------------------- -->
 
