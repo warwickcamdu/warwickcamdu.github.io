@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Image Analysis with Fiji</title>
+<title>Segmentation and Results Management</title>
 <link rel="stylesheet" href="css/reveal.css">
 <link rel="stylesheet" href="css/theme/cci.css">
 <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
@@ -17,6 +17,8 @@ link.type = 'text/css';
 link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 document.getElementsByTagName( 'head' )[0].appendChild( link );
 </script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="reveal">
@@ -28,9 +30,11 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
 
 <!-- ---------------------- START OF SLIDES -------------------------- -->
+
 <div class="slides">
+
 <section data-menu-title="Title">
-<h1>Colocalisation</h1>
+<h1>Segmentation</h1>
 <h3>Laura Cooper<br>Research Fellow, CAMDU</h3>
 <br>
 <p>Navigation:
@@ -38,101 +42,138 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 </p>
 </section>
 
-	<section data-menu-title="Acknowledgements" data-state="intro0a">
+<section data-menu-title="Acknowledgements" data-state="intro0a">
 	<h1>Acknowledgements</h1>
 	<p>Slides adpated from presentations by:
 	<ul>
 	<li>Dave Mason, formerly University of Liverpool: <a target="_blank" href="https://pcwww.liv.ac.uk/~dnmason/ia.html">https://pcwww.liv.ac.uk/~dnmason/ia.html</a></li>
 	<li>Erick Martins Ratamero, formerly University of Warwick</li>
-	<li>Lewis Mosby, University of Warwick</li>
-	<li>Philo van Kemenade (<a href="twitter.com/phivk">@phivk</a>)</li>
-        <li>Some material also from <a href="https://imagej.net/Introduction_into_Macro_Programming">ImageJ website</a></li>
-        </ul>
+	</ul>
 	</p>
 </section>
 
-<!-- ---------------------- APPLICATIONS COLOCALISTATION -------------------------- -->
 
-<section data-menu-title="Colocalisation Analysis" data-state="apps30z"><style>.apps30z header:after { content: ""; }</style>
-<h1>Applications: Co-localisation</h1>
-<h4>Use cases, some simple guidance, JaCoP</h4>
+<!-- ---------------------- APPLICATIONS SEGMENTATION AND CCA -------------------------- -->
+
+<section data-menu-title="Segmentation" data-state="apps10z"><style>.apps10z header:after { content: ""; }</style>
+<h1>Applications: Segmentation</h1>
+<h4>What is segmentation? Thresholding, Connected Component Analysis</h4>
 </section>
 
+<section data-state="apps10y"><style>.apps10y header:after { content: "Segmentation: Before we start"; }</style>
+<p>Fiji has an odd way of dealing with masks</p>
+<img class="third" src="img-ia/setupFiji1.png"/>
+<img class="third" src="img-ia/setupFiji2.png"/>
+<p>Run <code>[Process > Binary > Options]</code> and check <code>Black Background</code>. Hit OK.</p>
+</section> 
 
-<section data-state="apps30"><style>.apps30 header:after { content: "Colocalisation: Theory"; }</style>
-<!-- <p>Colocalisation: the bane of Image Analysts</p> -->
-<img class="half" src="img-ia/coloc_00.png"/>
-<p class="subtle">Adapted from a slide by <a href="https://twitter.com/fab_cordelieres" target="_blank">Fabrice Cordelieres</a></p>
+<section data-state="apps10"><style>.apps10 header:after { content: "Segmentation: Theory"; }</style>
+<p>Segmentation is the separation of an image into areas of interest and areas that are not of interest</p>
+<img class="left half" src="img-ia/seg_03.png"/><img data-fragment-index="1" class="fragment right half" src="img-ia/seg_04.png"/>
+<p data-fragment-index="1" class="clear fragment">The end point for most segmentation is a binary mask (false/true, 0/255)</p>
+</section> 
+<section data-state="apps10"><style>.apps10 header:after { content: "Segmentation: Theory"; }</style>
+<p>For most applications, intensity-based thresholding works well. This relies on the signal being higher intensity than the background.</p>
+<img class="half" src="img-ia/seg_05.png"/>
+<p>We use a <i>Threshold</i> to pick a cutoff.</p>
+</section> 
+
+<section data-state="apps11"><style>.apps11 header:after { content: "Segmentation: Hands On"; }</style>
+<ul><li>Open <a href="material/07-nuclei.tif"><code>07-nuclei.tif</code></a></li>
+<li>Run <code>[Image > Adjust > Threshold]</code></li>
+<li>Set the lower threshold to 0, 10 and 253, note how the image changes.</li></ul>
+<img class="third" srmc="img-ia/seg_06.png"/><span>&nbsp;&nbsp;</span><img class="third" src="img-ia/seg_07.png"/><span>&nbsp;&nbsp;</span><img class="third" src="img-ia/seg_08.png"/>
 </section>
 
-<section data-state="apps30"><style>.apps30 header:after { content: "Colocalisation: Theory"; }</style>
-<p>Colocalisation is <u>highly</u> dependent upon resolution! Example:</p>
-<img class="third" src="img-ia/coloc_02a.PNG"/><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><img class="third fragment" src="img-ia/coloc_02b.png"/>
-<p class="fragment">Same idea goes for cells. Keep in mind your imaging resolution!</p>
+<section data-state="apps11"><style>.apps11 header:after { content: "Segmentation: Hands On"; }</style>
+<p>Hit 'Apply' to create a mask based on the current Threshold</p>
+<img class="left third" src="img-ia/seg_09.png"/>
+<div class="fragment">
+<div class="right twothirds">
+<p>What can you do with a mask?</p>
+<ol class="half right">
+<li>Count</li>
+<li>Measure</li>
+<li>Visualise</li></ol>
 </section>
 
-<section data-state="apps35"><style>.apps35 header:after { content: "Bolte and Cordelieres"; }</style>
-<p>We will walk through using JaCoP (Just Another CoLocalisation Plugin) to look at Pearson's and Manders' analysis</p>
-<p>If you're doing colocalisation analysis at all, I <u>highly</u> recommend reading the companion paper <a href="https://doi.org/10.1111/j.1365-2818.2006.01706.x" target="_blank">https://doi.org/10.1111/j.1365-2818.2006.01706.x</a></p>
-
-<img class="half" src="img-ia/coloc_00a.png"/>
+<section data-state="apps11"><style>.apps11 header:after { content: "Segmentation: Hands On"; }</style>
+<p>Sometimes you will want to automatically set a threshold. Use the dropdown and <code>Auto</code> button</p><p>You can trial all autothresholding methods using <code>[Image > Adjust > Auto Threshold]</code> and select 'Try All'</p>
+<img class="third" src="img-ia/seg_05.png"/><img class="quart fragment" src="img-ia/seg_101.png"/><img class="third fragment" src="img-ia/seg_102.png"/>
 </section>
 
-<section data-state="apps31"><style>.apps31 header:after { content: "Colocalisation: Pearson's Correlation Coefficient"; }</style>
-<p>Pearson's Correlation Coefficient</p>
-<img class="third left" src="img-ia/coloc_10.png"/>
-<ul class="twothirds">
-<li>For each pixel, plot the intensities of two channels in a scatter plot</li>
-<li>Ignore pixels with only one channel
-<li>P value describes the goodness of fit (-1 to 1)</li>
-<ul>
-<li>1 = perfect correlation</li>
-<li>0 = no positive or negative correlation</li>
-<li>-1 = exclusion</li>
-</ul></ul>
-<p class="subtle clear">Figure from <a href="https://doi.org/10.1111/j.1365-2818.2006.01706.x" target="_blank">https://doi.org/10.1111/j.1365-2818.2006.01706.x</a></p>
+<section data-menu-title="Connected Component Analysis" data-state="apps12"><style>.apps12 header:after { content: "Segmentation: Object Counting"; }</style>
+<h1>Connected Component Analysis</h1>
 </section>
-<section data-state="apps31"><style>.apps31 header:after { content: "Colocalisation: Pearson's Correlation Coefficient"; }</style>
-<img class="left third" src="img-ia/coloc_11.png"/>
-<ul class="twothirds">
-<li>Download <a href="material/jacop_.jar"><code>JaCoP</code></a></li>
-<li>Run <code>[Plugins > Install Plugin]</code>, point to the jar file</li>
-<li>Restart Fiji</li>
-<li>Open <a href="material/11-colocA.tif"><code>11-colocA.tif</code></a> and <a href="material/12-colocB.tif"><code>12-colocB.tif</code></a></li>
-<li>Run <code>[Plugins > JaCoP]</code>, uncheck everything except Pearsons, select the same image for both channels</li>
-<li>Repeat for different combinations of these images and also <a href="material/13-colocA_half.tif"><code>13</code></a> and <a href="material/14-colocB_quarter.tif"><code>14</code></a></li>
+
+<section data-state="apps12"><style>.apps12 header:after { content: "Segmentation: Object Counting"; }</style>
+<p>Connected component analysis (CCA) is used to identify contiguous objects in a mask</p>
+<ul class="half left"><li>Open <a href="material/08-nucleiMask.tif"><code>08-nucleiMask.tif</code></a> (or use yours from the last step)</li>
+<li>Run <code>[Analyze > Analyze Particles]</code></li>
+<li>Use the settings on the right, hit OK</li>
+<li>You should have a results table with a Count of 31 (you may also have some other stats but we'll come to these later)</li> </ul>
+<img class="right third" src="img-ia/seg_CCA_1.png"/>
+</section>
+<section data-state="apps12"><style>.apps12 header:after { content: "Segmentation: Object Counting"; }</style>
+<p>But...there are at least 3 problems with this:</p>
+<ol><li>Single pixel spots are counted as objects</li>
+<li>Edge nuclei are counted</li>
+<li>Some nuclei are touching</li>
+</ol><br>
+<img class="third" src="img-ia/seg_CCA_2b.png"/>
+</section>
+<section data-state="apps12"><style>.apps12 header:after { content: "Segmentation: Object Counting"; }</style>
+<p>A quick fix for separating partially-touching roughly circular objects is to use <code>[Process > Binary > Watershed]</code> before running <code>[Analyze > Analyze Particles]</code></p>
+<img class="third" src="img-ia/seg_CCA_4.png"/><span>&nbsp;&nbsp;&nbsp;</span><img class="third fragment" src="img-ia/seg_CCA_5.png"/>
+</section>
+
+<section data-state="apps13"><style>.apps13 header:after { content: "Segmentation: Making Measurements"; }</style>
+<p>Analyze Particles comes with the option to <code>Display Results</code></p>
+<img class="third left" src="img-ia/seg_CCA_6.png"/>
+<img data-fragment-index="2" class="third left fragment" src="img-ia/seg_CCA_8.png"/>
+<img class="third fragment left" data-fragment-index="1" src="img-ia/seg_CCA_7.png"/>
+<ul><li>The results table will have a column for anything selected in <code>[Analyze > Set Measurements]</code> and one row per object</li>
+<li>Measurements (including intensity - labelled purple above) are made on the mask!</li></ul>
+</section>
+<section data-state="apps13"><style>.apps13 header:after { content: "Segmentation: Making Measurements"; }</style>
+<p>To apply measurements to the original image: check <code>Add to Manager</code> in Analyze Particles, open the <a href="material/07-nuclei.tif"><code>original image</code></a>, then run <code>[More > Multi Measure]</code></p>
+<img class="third" src="img-ia/seg_CCA_9b.png"/>
+<img class="third fragment" src="img-ia/seg_CCA_9.png"/>
+<img class="third fragment" src="img-ia/seg_CCA_9d.png"/>
+<p>Don't forget <code>[Analyze > Set Measurements]</code> to pick parameters</p>
+</section>
+
+<section data-state="apps14"><style>.apps14 header:after { content: "Segmentation: Visualisation"; }</style>
+<p>You may want to create an output or display image showing the results of CCA or segmentation. Analyze particles has several useful outputs:</p>
+<img class="third" src="img-ia/seg_CCA_10a.png"/>
+<img class="third fragment" src="img-ia/seg_CCA_10.png"/>
+<!-- <img class="third fragment" src="img-ia/seg_CCA_10b.png"/> -->
+<p>Count masks are very useful in combination with <code>[Image > Look Up Tables > Glasbey]</code>-style (IE random) LUTs</p>
+</section>
+<section data-state="apps14"><style>.apps14 header:after { content: "Segmentation: Visualisation"; }</style>
+<p>Another trick is to turn the mask into a composite selection then draw it into the original</p>
+<ul class="twothirds left"><li>Open <a href="material/08-nucleiMask.tif"><code>08-nucleiMask.tif</code></a></li>
+<li>Run <code>[Edit > Selection > Create Selection]</code></li>
+<li>If the black area is selected, run <code>[Edit > Selection > Make Inverse]</code>. Add it to the ROI manager ('t')</li>
+<li>Open the <a href="material/07-nuclei.tif"><code>original image</code></a></li>
+<li>Convert it to RGB <code>[Image > Type > RGB Color]</code> (remember what happened with the <a href="#/36">Scale Bar</a>?)</li>
+<li>Select the ROI, then run <code>[Edit > Draw]</code> (this will use the current foreground colour and line width)</li>
 </ul>
+<img class="right third" src="img-ia/seg_CCA_12.png"/>
 </section>
-<section data-state="apps32"><style>.apps32 header:after { content: "Colocalisation: Problems with Pearson's"; }</style>
-<img class="left quart" src="img-ia/coloc_10.png"/>
-<ul class="twothirds">
-<li>Great for complete colocalisation</li>
-<li>Unsuitable if there is a lot of noise or partial colocalisation (see below)</li>
-<li>Midrange P-values (-0.5 to 0.5) do not allow reliable conclusions to be drawn</li>
-<li>Bleedthrough can be particularly problematic (as they will always correlate)</li>
-</ul>
-<br>
-<img class="clear half" src="img-ia/coloc_12.png"/>
+<section data-state="apps14"><style>.apps14 header:after { content: "Segmentation: Visualisation"; }</style>
+<section>
+<p>Example visualisation of woundhealing</p>
+<!-- <a href="https://cci.liv.ac.uk/img/gallery/woundhealing.mp4" target="_blank"> -->
+<img class="third" src="img-ia/seg_CCA_13.png"/>
+<p>From the <a href="http://cci.liv.ac.uk/gallery.html" target="_blank">CCI website gallery</a>. Data c/o <a href="https://www.liverpool.ac.uk/integrative-biology/staff/daimark-bennett/" target="_blank">Daimark Bennett</a></p>
+<p><i class="fa fa-chevron-circle-down"></i> for movie</p>
 </section>
-
-<section data-state="apps33"><style>.apps33 header:after { content: "Colocalisation: Manders'"; }</style>
-<!-- <img class="twothirds" src="img-ia/coloc_13.png"/> -->
-<p>Manders' Overlap Coefficient</p>
-<ul class="twothirds">
-<li>Removes some of the intensity dependence of Pearson's and provides channel-specific overlap coefficients (M1 &amp; M2)</li>
-<li>Values from 0 (no overlap) to 1 (complete overlap)</li>
-<li>Defined as <i>"the ratio of the summed intensities of pixels from one channel for which the intensity in the second channel is above zero to the total intensity in the first channel"</i></li>
-</ul>
+<section>
+<video loop data-autoplay class="half" src="https://cci.liv.ac.uk/img/gallery/woundhealing.mp4"></video>
+<!-- </a> -->
+<p>From the <a href="http://cci.liv.ac.uk/gallery.html" target="_blank">CCI website gallery</a>. Data c/o <a href="https://www.liverpool.ac.uk/integrative-biology/staff/daimark-bennett/" target="_blank">Daimark Bennett</a></p>
 </section>
-
-<section data-state="apps33"><style>.apps33 header:after { content: "Colocalisation: Manders'"; }</style>
-<img class="third" src="img-ia/coloc_11.png"/>
-<ul class="twothirds">
-<li>Use the same images from last time (<a href="material/11-colocA.tif"><code>11</code></a>, <a href="material/12-colocB.tif"><code>12</code></a>,<a href="material/13-colocA_half.tif"><code>13</code></a> and <a href="material/14-colocB_quarter.tif"><code>14</code></a>)</li>
-<li>Run <code>[Plugins > JaCoP]</code>, check both Pearsons and Manders</li>
-<li>Run for different combinations of these images</li>
-<li>Note the differences in coefficients especially in images 13 and 14</li>
-<li class="fragment">[BONUS] add some noise <code>[Process > Noise > Add Noise]</code> or blur your images <code>[Process > Filters > Gaussian Blur]</code> and see how that affects the coefficients</li></ul>
 </section>
 
 <section data-menu-title="Managing Results" data-state="res1"><style>.res1 header:after { content: ""; }</style>
@@ -168,6 +209,17 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <li>You will need to export your results to another programme (e.g. excel, python, matlab, ...)</li>
 <li><a href="https://imagej.nih.gov/ij/developer/macro/functions.html#saveAs">saveAs(format, path)</a></li>
 <li>I would recommend exporting the results as a .csv (comma separated value) file</li>
+</ul>
+</section>
+
+<section data-menu-title="More Batch Processing" data-state="bat1"><style>.bat1 header:after { content: ""; }</style>
+<h1>More Batch Processing</h1>
+<p>Previously, we tried out <code>Process > Batch > Macro...</code>.<br> There are other ways to do Batch processing in ImageJ:</p>
+<ul>
+<li>Use <code>Process > Batch > Macro...</code> but run it from a macro command </li>
+<li>In the macro editor go to <code>Templates > ImageJ 1.x > Batch > Process Folder (IJ1 Macro)</code> and use the template to process all the files in a folder</li>
+<li>Use <a href=https://imagej.nih.gov/ij/developer/macro/functions.html#getDir>getDir</a> to request the directory from the user and then write your own loop to process all the files in the folder</li>
+<li>Use <a href=https://imagej.nih.gov/ij/developer/macro/functions.html#setBatchMode>setBatchMode</a> to do the processing in the background</li>
 </ul>
 </section>
 
