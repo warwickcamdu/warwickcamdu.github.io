@@ -17,6 +17,8 @@ link.type = 'text/css';
 link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 document.getElementsByTagName( 'head' )[0].appendChild( link );
 </script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="reveal">
@@ -30,7 +32,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <!-- ---------------------- START OF SLIDES -------------------------- -->
 <div class="slides">
 <section data-menu-title="Title">
-<h1>Colocalisation</h1>
+<h1>Validation and Colocalisation</h1>
 <h3>Laura Cooper<br>Research Fellow, CAMDU</h3>
 <br>
 <p>Navigation:
@@ -49,112 +51,6 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
         <li>Some material also from <a href="https://imagej.net/Introduction_into_Macro_Programming">ImageJ website</a></li>
         </ul>
 	</p>
-</section>
-
-
-<section data-state="assign2"><style>.assign2 header:after { content: "Assignment 2"; }</style>
-<h1>Assignment Part 2</h1>
-<ul>
-<li>Write a well annotated script, with accompanying README file, that counts the foci inside each cell. This will involve:
-<ul>
-<li>Identifying cell boundaries</li>
-<li>Detecting the relevant foci in the GFP channel</li>
-<li>Assigning the foci to specific cells</li>
-</ul></li>
-</ul>
-</section>
-
-<!-- ---------------------- APPLICATIONS COLOCALISTATION -------------------------- -->
-
-<section data-menu-title="Colocalisation Analysis" data-state="apps30z"><style>.apps30z header:after { content: ""; }</style>
-<h1>Applications: Co-localisation</h1>
-<h4>Use cases, some simple guidance, JaCoP</h4>
-</section>
-
-
-<section data-state="apps30"><style>.apps30 header:after { content: "Colocalisation: Theory"; }</style>
-<!-- <p>Colocalisation: the bane of Image Analysts</p> -->
-<img class="half" src="img-ia/coloc_00.png"/>
-<p class="subtle">Adapted from a slide by <a href="https://twitter.com/fab_cordelieres" target="_blank">Fabrice Cordelieres</a></p>
-</section>
-
-<section data-state="apps30"><style>.apps30 header:after { content: "Colocalisation: Theory"; }</style>
-<p>Colocalisation is <u>highly</u> dependent upon resolution! Example:</p>
-<img class="third" src="img-ia/coloc_02a.PNG"/><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><img class="third fragment" src="img-ia/coloc_02b.png"/>
-<p class="fragment">Same idea goes for cells. Keep in mind your imaging resolution!</p>
-</section>
-
-<section data-state="apps35"><style>.apps35 header:after { content: "Bolte and Cordelieres"; }</style>
-<p>We will walk through using JaCoP (Just Another CoLocalisation Plugin) to look at Pearson's and Manders' analysis</p>
-<p>If you're doing colocalisation analysis at all, I <u>highly</u> recommend reading the companion paper <a href="https://doi.org/10.1111/j.1365-2818.2006.01706.x" target="_blank">https://doi.org/10.1111/j.1365-2818.2006.01706.x</a></p>
-
-<img class="half" src="img-ia/coloc_00a.png"/>
-</section>
-
-<section data-state="apps31"><style>.apps31 header:after { content: "Colocalisation: Pearson's Correlation Coefficient"; }</style>
-<p>Pearson's Correlation Coefficient</p>
-<img class="third left" src="img-ia/coloc_10.png"/>
-<ul class="twothirds">
-<li>For each pixel, plot the intensities of two channels in a scatter plot</li>
-<li>Ignore pixels with only one channel
-<li>P value describes the goodness of fit (-1 to 1)</li>
-<ul>
-<li>1 = perfect correlation</li>
-<li>0 = no positive or negative correlation</li>
-<li>-1 = exclusion</li>
-</ul></ul>
-<p class="subtle clear">Figure from <a href="https://doi.org/10.1111/j.1365-2818.2006.01706.x" target="_blank">https://doi.org/10.1111/j.1365-2818.2006.01706.x</a></p>
-</section>
-<section data-state="apps31"><style>.apps31 header:after { content: "Colocalisation: Pearson's Correlation Coefficient"; }</style>
-<img class="left third" src="img-ia/coloc_11.png"/>
-<ul class="twothirds">
-<li>Download <a href="material/jacop_.jar"><code>JaCoP</code></a></li>
-<li>Run <code>[Plugins > Install Plugin]</code>, point to the jar file</li>
-<li>Restart Fiji</li>
-<li>Open <a href="material/11-colocA.tif"><code>11-colocA.tif</code></a> and <a href="material/12-colocB.tif"><code>12-colocB.tif</code></a></li>
-<li>Run <code>[Plugins > JaCoP]</code>, uncheck everything except Pearsons, select the same image for both channels</li>
-<li>Repeat for different combinations of these images and also <a href="material/13-colocA_half.tif"><code>13</code></a> and <a href="material/14-colocB_quarter.tif"><code>14</code></a></li>
-</ul>
-</section>
-<section data-state="apps32"><style>.apps32 header:after { content: "Colocalisation: Problems with Pearson's"; }</style>
-<img class="left quart" src="img-ia/coloc_10.png"/>
-<ul class="twothirds">
-<li>Great for complete colocalisation</li>
-<li>Unsuitable if there is a lot of noise or partial colocalisation (see below)</li>
-<li>Midrange P-values (-0.5 to 0.5) do not allow reliable conclusions to be drawn</li>
-<li>Bleedthrough can be particularly problematic (as they will always correlate)</li>
-</ul>
-<br>
-<img class="clear half" src="img-ia/coloc_12.png"/>
-</section>
-
-<section data-state="apps33"><style>.apps33 header:after { content: "Colocalisation: Manders'"; }</style>
-<!-- <img class="twothirds" src="img-ia/coloc_13.png"/> -->
-<p>Manders' Overlap Coefficient</p>
-<ul class="twothirds">
-<li>Removes some of the intensity dependence of Pearson's and provides channel-specific overlap coefficients (M1 &amp; M2)</li>
-<li>Values from 0 (no overlap) to 1 (complete overlap)</li>
-<li>Defined as <i>"the ratio of the summed intensities of pixels from one channel for which the intensity in the second channel is above zero to the total intensity in the first channel"</i></li>
-</ul>
-</section>
-
-<section data-state="apps33"><style>.apps33 header:after { content: "Colocalisation: Manders'"; }</style>
-<img class="third" src="img-ia/coloc_11.png"/>
-<ul class="twothirds">
-<li>Use the same images from last time (<a href="material/11-colocA.tif"><code>11</code></a>, <a href="material/12-colocB.tif"><code>12</code></a>,<a href="material/13-colocA_half.tif"><code>13</code></a> and <a href="material/14-colocB_quarter.tif"><code>14</code></a>)</li>
-<li>Run <code>[Plugins > JaCoP]</code>, check both Pearsons and Manders</li>
-<li>Run for different combinations of these images</li>
-<li>Note the differences in coefficients especially in images 13 and 14</li>
-<li class="fragment">[BONUS] add some noise <code>[Process > Noise > Add Noise]</code> or blur your images <code>[Process > Filters > Gaussian Blur]</code> and see how that affects the coefficients</li></ul>
-</section>
-
-<section data-menu-title="Title">
-<h1>Validation</h1>
-<h3>Laura Cooper<br>Research Fellow, CAMDU</h3>
-<br>
-<p>Navigation:
-<ul><li> Left/right arrow keys for previous/next slide</li><li>'m' key to get to navigation menu</li><li>Escape for slide overview</li></ul>
-</p>
 </section>
 
 <section data-menu-title="Validation" data-state="res1"><style>.res1 header:after { content: ""; }</style>
@@ -225,6 +121,92 @@ where \( N\) is the number of points, \(\boldsymbol{x}^s_i\) are the points that
 </ul>
 <p>For more information on validation see Chapter 10 of <a href=https://doi.org/10.1117/3.831079.ch10>Handbook of Medical Imaging, Volume 2. Medical Image Processing and Analysis (K. Bowyer, 2000)</a></p>
 </section>
+
+<!-- ---------------------- APPLICATIONS COLOCALISTATION -------------------------- -->
+
+<section data-menu-title="Colocalisation Analysis" data-state="apps30z"><style>.apps30z header:after { content: ""; }</style>
+<h1>Applications: Co-localisation</h1>
+<h4>Use cases, some simple guidance, JaCoP</h4>
+</section>
+
+
+<section data-state="apps30"><style>.apps30 header:after { content: "Colocalisation: Theory"; }</style>
+<!-- <p>Colocalisation: the bane of Image Analysts</p> -->
+<img class="half" src="img-ia/coloc_00.png"/>
+<p class="subtle">Adapted from a slide by <a href="https://twitter.com/fab_cordelieres" target="_blank">Fabrice Cordelieres</a></p>
+</section>
+
+<section data-state="apps30"><style>.apps30 header:after { content: "Colocalisation: Theory"; }</style>
+<p>Colocalisation is <u>highly</u> dependent upon resolution! Example:</p>
+<img class="third" src="img-lc/map.png"/><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><img class="third fragment" src="img-ia/coloc_02b.png"/>
+<p class="fragment">Same idea goes for cells. Keep in mind your imaging resolution!</p>
+</section>
+
+<section data-state="apps35"><style>.apps35 header:after { content: "Bolte and Cordelieres"; }</style>
+<p>We will walk through using JaCoP (Just Another CoLocalisation Plugin) to look at Pearson's and Manders' analysis</p>
+<p>If you're doing colocalisation analysis at all, I <u>highly</u> recommend reading the companion paper <a href="https://doi.org/10.1111/j.1365-2818.2006.01706.x" target="_blank">https://doi.org/10.1111/j.1365-2818.2006.01706.x</a></p>
+
+<img class="half" src="img-ia/coloc_00a.png"/>
+</section>
+
+<section data-state="apps31"><style>.apps31 header:after { content: "Colocalisation: Pearson's Correlation Coefficient"; }</style>
+<p>Pearson's Correlation Coefficient</p>
+<img class="third left" src="img-ia/coloc_10.png"/>
+<ul class="twothirds">
+<li>For each pixel, plot the intensities of two channels in a scatter plot</li>
+<li>Ignore pixels with only one channel
+<li>P value describes the goodness of fit (-1 to 1)</li>
+<ul>
+<li>1 = perfect correlation</li>
+<li>0 = no positive or negative correlation</li>
+<li>-1 = exclusion</li>
+</ul></ul>
+<p class="subtle clear">Figure from <a href="https://doi.org/10.1111/j.1365-2818.2006.01706.x" target="_blank">https://doi.org/10.1111/j.1365-2818.2006.01706.x</a></p>
+</section>
+<section data-state="apps31"><style>.apps31 header:after { content: "Colocalisation: Pearson's Correlation Coefficient"; }</style>
+<img class="left third" src="img-ia/coloc_11.png"/>
+<ul class="twothirds">
+<li>Download <a href="material/jacop_.jar"><code>JaCoP</code></a></li>
+<li>Run <code>[Plugins > Install Plugin]</code>, point to the jar file</li>
+<li>Restart Fiji</li>
+<li>Open <a href="material/11-colocA.tif"><code>11-colocA.tif</code></a> and <a href="material/12-colocB.tif"><code>12-colocB.tif</code></a></li>
+<li>Run <code>[Plugins > JaCoP]</code>, uncheck everything except Pearsons, select the same image for both channels</li>
+<li>Repeat for different combinations of these images and also <a href="material/13-colocA_half.tif"><code>13</code></a> and <a href="material/14-colocB_quarter.tif"><code>14</code></a></li>
+</ul>
+</section>
+<section data-state="apps32"><style>.apps32 header:after { content: "Colocalisation: Problems with Pearson's"; }</style>
+<img class="left quart" src="img-ia/coloc_10.png"/>
+<ul class="twothirds">
+<li>Great for complete colocalisation</li>
+<li>Unsuitable if there is a lot of noise or partial colocalisation (see below)</li>
+<li>Midrange P-values (-0.5 to 0.5) do not allow reliable conclusions to be drawn</li>
+<li>Bleedthrough can be particularly problematic (as they will always correlate)</li>
+</ul>
+<br>
+<img class="clear half" src="img-ia/coloc_12.png"/>
+</section>
+
+<section data-state="apps33"><style>.apps33 header:after { content: "Colocalisation: Manders'"; }</style>
+<!-- <img class="twothirds" src="img-ia/coloc_13.png"/> -->
+<p>Manders' Overlap Coefficient</p>
+<ul class="twothirds">
+<li>Removes some of the intensity dependence of Pearson's and provides channel-specific overlap coefficients (M1 &amp; M2)</li>
+<li>Values from 0 (no overlap) to 1 (complete overlap)</li>
+<li>Defined as <i>"the ratio of the summed intensities of pixels from one channel for which the intensity in the second channel is above zero to the total intensity in the first channel"</i></li>
+</ul>
+</section>
+
+<section data-state="apps33"><style>.apps33 header:after { content: "Colocalisation: Manders'"; }</style>
+<img class="third" src="img-ia/coloc_11.png"/>
+<ul class="twothirds">
+<li>Use the same images from last time (<a href="material/11-colocA.tif"><code>11</code></a>, <a href="material/12-colocB.tif"><code>12</code></a>,<a href="material/13-colocA_half.tif"><code>13</code></a> and <a href="material/14-colocB_quarter.tif"><code>14</code></a>)</li>
+<li>Run <code>[Plugins > JaCoP]</code>, check both Pearsons and Manders</li>
+<li>Run for different combinations of these images</li>
+<li>Note the differences in coefficients especially in images 13 and 14</li>
+<li class="fragment">[BONUS] add some noise <code>[Process > Noise > Add Noise]</code> or blur your images <code>[Process > Filters > Gaussian Blur]</code> and see how that affects the coefficients</li></ul>
+</section>
+
+
 
 
 </div> <!-- ---------------------- END OF SLIDES -------------------------- -->
