@@ -35,11 +35,98 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <div class="slides">
 
 <section data-menu-title="Title">
-<h1>Machine Learning</h1>
+<h1>Machine Learning and</h1>
+<h1>Pixel Classification</h1>
 <h3>Laura Cooper<br>Research Fellow, CAMDU</h3>
 <br>
 <p>Navigation:
 <ul><li> Left/right arrow keys for previous/next slide</li><li>'m' key to get to navigation menu</li><li>Escape for slide overview</li></ul>
+</p>
+</section>
+
+<section data-menu-title="Machine Learning" data-state="ml1z"><style>.ml1z header:after { content: ""; }</style>
+<h1>Machine Learning</h1>
+<p>
+<ul>
+<li>Algorithms designed to find patterns in data</li>
+<li>Training (supervised learning) takes a set of input data and it's known outputs and trains a model to predict the output for new data</li>
+<li>Classfication models separate input data into categories</li>
+</ul> 
+</p>
+</section>
+
+<section data-state="ml1"><style>.ml1 header:after { content: "Trainable Weka Segmentation"; }</style>
+<p>
+<ul>
+<li><a href="https://imagej.net/plugins/tws/">Trainable Weka Segmentation Fiji Plugin</a></li>
+<li>Combines a collection of machine learning algorithms with selected image features to produce segmentations</li>
+<li>Other software options include:
+<ul>
+<li><a href=https://www.ilastik.org/index.html>ilastik</a></li>
+<li><a href=https://imagej.net/plugins/labkit/>LabKit</a></li> 
+<li><a href=https://github.com/saalfeldlab/paintera>Paintera</a></li>
+</ul> 
+</ul> 
+</p>
+</section>
+
+<section data-state="ml1"><style>.ml1 header:after { content: "Trainable Weka Segmentation"; }</style>
+<p>
+<ul>
+<li>Download <a href="material/BBBC008_partial.zip">this folder</a> and unzip. This is a subset of BBBC008 from the <a href="https://data.broadinstitute.org/bbbc/BBBC008/" target="_blank">Broad Bioimage Benchmark Collection</a> (same dataset as used in Workshop 2)</li>
+<li>In Fiji, <code>[Plugins > Segmentation > Trainable Weka Segmentation]</code>, select one of the images to open.</li>
+</ul> 
+</p>
+</section>
+
+<section data-state="ml1"><style>.ml1 header:after { content: "Trainable Weka Segmentation"; }</style>
+<p>
+<img class="left half" src="img-lc/weka/train1.png"/>
+<ul class="right half">
+<li>Click and drag to draw on the image</li>
+<li>Draw a line in the background (dark area) and click <code>Add to class 1</code> (on the right)</li>
+<li>Draw a line in one or two of the nuclei (light area) and click <code>Add to class 2</code></li>
+<li>Click <code>Train classifier</code> (on the left)</li>
+</ul> 
+</p>
+</section>
+
+<section data-state="ml1"><style>.ml1 header:after { content: "Trainable Weka Segmentation"; }</style>
+<p>
+<img class="left half" src="img-lc/weka/train2.png"/>
+<ul class="right half">
+<li>Add more labels and retrain the classifier, to improve the result</li>
+<li>[Optional] Click <code>Settings</code> and select/deselect different "Training features". Retrain the classifier to see how the different features change the result. For more information about each feature, visit the <a href="https://imagej.net/plugins/tws/">Plugin webpage</a></li>
+<li>When you are happy with the result, click <code>Apply classifier</code> and select a different image from the data set. Does the classifier work well for this image too?</li>
+<li>Click <code>Save data</code> and save the data.arff file</li>
+</ul> 
+</p>
+</section>
+
+<section data-state="ml1"><style>.ml1 header:after { content: "Trainable Weka Segmentation"; }</style>
+<p>
+<ul>
+<li>Close the Trainable Weka Segmentation Window and any other open image windows</li>
+<li><code>[Plugins > Segmentation > Trainable Weka Segmentation]</code> and select another image to open.</li>
+<li>Click <Load data> and open the data.arff file</li>
+<li>Click <code>Train classifier</code>. This will apply the classifier from the previous image</li>
+<li>Add more labels and click <code>Train classifier</code> again. This allows you to train on multiple images</li>
+</ul> 
+</p>
+</section>
+
+<section data-state="ml1"><style>.ml1 header:after { content: "Machine Learning"; }</style>
+<p>
+<ul>
+<li>Machine learning can also be used for:
+<ul>
+<li>Denoising</li>
+<li>Isotropic Reconstruction</li>
+<li>Surface Projection</li>
+</ul>
+<li>See <a herf=https://csbdeep.bioimagecomputing.com/>CSBDeep</a> for examples</li>
+<li>Training a model can be very time consuming, it can require a lot of user input and computing time. Using a Graphical Processing Unit (GPU) rather than the Central Processing Unit (CPU) can speed up the processing time.</li>
+</ul> 
 </p>
 </section>
 
