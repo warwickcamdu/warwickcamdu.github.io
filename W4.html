@@ -17,6 +17,8 @@ link.type = 'text/css';
 link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 document.getElementsByTagName( 'head' )[0].appendChild( link );
 </script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="reveal">
@@ -28,11 +30,9 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 
 
 <!-- ---------------------- START OF SLIDES -------------------------- -->
-
 <div class="slides">
-
 <section data-menu-title="Title">
-<h1>Deconvolution and Tracking</h1>
+<h1>Validation and Results Management</h1>
 <h3>Laura Cooper<br>Research Fellow, CAMDU</h3>
 <br>
 <p>Navigation:
@@ -40,167 +40,135 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 </p>
 </section>
 
-<section data-menu-title="Acknowledgements" data-state="intro0a">
+	<section data-menu-title="Acknowledgements" data-state="intro0a">
 	<h1>Acknowledgements</h1>
 	<p>Slides adpated from presentations by:
 	<ul>
 	<li>Dave Mason, formerly University of Liverpool: <a target="_blank" href="https://pcwww.liv.ac.uk/~dnmason/ia.html">https://pcwww.liv.ac.uk/~dnmason/ia.html</a></li>
 	<li>Erick Martins Ratamero, formerly University of Warwick</li>
-	</ul>
+	<li>Lewis Mosby, University of Warwick</li>
+	<li>Philo van Kemenade (<a href="twitter.com/phivk">@phivk</a>)</li>
+        <li>Some material also from <a href="https://imagej.net/Introduction_into_Macro_Programming">ImageJ website</a></li>
+        </ul>
 	</p>
 </section>
 
-<section data-menu-title="Deconvolution" data-state="decon">
-<h1>Recap</h1>
-<ul class="left half">
-<li>When aquiring an image, we detect the point spread function (PSF). It blurs every point in the image</li>
-<li>Fourier transforms can be used speed up convolution. Convolution in the spatial domain is the same as multiplication in the frequency domain</li>
-<li class="fragment">Image formation in the microscope can be understood as convolution between the object being imaged and the PSF of the imaging system</li>
-</ul>
-<img class="fragment right third" src="img-lc/PSF.png"/>
+<section data-menu-title="Validation" data-state="res1"><style>.res1 header:after { content: ""; }</style>
+<h1>Validation</h1>
+<h4>Does the macro work? Are the measurements correct?</h4>
 </section>
 
-<section data-state="decon">
-<h1>Approximating the PSF</h1>
-<ul class="left half">
-<li>PSF are approximated by imaging very small beads. If the beads are smaller than the resolution, the outputs will be the PSF.</li>
-<li>Theoretical PSF are sometimes used, often approximated as a Gaussian function.</li>
-<li>If we have the PSF and the image can we reconstruct the object?</li>
-</ul>
-<img class="right third" src="img-lc/PSF.png"/>
-</section>
-
-<section data-state="decon">
-<h1>Deconvolution</h1>
-<ul class="left half">
-<li>In the spatial domain, let an image, I, be an object, O, convolved with a PSF, P. i.e. I=O*P</li>
-<li>Then, in the frequency domain, we have the F(I)=F(O) x F(P), where F represent the Fourier transform</li>
-<li>So F(O)=F(I) &divide F(P)</li>
-<li>By taking the inverse Fourier transform of F(O), we obtain O, the object.</li>
-<li>This is known as <b>naive deconvolution</b></li>
-</ul>
-<img class="right third" src="img-lc/PSF.png"/>
-</section>
-
-<section data-state="decon">
-<h1>Deconvolution Issues</h1>
+<section data-state="res1"><style>.res1 header:after { content: ""; }</style>
+<h1>Validation</h1>
+<p>After designing an image analysis workflow it is important to validate it, especially if you are planning to use the same process on multiple images. The validation strategies used will depend on they type of problem.</p>
+<p>
 <ul>
-<li>Extremely sensitive to noise</li>
-<li>Can have artifacts if the light source is not constant</li>
-<li>More advanced methods are very computationally intesive</li>
-</ul>
+<li>Measurement</li>
+<li>Classification</li>
+<li>Segmentation</li>
+</ul> 
+</p>
+<p>
+Your final workflow may contain some or all of these problems. In the following slides there are some examples of quantitative measurements that can be used to evaluate the performance for each problem.
+</p>
 </section>
 
-<!-- ---------------------- APPLICATIONS TRACKING -------------------------- -->
-
-<section data-menu-title="Tracking" data-state="apps1z"><style>.apps1z header:after { content: ""; }</style>
-<h1>Applications: Tracking</h1>
-<h4>Correlating spatial and temporal phenomena, Feature detection, linkage, gotchas</h4>
-</section>
- 
-<section data-state="apps1"><style>.apps1 header:after { content: "Tracking: Theory"; }</style>
-<p>Life exists in the fourth dimension. Tracking allows you to correlate spatial and temporal properties.</p>
-<img class="third" src="img-ia/tracks_01.png"/><span>&nbsp;&nbsp;&nbsp;</span><img data-fragment-index="2" class="third fragment" src="img-ia/tracks_02.png"/>
-<p data-fragment-index="1" class="fragment">Most partcles look the same! Without any way to identify them, tracking is probabilistic.</p>
+<section data-state="res1"><style>.res1 header:after { content: ""; }</style>
+<h1>Example Validation of Measurement Problem</h1>
+<p>Aim: Estimate a scalar or vector quantity</p>
+<p>Method: Calculate the mean relative error<br>
+\[ mean\ relative\ error = {measured\ value - true\ value \over true\ value} \]</p>
 </section>
 
-<section data-state="apps1"><style>.apps1 header:after { content: "Tracking: Theory"; }</style>
-<p>Tracking has two parts: Feature Identification and Feature Linking</p>
-<img class="half" src="img-ia/tracks_03.png"/><img class="half" src="img-ia/tracks_04.png"/>
-<p>For every frame, features are detected, typically using a Gaussian-based method (eg. <a href="https://en.wikipedia.org/wiki/Blob_detection#The_difference_of_Gaussians_approach" target="_blank">Laplacian of Gaussian</a>: LoG)</p>
+<section data-state="res1"><style>.res1 header:after { content: ""; }</style>
+<h1>Example Validation of Classification Problem</h1>
+<p>Aim: Decide if something is present in an image</p>
+<p>Method: Calculate the sensitivity and specificity</p>
+<p class="left half">\[ sensitivity = {TPs \over TPs+FNs} \]
+The fraction of present things that are correctly detected, 0 none detected to 1 all detected
+\[ specificity = {TNs \over TNs+FPs} \]
+The fraction of correct detection when the thing is not present, 0 all falsely detected to 1 none falsely detected</p>
+<img class="right half" src="img-lc/TPFNtable.png"/> 
+<img class="right half" src="img-lc/falsepositivecutoff.png"/>
+<p>Image from <a href=https://www.genomenon.com/blog/machine-learning-enhances-specificity-of-variant-search/>www.genomenon.com</a></p>
 </section>
-<section data-state="apps1"><style>.apps1 header:after { content: "Tracking: Theory"; }</style>
-<p>Spots can be localised to sub-pixel resolution!</p>
-<img class="left half" src="img-ia/tracks_05.png"/>
-<p class="right half">Without sub-pixel localisation, the precision of detection is limited to whole pixel values.</p>
+
+<section data-state="res1"><style>.res1 header:after { content: ""; }</style>
+<h1>Example Validation of Segmentation Problem</h1>
+<p>Aim: Estimate the boundary regions of an image</p>
+<p class="left twothirds">Method: Calculate the difference between the segmented and ground truth boundaries
+\[ root\ mean\ square\ error = \sqrt{{\displaystyle\sum\limits_{i=1}^{N}(\boldsymbol{x}^s_i-\boldsymbol{x}^g_i)^2 \over N}}\]
+where \( N\) is the number of points, \(\boldsymbol{x}^s_i\) are the points that make up the segmented boundary (green) and \(\boldsymbol{x}^g_i\) are the points that make up the ground truth boundary (magenta)</p>
+<img class="right third" src="img-lc/GTboundcomp.png"/>
+<p>Different metrics can be used, e.g. Hausdorff distance</p>
 </section>
-<section data-state="apps1"><style>.apps1 header:after { content: "Tracking: Theory"; }</style>
-<p>Feature linkage</p>
-<!-- <img class="half" src="img-ia/tracks_06.png"/><br> -->
-<img class="half" src="img-ia/tracks_07.png"/>
-<p>For each feature, all possible links in the next frame are calculated. This includes the spot disappearing completely.</p>
-<img data-fragment-index="1" class="fragment half" src="img-ia/tracks_08.png"/>
-<p data-fragment-index="2" class="fragment">A 'cost matrix' is formed to compare the 'cost' of each linkage. This is globally optimised to calculate the lowest cost for all linkages.</p>
-</section>
-<section data-state="apps1"><style>.apps1 header:after { content: "Tracking: Theory"; }</style>
-<!-- <img class="half" src="img-ia/tracks_07.png"/> -->
-<p>In the simplest form, a cost matrix will usually consider distance. Many other parameters can be used such as:</p>
+
+<section data-state="res1"><style>.res1 header:after { content: ""; }</style>
+<h1>What's true?</h1>
 <ul>
-<li>Intensity</li>
-<li>Shape</li>
-<li>Quality of fit</li>
-<li>Speed</li>
-<li>Motion type</li>
-</ul>
-<p>Which can allow for a more accurate linkage especially in crowded or low S/N environments</p>
-</section>
-
-<section data-state="apps2"><style>.apps2 header:after { content: "Tracking: Hands On"; }</style>
-<p>Open <a href="material/10-tracks.tif"><code>10-tracks.tif</code></a><br>Hit the arrow to play the movie. Right Click on the arrow to set playback speed</p>
-<img class="quart" src="img-ia/tracks_11.png"/>
-<p class="fragment">If you're interested in how the dataset was made see <a href="https://bitbucket.org/snippets/davemason/Ke9zz7" target="_blank">this snippet</a></p>
-</section>
-
-<section data-state="apps2"><style>.apps2 header:after { content: "Tracking: Hands On"; }</style>
-<p>Run <code>[Plugins > Tracking > Trackmate]</code></p>
-
-<img class="half left" src="img-ia/trackmate_01.png"/>
-
-<ul class="half right"><li>Trackmate guides you through tracking using the Next and Prev buttons</li><li>The first dialog lets you select a subset (in space and time) to process. This is handy on large datasets when you want to calculate parameters before processing the whole dataset</li><li>Hit Next, keep the default (LoG) detector then hit Next again to move onto Feature detection.</li></ul>
-</section>
-<section data-state="apps2"><style>.apps2 header:after { content: "Tracking: Hands On"; }</style>
-<img class="left half" src="img-ia/trackmate_02.png"/>
-<ul class="half right"><li>Enter a Blob Diameter of 2 (note the scaled units)</li><li>Hit preview. Without any threshold, all the background noise is detected as features</li><li>Add a threshold of 0.1 and hit Preview again.</li></ul>
-
-<p class="fragment clear">Generally your aim should be to provide the minimum threshold that removes all noise. Slide the navigation bar, then hit Preview to check out a few other timepoints.</p>
-</section>
-<section data-state="apps2"><style>.apps2 header:after { content: "Tracking: Hands On"; }</style>
-<img class="left half" src="img-ia/trackmate_04.png"/>
-<p class="half right">Hit next, accepting defaults until you reach 'Set Filters on Spots'</p>
-</section>
-<section data-state="apps2"><style>.apps2 header:after { content: "Tracking: Hands On"; }</style>
-<img class="left half" src="img-ia/trackmate_05.png"/>
-<ul class="half right">
-<li>Hit next, accepting defaults until you reach 'Settings for Simple LAP tracker'</li>
-<li>Set the distances to 5 and hit Next</li>
-<li>You have tracks!</li>
+<li>The true value or ground truth should be evaluated independently from the image analysis</li>
+<li>The method may depend on the area of study. There is often a method that is considered the "gold standard" in the community.</li>
 </ul>
 </section>
-<section data-state="apps2"><style>.apps2 header:after { content: "Tracking: Hands On"; }</style>
-<img class="left half" src="img-ia/trackmate_05.png"/>
-<div class="half right">
-<p class="fragment"><code>Linking Max Distance</code> Sets a 'search radius' for linkage</p>
-<img class="fragment" src="img-ia/tracks_09.png"/>
-<p class="fragment"><code>Gap-closing Max Frame Gap</code> Allows linkages to be found in non-adjacent frames</p>
-<img class="fragment" src="img-ia/tracks_10.png"/>
-<p class="fragment"><code>Gap-closing Max Distance</code> Limits search radius in non-adjacent frames</p>
-</div>
-</section>
 
-<section data-state="apps2"><style>.apps2 header:after { content: "Tracking: Hands On"; }</style>
-<p>Common outputs from Trackmate: (1) Tracking data</p>
-<img class="left half" src="img-ia/trackmate_06.png"/>
-<img class="right half" src="img-ia/trackmate_08.png"/>
-<p>Click 'Tracks' or 'Spots' to view the analysis.</p>
-</section>
-<section data-state="apps2"><style>.apps2 header:after { content: "Tracking: Hands On"; }</style>
-<p>Common outputs from Trackmate: (2) Movies!</p>
-<img class="left half" src="img-ia/trackmate_07.png"/>
-<img class="right third" src="img-ia/trackmate_09.gif"/>
-<div class="clear"></div>
-<p>You may have to adjust the display options to get the tracks drawing the way you want (try "Local Backwards")</p>
-</section>
-
-<section data-state="apps3"><style>.apps3 header:after { content: "Tracking: Common Problems"; }</style>
-<p>While simple, Tracking is not to be taken on lightly!</p>
+<section data-state="res1"><style>.res1 header:after { content: ""; }</style>
+<h1>Training and Testing</h1>
 <ul>
-<li>For the best results make sure the inter-particle distance is greater than the frame-to-frame movement. If not, try to increase resolution (more pixels) or decrease interval (more frames)</li>
-<li>The search radius increases processing time with HUGE datasets but in most case, has little effect on processing time. Remember that closer particles will still be linked preferably if possible.</li>
-<li>Keep it simple! Unless you have problems with noise, blinking, focal shifts and similar, do not introduce gap closing as this may lead to false-linkages</li>
-<li>'Simple LAP tracker' does not include merge/spliting events, however Trackmate ships with the more complex 'LAP Tracker' which can handle merge/splitting events (but keep in mind your system!)</li>
-<li>Quality control! Look at your output carefully and make sure you're not getting 'jumps' where one particle is linked to another incorrectly</li>
+<li>Let's assume you have some ground truth data for your images that has been obtained using the "gold standard" method</li>
+<li>You also have the original dataset, on which no analysis has been performed</li>
+<li>When developing an algorithm, a portion of the data will be used for training the algorithm and a portion will be used for testing</li>
+<li>More data is always better!</li>
+</ul>
+<p>For more information on validation see Chapter 10 of <a href=https://doi.org/10.1117/3.831079.ch10>Handbook of Medical Imaging, Volume 2. Medical Image Processing and Analysis (K. Bowyer, 2000)</a></p>
+</section>
+
+<section data-menu-title="Managing Results" data-state="res1"><style>.res1 header:after { content: ""; }</style>
+<h1>Managing Results</h1>
+<h4>How to get values from results window, how to add custom results</h4>
+</section>
+
+<section data-state="res1"><style>.res1 header:after { content: ""; }</style>
+<h1>Built-in Functions</h1>
+<p>There are some useful <a href="https://imagej.nih.gov/ij/developer/macro/functions.html">Built-in Functions</a> for managing results in Fiji:</p>
+<p>
+<ul>
+<li><a href="https://imagej.nih.gov/ij/developer/macro/functions.html#getStatistics">getStatistics()</a></li>
+<li><a href="https://imagej.nih.gov/ij/developer/macro/functions.html#getResult">getResult("Column", row)</a></li>
+<li><a href="https://imagej.nih.gov/ij/developer/macro/functions.html#getResult">setResult("Column", row, value)</a> and <a href="https://imagej.nih.gov/ij/developer/macro/functions.html#updateResults">updateResults()</a></li>
+<li><a href="https://imagej.nih.gov/ij/developer/macro/functions.html#nResults">nResults</a> or <a href="https://imagej.nih.gov/ij/developer/macro/functions.html#results-count">getValue("results.count")</a></li>
+</ul>
+</p>
+</section>
+
+<section data-state="res1"><style>.res1 header:after { content: ""; }</style>
+<h1>Results windows</h1>
+<ul>
+<li>You can only have one active results window at a time. This must be named "Results".</li> <li>Other results windows should be renamed. You can use <a href="https://imagej.nih.gov/ij/developer/macro/functions.html#IJ.renameResults">IJ.renameResults</a> to do this.</li>
+<li>To make a renamed results window active again, just rename it back to "Results" and rename the previously active window something else</li>
 </ul>
 </section>
+
+<section data-state="res1"><style>.res1 header:after { content: ""; }</style>
+<h1>Graphs</h1>
+<ul>
+<li>Fiji is not designed to create graphs</li>
+<li>You will need to export your results to another programme (e.g. excel, python, matlab, ...)</li>
+<li><a href="https://imagej.nih.gov/ij/developer/macro/functions.html#saveAs">saveAs(format, path)</a></li>
+<li>I would recommend exporting the results as a .csv (comma separated value) file</li>
+</ul>
+</section>
+
+<section data-menu-title="More Batch Processing" data-state="bat1"><style>.bat1 header:after { content: ""; }</style>
+<h1>More Batch Processing</h1>
+<p>Previously, we tried out <code>Process > Batch > Macro...</code>.<br> There are other ways to do Batch processing in ImageJ:</p>
+<ul>
+<li>Use <code>Process > Batch > Macro...</code> but run it from a macro command </li>
+<li>In the macro editor go to <code>Templates > ImageJ 1.x > Batch > Process Folder (IJ1 Macro)</code> and use the template to process all the files in a folder</li>
+<li>Use <a href=https://imagej.nih.gov/ij/developer/macro/functions.html#getDir>getDir</a> to request the directory from the user and then write your own loop to process all the files in the folder</li>
+<li>Use <a href=https://imagej.nih.gov/ij/developer/macro/functions.html#setBatchMode>setBatchMode</a> to do the processing in the background</li>
+</ul>
+</section>
+
 
 </div> <!-- ---------------------- END OF SLIDES -------------------------- -->
 

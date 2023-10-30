@@ -32,7 +32,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 <!-- ---------------------- START OF SLIDES -------------------------- -->
 <div class="slides">
 <section data-menu-title="Title">
-<h1>Validation and Colocalisation</h1>
+<h1>Deconvolution and Colocalisation</h1>
 <h3>Laura Cooper<br>Research Fellow, CAMDU</h3>
 <br>
 <p>Navigation:
@@ -53,73 +53,45 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 	</p>
 </section>
 
-<section data-menu-title="Validation" data-state="res1"><style>.res1 header:after { content: ""; }</style>
-<h1>Validation</h1>
-<h4>Does the macro work? Are the measurements correct?</h4>
-</section>
-
-<section data-state="res1"><style>.res1 header:after { content: ""; }</style>
-<h1>Validation</h1>
-<p>After designing an image analysis workflow it is important to validate it, especially if you are planning to use the same process on multiple images. The validation strategies used will depend on they type of problem.</p>
-<p>
-<ul>
-<li>Measurement</li>
-<li>Classification</li>
-<li>Segmentation</li>
-</ul> 
-</p>
-<p>
-Your final workflow may contain some or all of these problems. In the following slides there are some examples of quantitative measurements that can be used to evaluate the performance for each problem.
-</p>
-</section>
-
-<section data-state="res1"><style>.res1 header:after { content: ""; }</style>
-<h1>Example Validation of Measurement Problem</h1>
-<p>Aim: Estimate a scalar or vector quantity</p>
-<p>Method: Calculate the mean relative error<br>
-\[ mean\ relative\ error = {measured\ value - true\ value \over true\ value} \]</p>
-</section>
-
-<section data-state="res1"><style>.res1 header:after { content: ""; }</style>
-<h1>Example Validation of Classification Problem</h1>
-<p>Aim: Decide if something is present in an image</p>
-<p>Method: Calculate the sensitivity and specificity</p>
-<p class="left half">\[ sensitivity = {TPs \over TPs+FNs} \]
-The fraction of present things that are correctly detected, 0 none detected to 1 all detected
-\[ specificity = {TNs \over TNs+FPs} \]
-The fraction of correct detection when the thing is not present, 0 all falsely detected to 1 none falsely detected</p>
-<img class="right half" src="img-lc/TPFNtable.png"/> 
-<img class="right half" src="img-lc/falsepositivecutoff.png"/>
-<p>Image from <a href=https://www.genomenon.com/blog/machine-learning-enhances-specificity-of-variant-search/>www.genomenon.com</a></p>
-</section>
-
-<section data-state="res1"><style>.res1 header:after { content: ""; }</style>
-<h1>Example Validation of Segmentation Problem</h1>
-<p>Aim: Estimate the boundary regions of an image</p>
-<p class="left twothirds">Method: Calculate the difference between the segmented and ground truth boundaries
-\[ root\ mean\ square\ error = \sqrt{{\displaystyle\sum\limits_{i=1}^{N}(\boldsymbol{x}^s_i-\boldsymbol{x}^g_i)^2 \over N}}\]
-where \( N\) is the number of points, \(\boldsymbol{x}^s_i\) are the points that make up the segmented boundary (green) and \(\boldsymbol{x}^g_i\) are the points that make up the ground truth boundary (magenta)</p>
-<img class="right third" src="img-lc/GTboundcomp.png"/>
-<p>Different metrics can be used, e.g. Hausdorff distance</p>
-</section>
-
-<section data-state="res1"><style>.res1 header:after { content: ""; }</style>
-<h1>What's true?</h1>
-<ul>
-<li>The true value or ground truth should be evaluated independently from the image analysis</li>
-<li>The method may depend on the area of study. There is often a method that is considered the "gold standard" in the community.</li>
+<section data-menu-title="Deconvolution" data-state="decon">
+<h1>Recap</h1>
+<ul class="left half">
+<li>When aquiring an image, we detect the point spread function (PSF). It blurs every point in the image</li>
+<li>Fourier transforms can be used speed up convolution. Convolution in the spatial domain is the same as multiplication in the frequency domain</li>
+<li class="fragment">Image formation in the microscope can be understood as convolution between the object being imaged and the PSF of the imaging system</li>
 </ul>
+<img class="fragment right third" src="img-lc/PSF.png"/>
 </section>
 
-<section data-state="res1"><style>.res1 header:after { content: ""; }</style>
-<h1>Training and Testing</h1>
-<ul>
-<li>Let's assume you have some ground truth data for your images that has been obtained using the "gold standard" method</li>
-<li>You also have the original dataset, on which no analysis has been performed</li>
-<li>When developing an algorithm, a portion of the data will be used for training the algorithm and a portion will be used for testing</li>
-<li>More data is always better!</li>
+<section data-state="decon">
+<h1>Approximating the PSF</h1>
+<ul class="left half">
+<li>PSF are approximated by imaging very small beads. If the beads are smaller than the resolution, the outputs will be the PSF.</li>
+<li>Theoretical PSF are sometimes used, often approximated as a Gaussian function.</li>
+<li>If we have the PSF and the image can we reconstruct the object?</li>
 </ul>
-<p>For more information on validation see Chapter 10 of <a href=https://doi.org/10.1117/3.831079.ch10>Handbook of Medical Imaging, Volume 2. Medical Image Processing and Analysis (K. Bowyer, 2000)</a></p>
+<img class="right third" src="img-lc/PSF.png"/>
+</section>
+
+<section data-state="decon">
+<h1>Deconvolution</h1>
+<ul class="left half">
+<li>In the spatial domain, let an image, I, be an object, O, convolved with a PSF, P. i.e. I=O*P</li>
+<li>Then, in the frequency domain, we have the F(I)=F(O) x F(P), where F represent the Fourier transform</li>
+<li>So F(O)=F(I) &divide F(P)</li>
+<li>By taking the inverse Fourier transform of F(O), we obtain O, the object.</li>
+<li>This is known as <b>naive deconvolution</b></li>
+</ul>
+<img class="right third" src="img-lc/PSF.png"/>
+</section>
+
+<section data-state="decon">
+<h1>Deconvolution Issues</h1>
+<ul>
+<li>Extremely sensitive to noise</li>
+<li>Can have artifacts if the light source is not constant</li>
+<li>More advanced methods are very computationally intesive</li>
+</ul>
 </section>
 
 <!-- ---------------------- APPLICATIONS COLOCALISTATION -------------------------- -->
